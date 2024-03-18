@@ -1,0 +1,33 @@
+// Colors
+$accent-color-1: #1F623E;
+$accent-color-2: #2B7B50;
+$accent-color-3: #CDA103;
+$accent-color-4: #609B00;
+$background-color: #D5E9E8;
+
+$dark-color: #202124;
+$secondary-color: #000000;
+$danger-color: #FA0303;
+
+$font-color-black:#000000;
+$font-color-white:#FFFFFF;
+
+// Font families
+$font-family: 'Roboto', sans-serif;
+
+// Font sizes
+$header-4: 36px;
+$header-3: 30px;
+$header-2: 24px;
+$header-1: 20px;
+$title-size: 16px;
+$text-size: 14px;
+
+// tailwind
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+//bootstrap
+@import 'bootstrap/scss/bootstrap';
