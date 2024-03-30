@@ -1,0 +1,64 @@
+@import "../../index.scss";
+
+.header-outer {
+    background-color: $accent-color-1;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .header-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-around;
+  
+      .content {
+        display: flex;
+        align-items: center;
+        border: solid 1px red;
+  
+        .title h1 {
+          font-size: $title-size;
+          color: $font-color-white;
+          margin-left: 20px;
+        }
+      }
+  
+      .mode-btn {
+        .btn-outer {
+          width: 92px;
+          height: 39px;
+          background-color: $primary-white;
+          border-radius: 20px;
+          margin: 5px 0 5px 0;
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          display: flex;
+          align-items: center;
+          padding: 5px;
+  
+          .btn-inner {
+            width: 40px;
+            height: 38px;
+            background-color: $accent-color-1;
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+  
+    &.dark-mode {
+      background-color: $dark-color; // Define your dark mode background color
+      .content .title h1 {
+        color: $font-color-white; // Define your dark mode font color
+      }
+      .mode-btn .btn-outer .btn-inner {
+        background-color: $dark-color; // Define your dark mode button color
+      }
+      .btn-outer{
+        justify-content: end;
+      }
+    }
+  }
+  

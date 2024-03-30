@@ -5,6 +5,7 @@ $accent-color-3: #CDA103;
 $accent-color-4: #609B00;
 $background-color: #D5E9E8;
 
+$primary-white: #FFFFFF;
 $dark-color: #202124;
 $secondary-color: #000000;
 $danger-color: #FA0303;
@@ -31,3 +32,12 @@ $text-size: 14px;
 
 //bootstrap
 @import 'bootstrap/scss/bootstrap';
+:root{
+    --background-color: #D5E9E8;
+    --secondary-color : #000000;
+}
+[data-theme ="dark"]{
+    --background-color: #000000;
+    --secondary-color : #D5E9E8;
+    
+}
