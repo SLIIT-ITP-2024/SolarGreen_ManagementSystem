@@ -1,14 +1,15 @@
-import ChartOne from "../components/Dashboard/ChartOne";
-import TopHeader from "../components/Dashboard/TopHeader";
-import WithLayout from "../hoc";
 
+import ChartOne from "../components/Dashboard/ChartOne";
+import WithLayout from "../hoc";
+import './Dashboard.scss';
 function Dashboard() {
-    return (
-        <>
-         
-      <ChartOne></ChartOne>
+    return ( 
+      <div className="text-center">
+          <ChartOne />
+      </div>
+     
     
-        </>
+      
     );
 }
 

@@ -3,7 +3,7 @@ import WithLayout from '../../hoc'
 
 const MaintenanceManagementPage = () => {
   return (
-    <div>
+    <div >
         <h1>Maintenance Management</h1>
         // add your components here
     </div>

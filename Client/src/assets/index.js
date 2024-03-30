@@ -7,7 +7,7 @@ import customer_icon from "./icons/light/customer.png";
 import installation_icon from "./icons/light/installation.png";
 import maintanance_icon from "./icons/light/maintanace.png";
 import transport_icon from "./icons/light/transport.png";
-
+import leave_icon from "./icons/light/leaves.png";
 export {
   permission_icon,
   inventory_icon,
@@ -16,4 +16,6 @@ export {
   customer_icon,
   installation_icon,
   maintanance_icon,
-  transport_icon}
+  transport_icon,
+  leave_icon
+}
