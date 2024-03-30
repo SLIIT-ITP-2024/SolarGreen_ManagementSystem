@@ -3,9 +3,9 @@ import WithLayout from '../../hoc'
 
 const PermissionManagementPage = () => {
   return (
-    <div>
+    <div >
         <h1>Permission Management</h1>
-         {/* add your components here */}
+         
     </div>
   )
 }

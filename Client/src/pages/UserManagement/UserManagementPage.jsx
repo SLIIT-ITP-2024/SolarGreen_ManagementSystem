@@ -1,7 +1,6 @@
 import React from 'react'
 import WithLayout from '../../hoc'
 
-
 const UserManagementPage = () => {
   return (
     <div>
