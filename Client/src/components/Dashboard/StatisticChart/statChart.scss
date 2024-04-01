@@ -1,0 +1,14 @@
+.statistic-char-outer{
+    background-color: var(--foreground-color);
+    border-radius: 20px;
+    width: 36vw;
+    padding: 20px;
+
+    .inner{
+        color: var(--font-color-secondary);
+
+        .chart{
+           
+        }
+    }
+}

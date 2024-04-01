@@ -45,7 +45,9 @@ $small-text: 12px;
     --accent-color-3: #CDA103;
 
     --font-color-primary: #ffffff;
-    --font-color-secondary: #000000
+    --font-color-secondary: #000000;
+
+    --foreground-color:#FFFFFF;
 }
    
 [data-theme ="dark"]{
@@ -61,6 +63,8 @@ $small-text: 12px;
 
     --font-color-primary: #000000;
     --font-color-secondary: #ffffff;
+
+    --foreground-color:#000000;
     
     
 }
