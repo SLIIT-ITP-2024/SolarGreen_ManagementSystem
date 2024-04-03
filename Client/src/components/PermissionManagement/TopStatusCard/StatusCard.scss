@@ -1,0 +1,35 @@
+@import '../../../index.scss';
+
+.statusCard-outer{
+        width: 20vw;
+        height: 100px;
+        background-color: var(--accent-color-1);
+        border-radius: 10px;
+
+        .inner{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .title h3{
+                font-size: $header-1;
+                color: var(--font-color-secondary);
+              
+            }
+            .count{
+                width: 50px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                border: solid 1px var(--border-color);
+                
+                p{
+                    font-size: $header-1;
+                    color: var(--font-color-secondary);
+                }
+               
+            }
+        }
+}

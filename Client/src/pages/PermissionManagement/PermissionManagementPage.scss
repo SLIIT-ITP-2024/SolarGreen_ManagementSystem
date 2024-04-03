@@ -1,0 +1,17 @@
+.outer{
+    padding: 20px;
+    background-color: var(--background-color);
+    .top-section{
+        display: flex;
+        justify-content: space-between;
+
+        .card{
+            margin: 5px;
+            display: flex;
+            flex-direction: row;
+            width: 45vw;
+            justify-content: space-between;
+        }
+        
+    }
+}
