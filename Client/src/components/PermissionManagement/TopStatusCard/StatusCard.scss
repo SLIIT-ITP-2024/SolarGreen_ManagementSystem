@@ -14,6 +14,7 @@
             .title h3{
                 font-size: $header-1;
                 color: var(--font-color-secondary);
+                margin-top: 5px;
               
             }
             .count{
@@ -25,7 +26,7 @@
                 border-radius: 50%;
                 border: solid 1px var(--border-color);
                 
-                p{
+                h3{
                     font-size: $header-1;
                     color: var(--font-color-secondary);
                 }
