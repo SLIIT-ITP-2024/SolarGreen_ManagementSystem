@@ -1,15 +1,17 @@
 import AppRouters from "./router/AppRoutes"
 
 import './App.scss'
+import { Dashboard } from "./pages"
+import { DarkModeProvider } from "./contexts/DarkModeContext"
+
 function App() {
  
   return (
     <>
-   <h1 className="text-2xl font-bold underline ">
-      Hello world!
-    </h1>
-    
-    <div className="text">Header</div>
+    <DarkModeProvider>
+          <AppRouters className="Main"/>
+    </DarkModeProvider>
+        
      </>
   )
 }

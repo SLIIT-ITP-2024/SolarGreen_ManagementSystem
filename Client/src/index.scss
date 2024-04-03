@@ -1,10 +1,11 @@
 // Colors
-$accent-color-1: #1F623E;
-$accent-color-2: #2B7B50;
+$accent-color-1: #1F623E; 
+$accent-color-2: #2B7B50;  
 $accent-color-3: #CDA103;
 $accent-color-4: #609B00;
 $background-color: #D5E9E8;
 
+$primary-white: #FFFFFF;
 $dark-color: #202124;
 $secondary-color: #000000;
 $danger-color: #FA0303;
@@ -22,6 +23,7 @@ $header-2: 24px;
 $header-1: 20px;
 $title-size: 16px;
 $text-size: 14px;
+$small-text: 12px;
 
 // tailwind
 @tailwind base;
@@ -31,3 +33,34 @@ $text-size: 14px;
 
 //bootstrap
 @import 'bootstrap/scss/bootstrap';
+:root{
+    --primary-color: #1F623E;
+    --secondary-color : #D5E9E8;
+
+    --background-color: #D5E9E8;
+    --border-color: #000000;
+
+    --accent-color-1: #609B00;
+    --accent-color-2: #2B7B50; 
+    --accent-color-3: #CDA103;
+
+    --font-color-primary: #ffffff;
+    --font-color-secondary: #000000
+}
+   
+[data-theme ="dark"]{
+    --primary-color: #000000;
+    --secondary-color :#202124;
+
+    --background-color: #202124;
+    --border-color: #ffffff;
+
+    --accent-color-1: #000000;
+    --accent-color-2: #202124;
+    --accent-color-3: #000000; 
+
+    --font-color-primary: #000000;
+    --font-color-secondary: #ffffff;
+    
+    
+}
