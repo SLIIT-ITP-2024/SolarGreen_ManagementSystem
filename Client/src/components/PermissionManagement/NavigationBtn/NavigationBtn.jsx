@@ -1,12 +1,12 @@
 import React from 'react';
 import { IoMdArrowDropright } from 'react-icons/io';
 import './NavigationBtn.scss';
+import { Link } from 'react-router-dom';
 
 const NavigationBtn = React.memo((props) => {
-  
+
   const handleClick = () => {
-    console.log(props.btnName);
-    // Add your onClick logic here
+    window.location.href = '/login-attempts';
   };
 
   return (

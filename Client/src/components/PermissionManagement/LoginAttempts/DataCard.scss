@@ -1,0 +1,36 @@
+@import '../../../index.scss';
+
+.datacard-outer{
+    width: 100%;
+    height: auto;
+    background-color: transparent !important;
+    border: none;
+    .datacard-inner {
+        width: 100%; 
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--foreground-color);
+        border-radius: 20px;
+        padding-bottom: 20px;
+        padding-top: 10px;
+        
+        .top-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 10px;
+            margin-right: 20px;
+            h3{
+                font-size: $header-1;
+                color: var(--font-color-secondary);
+                
+            }
+            .username{
+                margin-left: 20px;
+            }
+
+        }
+        
+    }
+}
