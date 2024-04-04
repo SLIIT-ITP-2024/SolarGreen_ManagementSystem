@@ -14,15 +14,19 @@ function AllProjects() {
                 <thead>
                     <tr>
                         <th>PID</th>
-                        <th>Customer</th>
+                        <th>CID</th>
                         <th>Type</th>
+                        <th>Date</th>
                         <th>Status</th>
+                        <th>Comments</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>P001</td>
+                        <td>xxx</td>
+                        <td>xxx</td>
                         <td>xxx</td>
                         <td>xxx</td>
                         <td>xxx</td>
@@ -33,6 +37,8 @@ function AllProjects() {
                     </tr>
                     <tr>
                         <td>P002</td>
+                        <td>xxx</td>
+                        <td>xxx</td>
                         <td>xxx</td>
                         <td>xxx</td>
                         <td>xxx</td>
