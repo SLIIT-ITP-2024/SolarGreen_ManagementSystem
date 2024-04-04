@@ -1,20 +1,18 @@
-import React from 'react'
-import WithLayout from '../../hoc'
-import Header from '../../components/_Shared/Header'
 
-import './RegisterPage.scss'
-import { useDarkMode } from '../../contexts/DarkModeContext'
-import { Link } from 'react-router-dom'
-const RegisterPage = () => {
-  const { isDarkMode } = useDarkMode();
+import Modal from 'react-bootstrap/Modal';
+import './Popup.scss';
+import { useDarkMode } from '../../../contexts/DarkModeContext';
+
+const Popup = ({ showModal, handleClose }) => {
+    const { isDarkMode } = useDarkMode(); 
   return (
-    <div className='reg-outer' data-theme={isDarkMode ? 'dark' : 'light'}>
-      <Header />
-      <div className='reg-inner' > 
-          <div className="title">
-            <h1>REGISTER</h1>
-          </div>
-        
+    <>
+      <Modal show={showModal} onHide={handleClose} size='lg' centered 
+      data-theme={isDarkMode ? 'dark' : 'light'} >
+        <Modal.Header closeButton>
+          <Modal.Title>UPDATE USER ROLE</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
         <div className="form">
           <form>
           <div className="form-group">
@@ -52,20 +50,21 @@ const RegisterPage = () => {
                   <option value="for year">for year</option>
                 </select>
               </div>
-              <div className="form-group">
-                <button type="submit">SUBMIT</button>
-              </div>
-
-              <div className="form-group">
-                <p>Already have an account? 
-                  <Link to="/login"> Login</Link>
-                   </p>
-              </div>
-
-              </form>
+        </form>
         </div>
-        </div>
-    </div>
-  )
-}
-export default RegisterPage
+        </Modal.Body>
+
+        <Modal.Footer className='footer'>
+          <button className='closeBtn' onClick={handleClose}>
+            Close
+          </button>
+          <button className='SaveBtn' onClick={handleClose}>
+            Save Changes
+          </button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+};
+
+export default Popup;

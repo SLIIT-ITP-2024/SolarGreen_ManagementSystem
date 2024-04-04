@@ -1,0 +1,14 @@
+.linechar-outer{
+    background-color: var(--foreground-color);
+    border-radius: 20px;
+    width: 49vw;
+    padding: 20px;
+    .inner{
+        color: var(--font-color-secondary);
+        display: flex;
+        flex-direction: column;
+        .chart{
+                margin-left: 20px;
+        }
+    }
+}

@@ -2,12 +2,17 @@
 
 .menu-outer {
     width: 20vw;
-    height: fit-content;
+    max-height: 100vh;
+    overflow-y: auto;
     z-index: 1;
     position: fixed;
     top: 0;
     left: 0;
-}
+  
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.1);
+  }
+
 
 .menu-inner {
     width: 100%;
