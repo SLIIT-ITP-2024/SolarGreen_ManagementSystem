@@ -1,6 +1,5 @@
 import React from 'react'
 import WithLayout from '../../hoc/WithLayout'
-import TestCom from '../../components/InstallationManagement/__tests__/TestCom'
 import Buttons from '../../components/InstallationManagement/Buttons/Buttons'
 import AllProjects from '../../components/InstallationManagement/Table/AllProjects'
 
