@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
 import WithLayout from '../../../hoc/WithLayout'
 import './AddProject.css'
+import SolarWaterHeatingEquipment from '../EquipmentDetails/SolarWaterHeatingEquipment';
+import ResidentialRooftopSolarPVEquipment from '../EquipmentDetails/ResidentialRooftopSolarPVEquipment';
+import SolarStreetLightingEquipment from '../EquipmentDetails/SolarStreetLightingEquipment';
 
 function AddProject() {
 
@@ -12,6 +15,7 @@ function AddProject() {
     const [projectSize, setProjectSize] = useState("");
     const [cost, setCost] = useState(null);
     const [duration, setDuration] = useState(null);
+    const [comments, setComments] = useState("");
 
     //Current date
     const getCurrentDate = () => {
@@ -108,17 +112,29 @@ function AddProject() {
                         </div>
                     </div>
 
+                    {projectType === "Solar Water Heating System" && projectSize !== "" && <SolarWaterHeatingEquipment/>}
+                    {projectType === "Residential Rooftop Solar PV System" && projectSize !== "" && <ResidentialRooftopSolarPVEquipment />}
+                    {projectType === "Solar Street Lighting System" && projectSize !== "" && <SolarStreetLightingEquipment />}
+
                     <button type="button" className="btn btn-secondary" onClick={handleCalculate}>Calculate Estimations</button>
 
                     {cost !== null && duration !== null &&
                         <div>
+
                             <div className="form-group">
                                 <label htmlFor="cost">Estimated Cost</label>
                                 <input type="text" className="form-control" id="cost" value={`Rs. ${cost}`} readOnly />
                             </div>
+
                             <div className="form-group">
                                 <label htmlFor="duration">Estimated Duration</label>
                                 <input type="text" className="form-control" id="duration" value={`${duration} days`} readOnly />
+                            </div>
+
+
+                            <div className="form-group">
+                                <label htmlFor="gender">Comments</label>
+                                <input type="text" className="form-control" id="comments" onChange={(e) => setComments(e.target.value)}/>
                             </div>
 
                             <button type="submit" className="btn btn-primary">Add Project</button>
@@ -126,15 +142,6 @@ function AddProject() {
                     }
 
                     
-                    {/* <div className="form-group">
-                        <label htmlFor="gender">Comments</label>
-                        <select className="form-control" id="pType">
-                            <option value="">Select Type</option>
-                            <option value="Solar Water Heating System">Solar Water Heating System</option>
-                            <option value="Residential Rooftop Solar PV System">Residential Rooftop Solar PV System</option>
-                            <option value="Solar Street Lighting System">Solar Street Lighting System</option>
-                        </select>
-                    </div> */}
                 
                     
                 </form>
