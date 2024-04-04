@@ -1,3 +1,5 @@
+import "./Tables.css";
+
 function AllProjects() {
     const styles = {
         marginRight: "15px",

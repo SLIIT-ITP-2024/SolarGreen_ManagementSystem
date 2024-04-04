@@ -1,0 +1,9 @@
+.first-row {
+    display: flex;
+
+}
+
+.btn-primary {
+    margin: 10px 15px;
+    border-radius: 5px;
+}
