@@ -1,13 +1,15 @@
 import React from 'react'
 import { useDarkMode } from '../../../contexts/DarkModeContext';
 
-const DataCard = (props) => {
+import './AttemptsDataCard.scss';
+
+const AttemptsDataCard = (props) => {
     const { isDarkMode } = useDarkMode();
   return (
     <>
-        <div className="datacard-outer" data-theme={isDarkMode ? 'dark' : 'light'}>
-        <div className="datacard-inner">
-            <div className="top-row">
+        <div className="AttemptsDataCard-outer" data-theme={isDarkMode ? 'dark' : 'light'}>
+        <div className="AttemptsDataCard-inner">
+            <div className="AttemptsDataCard-top-row shadow-sm">
                 <div className="username">
                     <h3>{props.username}</h3>
                 </div>
@@ -28,4 +30,4 @@ const DataCard = (props) => {
   )
 }
 
-export default DataCard
+export default AttemptsDataCard

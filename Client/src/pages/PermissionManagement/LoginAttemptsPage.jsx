@@ -1,5 +1,4 @@
 import React from 'react'
-import DataCard from '../../components/PermissionManagement/LoginAttempts/DataCard'
 import StatusCard from '../../components/PermissionManagement/TopStatusCard/StatusCard'
 import SearchBar from '../../components/_Shared/SearchBar/SearchBar'
 import WithLayout from '../../hoc'
@@ -7,6 +6,7 @@ import WithLayout from '../../hoc'
 
 import './LoginAttemptsPage.scss';
 import ReportGenbtn from '../../components/PermissionManagement/LoginAttempts/Button/ReportGenbtn'
+import AttemptsDataCard from '../../components/PermissionManagement/LoginAttempts/AttemptsDataCard'
 
 const LoginAttemptsPage = () => {
     const dataList = {
@@ -39,7 +39,7 @@ const LoginAttemptsPage = () => {
     const dataCard = () => {
         return dataList.data.map((data, index) => {
             return (
-                <DataCard
+                <AttemptsDataCard
                     key={index}
                     username={data.username}
                     password={data.password}
@@ -51,23 +51,23 @@ const LoginAttemptsPage = () => {
     }
   return (
    <>
-       <div className='outer'>
-        <div className="top-section">
-          <div className="card">
+       <div className='loging-attempts-outer'>
+        <div className="loging-attempts-top-section">
+          <div className="loging-attempts-card">
           <StatusCard title="Real Users" count = "07" />
           <StatusCard title="Unauthorized" count = "12" />
           </div>
-          <div className="btn">
+          <div className="loging-attempts-btn">
                 <ReportGenbtn btnName="Generate Report" />
           </div>
          
         </div>
-        <div className="search-bar">
+        <div className="loging-attempts-search-bar">
             <SearchBar />
         </div>
         
-        <div className="table">
-            <div className="inner">
+        <div className="loging-attempts-table">
+            <div className="loging-attempts-inner">
                 <div className="header">
                   <h3>Username</h3>
                   <h3>Password</h3>
@@ -76,7 +76,7 @@ const LoginAttemptsPage = () => {
                 </div>
                 <hr />
 
-                <div className="cards">
+                <div className="loging-attempts-cards">
                   {dataCard()}
                 </div>
             </div>

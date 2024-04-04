@@ -1,12 +1,12 @@
 @import '../../index.scss';
-.outer{
+.loging-attempts-outer{
     padding: 20px;
     background-color: var(--background-color);
-    .top-section{
+    .loging-attempts-top-section{
         display: flex;
         justify-content: space-between;
 
-        .card{
+        .loging-attempts-card{
             margin: 5px;
             display: flex;
             flex-direction: row;
@@ -15,7 +15,7 @@
             background-color: transparent;
             border: none;
         }
-        .btn{
+        .loging-attempts-btn{
             height: 100px;
             display: flex;
             flex-direction: column;
@@ -24,16 +24,16 @@
             border: none;
         }
     }
-    .search-bar{
+    .loging-attempts-search-bar{
         margin-top: 30px;
     }
-    .table{
+    .loging-attempts-table{
         width: 100%;
         display: flex;
         justify-content: center;
         margin-top: 40px;
 
-        .inner{
+        .loging-attempts-inner{
             width: 80%;
            
             .header{
@@ -58,7 +58,7 @@
                 width: 100%;
                 border: 1px solid var(--font-color-secondary);
             }
-            .cards{
+            .loging-attempts-cards{
                display: flex;
                flex-direction: column;
                padding-bottom: 5px;

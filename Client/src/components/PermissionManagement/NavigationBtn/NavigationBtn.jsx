@@ -4,15 +4,12 @@ import './NavigationBtn.scss';
 import { Link } from 'react-router-dom';
 
 const NavigationBtn = React.memo((props) => {
-
-  const handleClick = () => {
-    window.location.href = '/login-attempts';
-  };
-
   return (
-    <div className='navBtn-outer' onClick={handleClick}>
-      <h3>{props.btnName}</h3>
-      <IoMdArrowDropright className='icon'/>
+    <div className='navBtn-outer'>
+        <Link to="/login-attempts" className="navBtn-link">
+          <h3>{props.btnName}</h3>
+          <IoMdArrowDropright className='icon'/>
+        </Link>
     </div>
   );
 });

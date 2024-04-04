@@ -1,6 +1,6 @@
 @import "../../../index.scss";
 
-.navBtn-outer{
+.navBtn-link{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,10 +8,12 @@
     width: 150px;
     height: 40px;
     border-radius: 10px;
+    text-decoration: none;
     h3{
         font-size: $text-size;
         margin-bottom: 0;
         margin-right: 10px;
+        color: var(--font-color-secondary);
     }
     .icon{
         font-size: 20px;
