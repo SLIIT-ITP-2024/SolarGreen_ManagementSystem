@@ -10,6 +10,7 @@ import TransportManagementPage from "./TransportManagement/TransportManagementPa
 import Dashboard from "./Dashboard"
 import NotFoundPage from "./NotFoundPage"
 import InventoryManagementPage from "./InventoryManagement/InventoryManagementPage"
+import LoginAttemptsPage from "./PermissionManagement/LoginAttemptsPage"
 export{
     LoginPage,
     RegisterPage,
@@ -22,5 +23,6 @@ export{
     TransportManagementPage,
     Dashboard,
     InventoryManagementPage,
-    NotFoundPage
+    NotFoundPage,
+    LoginAttemptsPage
 }

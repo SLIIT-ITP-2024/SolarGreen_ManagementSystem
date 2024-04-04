@@ -14,7 +14,8 @@ import {
   TransportManagementPage,
   Dashboard,
   InventoryManagementPage,
-  NotFoundPage
+  NotFoundPage,
+  LoginAttemptsPage
 } from '.././pages';
 
 import Estimations from '../pages/InstallationManagement/Estimations'
@@ -37,6 +38,7 @@ const AppRouters = () => {
             <Route path="/user-management" element={<UserManagementPage />} />
             <Route path="/transport-management" element={<TransportManagementPage />} />
             <Route path= '/inventory-management' element={<InventoryManagementPage />} />
+            <Route path="/login-attempts" element={<LoginAttemptsPage />} />
             <Route path="*" element={<NotFoundPage />} />
 
             {/* InstallationManagementRoutes */}
