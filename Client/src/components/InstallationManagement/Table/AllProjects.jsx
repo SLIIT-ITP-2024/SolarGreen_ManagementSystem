@@ -1,12 +1,8 @@
 import "./Tables.css";
 
 function AllProjects() {
-    const styles = {
-        marginRight: "15px",
-    };
 
-    return (
-        
+    return (  
         <div className="container">
             <br></br>
             <h3>Projects</h3>
@@ -31,7 +27,7 @@ function AllProjects() {
                         <td>xxx</td>
                         <td>xxx</td>
                         <td>
-                            <button type="button" className="btn btn-warning" style={styles}>Update</button>
+                            <button type="button" className="btn btn-warning">Update</button>
                             <button type="button" className="btn btn-danger">Delete</button>
                         </td>
                     </tr>
@@ -43,7 +39,7 @@ function AllProjects() {
                         <td>xxx</td>
                         <td>xxx</td>
                         <td>
-                            <button type="button" className="btn btn-warning" style={styles}>Update</button>
+                            <button type="button" className="btn btn-warning">Update</button>
                             <button type="button" className="btn btn-danger">Delete</button>
                         </td>
                     </tr>

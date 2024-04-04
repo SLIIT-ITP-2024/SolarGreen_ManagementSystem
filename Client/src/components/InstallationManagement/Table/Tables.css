@@ -13,3 +13,7 @@ table {
   tr {
     background-color: #f2f2f2;
   }
+
+  .btn-warning {
+    margin-right: 15px;
+  }
