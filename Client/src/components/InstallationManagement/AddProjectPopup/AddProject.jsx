@@ -33,4 +33,4 @@ function AddProject() {
   )
 }
 
-export default AddProject
+export default Withlayout(AddProject)
