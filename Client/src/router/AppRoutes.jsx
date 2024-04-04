@@ -18,7 +18,7 @@ import {
 } from '.././pages';
 
 import Estimations from '../pages/InstallationManagement/Estimations'
-import AddProject from '../components/InstallationManagement/AddProjectPopup/AddProject';
+import AddProject from '../pages/InstallationManagement/AddProject/AddProject';
 
 
 const AppRouters = () => {
@@ -41,7 +41,7 @@ const AppRouters = () => {
 
             {/* InstallationManagementRoutes */}
             <Route path="/installation-management/estimations" element={<Estimations />} />
-            <Route path="/installation-management/newProject" element={<AddProject />} />
+            <Route path="/installation-management/new-project" element={<AddProject />} />
             {/*  */}
             
        </Routes>
