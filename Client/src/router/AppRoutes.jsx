@@ -17,6 +17,9 @@ import {
   NotFoundPage
 } from '.././pages';
 
+import Estimations from '../pages/InstallationManagement/Estimations'
+
+
 const AppRouters = () => {
   return (
     <Router>
@@ -34,7 +37,11 @@ const AppRouters = () => {
             <Route path="/transport-management" element={<TransportManagementPage />} />
             <Route path= '/inventory-management' element={<InventoryManagementPage />} />
             <Route path="*" element={<NotFoundPage />} />
-       
+
+            {/* InstallationManagementRoutes */}
+            <Route path="/installation-management/estimations" element={<Estimations />} />
+            {/*  */}
+            
        </Routes>
        
       

@@ -1,4 +1,5 @@
 import "./Buttons.css"
+import { Link } from "react-router-dom";
 
 function Buttons() {
      
@@ -6,7 +7,7 @@ function Buttons() {
         <>
             <div className="first-row">
                 <button className="btn btn-primary">New Project +</button>
-                <button className="btn btn-primary">Estimations</button>
+                <Link to={"/installation-management/estimations"} className="btn btn-primary">Estimations</Link>
             </div>
 
             <button className="btn btn-primary">Generate report</button>
