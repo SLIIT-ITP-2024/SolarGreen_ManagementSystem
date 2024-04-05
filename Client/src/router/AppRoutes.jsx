@@ -18,9 +18,11 @@ import {
   LoginAttemptsPage
 } from '.././pages';
 
+// Installation Management
 import Estimations from '../pages/InstallationManagement/Estimations'
 import AddProject from '../pages/InstallationManagement/AddProject/AddProject';
-
+import UpdateProject from '../pages/InstallationManagement/UpdateProject/UpdateProject';
+// 
 
 const AppRouters = () => {
   return (
@@ -44,6 +46,7 @@ const AppRouters = () => {
             {/* InstallationManagementRoutes */}
             <Route path="/installation-management/estimations" element={<Estimations />} />
             <Route path="/installation-management/new-project" element={<AddProject />} />
+            <Route path="/installation-management/update-project" element={<UpdateProject />} />
             {/*  */}
             
        </Routes>

@@ -1,4 +1,5 @@
 import "./Tables.css";
+import { Link } from "react-router-dom";
 
 function AllProjects() {
 
@@ -27,7 +28,7 @@ function AllProjects() {
                         <td>xxx</td>
                         <td>xxx</td>
                         <td>
-                            <button type="button" className="btn btn-warning">Update</button>
+                            <Link to={"/installation-management/update-project"} className="btn btn-warning">Update</Link>
                             <button type="button" className="btn btn-danger">Delete</button>
                         </td>
                     </tr>
@@ -39,7 +40,7 @@ function AllProjects() {
                         <td>xxx</td>
                         <td>xxx</td>
                         <td>
-                            <button type="button" className="btn btn-warning">Update</button>
+                        <Link to={"/installation-management/update-project"} className="btn btn-warning">Update</Link>
                             <button type="button" className="btn btn-danger">Delete</button>
                         </td>
                     </tr>

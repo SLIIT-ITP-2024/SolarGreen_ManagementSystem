@@ -1,16 +1,12 @@
 import React, {useState} from 'react'
 import WithLayout from '../../../hoc/WithLayout'
 import './AddProject.css'
-import SolarWaterHeatingEquipment from '../EquipmentDetails/SolarWaterHeatingEquipment';
-import ResidentialRooftopSolarPVEquipment from '../EquipmentDetails/ResidentialRooftopSolarPVEquipment';
-import SolarStreetLightingEquipment from '../EquipmentDetails/SolarStreetLightingEquipment';
+import SolarWaterHeatingEquipment from '../../../components/InstallationManagement/EquipmentDetails/SolarWaterHeatingEquipment';
+import ResidentialRooftopSolarPVEquipment from '../../../components/InstallationManagement/EquipmentDetails/ResidentialRooftopSolarPVEquipment';
+import SolarStreetLightingEquipment from '../../../components/InstallationManagement/EquipmentDetails/SolarStreetLightingEquipment';
 
 function AddProject() {
 
-
-    const [name, setName] = useState("");
-    const [age, setAge] = useState("");
-    const [gender, setGender] = useState("");
     const [projectType, setProjectType] = useState("");
     const [projectSize, setProjectSize] = useState("");
     const [cost, setCost] = useState(null);
