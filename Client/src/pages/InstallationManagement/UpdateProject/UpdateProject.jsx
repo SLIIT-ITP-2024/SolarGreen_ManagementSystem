@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import WithLayout from '../../../hoc/WithLayout'
 import '../AddProject/AddProject.css'
+import { Link } from "react-router-dom";
 
 function UpdateProject() {
 
@@ -79,6 +80,9 @@ function UpdateProject() {
                         <label htmlFor="comments">Comments</label>
                         <input type="text" className="form-control" id="comments" onChange={(e) => setComments(e.target.value)}/>
                     </div>
+                    
+                    <button type="submit" className="btn btn-primary">Update</button>
+                    <Link to={"/installation-management"} className="btn btn-primary">Cancel</Link>
 
                 </form>
             </div>

@@ -4,6 +4,7 @@ import './AddProject.css'
 import SolarWaterHeatingEquipment from '../../../components/InstallationManagement/EquipmentDetails/SolarWaterHeatingEquipment';
 import ResidentialRooftopSolarPVEquipment from '../../../components/InstallationManagement/EquipmentDetails/ResidentialRooftopSolarPVEquipment';
 import SolarStreetLightingEquipment from '../../../components/InstallationManagement/EquipmentDetails/SolarStreetLightingEquipment';
+import { Link } from "react-router-dom";
 
 function AddProject() {
 
@@ -142,6 +143,9 @@ function AddProject() {
                     }
 
                 </form>
+                
+                <Link to={"/installation-management"} className="btn btn-primary">Cancel</Link>
+
             </div>
         
         )
