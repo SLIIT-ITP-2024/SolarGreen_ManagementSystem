@@ -108,14 +108,16 @@ function AddProject() {
                         </div>
                     </div>
 
-                    {projectType === "Solar Water Heating System" && projectSize !== "" && <SolarWaterHeatingEquipment/>}
-                    {projectType === "Residential Rooftop Solar PV System" && projectSize !== "" && <ResidentialRooftopSolarPVEquipment />}
-                    {projectType === "Solar Street Lighting System" && projectSize !== "" && <SolarStreetLightingEquipment />}
-
+                   
                     <button type="button" className="btn btn-secondary" onClick={handleCalculate}>Calculate Estimations</button>
 
                     {cost !== null && duration !== null &&
                         <div>
+
+                            {projectType === "Solar Water Heating System" && projectSize !== "" && <SolarWaterHeatingEquipment/>}
+                            {projectType === "Residential Rooftop Solar PV System" && projectSize !== "" && <ResidentialRooftopSolarPVEquipment />}
+                            {projectType === "Solar Street Lighting System" && projectSize !== "" && <SolarStreetLightingEquipment />}
+                            <br />
 
                             <div className="form-group">
                                 <label htmlFor="cost">Estimated Cost</label>
