@@ -9,10 +9,12 @@ function AddProject() {
 
     const [projectType, setProjectType] = useState("");
     const [projectSize, setProjectSize] = useState("");
+    const [status, setStatus] = useState("Pending");
     const [cost, setCost] = useState(null);
     const [duration, setDuration] = useState(null);
     const [comments, setComments] = useState("");
 
+    console.log(status);
     //Current date
     const getCurrentDate = () => {
         const date = new Date();
@@ -77,7 +79,7 @@ function AddProject() {
                         </div>
                         <div className="col">
                             <div className="form-group">
-                                <label for="age">Date</label>
+                                <label htmlFor="age">Date</label>
                                 <input type="text" className="form-control" id="date" value={getCurrentDate()} readOnly/>
                             </div>
                         </div>
@@ -131,7 +133,7 @@ function AddProject() {
 
 
                             <div className="form-group">
-                                <label htmlFor="gender">Comments</label>
+                                <label htmlFor="comments">Comments</label>
                                 <input type="text" className="form-control" id="comments" onChange={(e) => setComments(e.target.value)}/>
                             </div>
 
@@ -139,9 +141,6 @@ function AddProject() {
                         </div>
                     }
 
-                    
-                
-                    
                 </form>
             </div>
         
