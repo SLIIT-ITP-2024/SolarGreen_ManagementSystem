@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 
 function UpdateProject() {
 
+    const customerID = "";
+    const customerName="";
+    const projectID = "";
+    const date = "";
+    const estimatedCost = "";
+    const estimatedDuration = "";
     const [projectType, setProjectType] = useState("");
     const [projectSize, setProjectSize] = useState("");
     const [status, setStatus] = useState("Pending");

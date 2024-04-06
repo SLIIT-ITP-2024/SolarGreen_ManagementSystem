@@ -8,6 +8,10 @@ import { Link } from "react-router-dom";
 
 function AddProject() {
 
+    const customerID = "";
+    const customerName="";
+    const projectID = "";
+    const date = "";
     const [projectType, setProjectType] = useState("");
     const [projectSize, setProjectSize] = useState("");
     const [status, setStatus] = useState("Pending");
@@ -60,13 +64,13 @@ function AddProject() {
                         <div className="col">
                             <div className="form-group">
                                 <label htmlFor="cID">Customer ID</label>
-                                <input type="text" className="form-control" id="cID" value={"C00"} readOnly/>
+                                <input type="text" className="form-control" id="customerID" value={"C00"} readOnly/>
                             </div>
                         </div>
                         <div className="col">
                             <div className="form-group">
                                 <label htmlFor="cName">Customer Name</label>
-                                <input type="text" className="form-control" id="cName" value={"xxx"} readOnly/>
+                                <input type="text" className="form-control" id="customerName" value={"xxx"} readOnly/>
                             </div>
                         </div>
                     </div>
@@ -75,7 +79,7 @@ function AddProject() {
                         <div className="col">
                             <div className="form-group">
                                 <label htmlFor="cID">Project ID</label>
-                                <input type="text" className="form-control" id="pID" value={"P00"} readOnly/>
+                                <input type="text" className="form-control" id="projectID" value={"P00"} readOnly/>
                             </div>
                         </div>
                         <div className="col">
@@ -90,7 +94,7 @@ function AddProject() {
                         <div className="col">
                             <div className="form-group">
                                 <label htmlFor="gender">Project Type</label>
-                                <select className="form-control" id="pType" onChange={(e) => setProjectType(e.target.value)}>
+                                <select className="form-control" id="projectType" onChange={(e) => setProjectType(e.target.value)}>
                                     <option value="">Select Type</option>
                                     <option value="Solar Water Heating System">Solar Water Heating System</option>
                                     <option value="Residential Rooftop Solar PV System">Residential Rooftop Solar PV System</option>
@@ -124,12 +128,12 @@ function AddProject() {
 
                             <div className="form-group">
                                 <label htmlFor="cost">Estimated Cost</label>
-                                <input type="text" className="form-control" id="cost" value={`Rs. ${cost}`} readOnly />
+                                <input type="text" className="form-control" id="estimatedCost" value={`Rs. ${cost}`} readOnly />
                             </div>
 
                             <div className="form-group">
                                 <label htmlFor="duration">Estimated Duration</label>
-                                <input type="text" className="form-control" id="duration" value={`${duration} days`} readOnly />
+                                <input type="text" className="form-control" id="estimatedDuration" value={`${duration} days`} readOnly />
                             </div>
 
 
