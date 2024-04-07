@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function AllProjects() {
 
-    const [projects, setProjects] = useState([]);
+    // const [projects, setProjects] = useState([]);
 
     // Get all projects
 
@@ -23,7 +23,7 @@ function AllProjects() {
     // }, []);
 
     // Delete a project
-    
+
     // const handleDelete = async (id) => {
     //     const confirmDelete = window.confirm("Are you sure you want to delete this record?");
     //     if (confirmDelete) {

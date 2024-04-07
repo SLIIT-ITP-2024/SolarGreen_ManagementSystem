@@ -5,16 +5,30 @@ import { Link } from "react-router-dom";
 
 function UpdateProject() {
 
-    const customerID = "";
-    const customerName="";
-    const projectID = "";
-    const date = "";
-    const estimatedCost = "";
-    const estimatedDuration = "";
+    // const { _id} = useParams(); 
+    // const [customerID, setCustomerID] = useState("");
+    // const [customerName, setCustomerName] = useState("");
+    // const [projectID, setProjectID] = useState("");
+    // const [date, setDate] = useState("");
+    // const [estimatedCost, setEstimatedCost] = useState("");
+    // const [estimatedDuration, setEstimatedDuration] = useState("");
     const [projectType, setProjectType] = useState("");
     const [projectSize, setProjectSize] = useState("");
     const [status, setStatus] = useState("Pending");
     const [comments, setComments] = useState("");
+
+    // useEffect(() => {
+    //     axios.get(`http://localhost:8070/project/get/${_id}`)
+    //         .then((res) => {
+    //             const project = res.data.project;
+    //             setName(student.name);
+    //             setAge(student.age);
+    //             setGender(student.gender);
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         });
+    // }, [_id]);
 
     return (
         <div>
