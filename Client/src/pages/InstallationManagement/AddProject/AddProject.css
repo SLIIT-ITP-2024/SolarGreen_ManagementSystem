@@ -12,6 +12,10 @@ label {
     font-weight: bold;
 }
 
+.form-group {
+    margin: 10px 5px;
+}
+
 .btn-secondary {
     margin: 15px 5px;
 }
