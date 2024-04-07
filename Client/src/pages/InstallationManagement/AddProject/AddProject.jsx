@@ -19,7 +19,7 @@ function AddProject() {
     const [duration, setDuration] = useState(null);
     const [comments, setComments] = useState("");
 
-    // // Fetch the existing students to calculate the next student ID
+    // // Fetch the existing projects to calculate the next project ID
     // useEffect(() => {
     //     axios.get("http://localhost:8070/project/")
     //         .then((res) => {
