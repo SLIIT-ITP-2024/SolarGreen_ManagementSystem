@@ -1,4 +1,4 @@
-const Project = require('../models/installationModels/project.model');
+const Project = require('../models/installationModels/project');
 
 //http://localhost:3000/api/v1/installation/test
 const testController = (req, res) => {
@@ -8,9 +8,9 @@ const testController = (req, res) => {
 
 // get all projects
 // http://localhost:3000/api/v1/installation/projects/get
-const getProjects = (req, res) => {
+const getProjects = async (req, res) => {
   try {
-      const projects = Project.find().lean();
+      const projects = await Project.find().lean();
       res.status(200).json(projects);
   } catch (error) {
       res.status(500).json({message: error.message});

@@ -1,9 +1,9 @@
 const express = require('express');
 const installationRouter = express.Router();
-const Project = require('../models/installationModels/project.model');
+const Project = require('../models/installationModels/project');
 const installationController = require('../controllers/installationController');
 
-//http://localhost:3000/api/v1/installation
+//http://localhost:3000/api/v1/installation/
 installationRouter.get('/test', installationController.testController);
 installationRouter.get('/projects/get', installationController.getProjects);
 installationRouter.get('/projects/get/:id', installationController.getProject);
