@@ -10,7 +10,7 @@ const testController = (req, res) => {
 // http://localhost:3000/api/v1/installation/projects/get
 const getProjects = async (req, res) => {
   try {
-      const projects = await Project.find().lean();
+      const projects = await Project.find();
       res.status(200).json(projects);
   } catch (error) {
       res.status(500).json({message: error.message});
