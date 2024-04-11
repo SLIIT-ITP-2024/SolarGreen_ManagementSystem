@@ -38,17 +38,17 @@ const getProject = async (req, res) => {
 // http://localhost:3000/api/v1/installation/projects/add
 const addProject = async (req, res) => {
   try {
-    const customerID = req.body.customerID;
-    const customerName = req.body.customerName;
-    const projectID = req.body.projectID;
-    const date = req.body.date;
-    const projectType = req.body.projectType;
-    const projectSize = req.body.projectSize;
-    const status = req.body.status;
-    const estimatedCost = Number(req.body.estimatedCost);
-    const estimatedDuration = Number(req.body.estimatedDuration);
-    const comments = req.body.comments;
-      
+      const customerID = req.body.customerID;
+      const customerName = req.body.customerName;
+      const projectID = req.body.projectID;
+      const date = req.body.date;
+      const projectType = req.body.projectType;
+      const projectSize = req.body.projectSize;
+      const status = req.body.status;
+      const estimatedCost = Number(req.body.estimatedCost);
+      const estimatedDuration = Number(req.body.estimatedDuration);
+      const comments = req.body.comments;
+
       const newProject = new Project({
           customerID,
           customerName,
@@ -60,13 +60,11 @@ const addProject = async (req, res) => {
           estimatedCost,
           estimatedDuration,
           comments
-        });
-        
-        
-        newProject.save().then(() => {
+      });
+
+      newProject.save().then(() => {
           res.json("Project Added!")
-        }).catch((err) => {
-          console.log("add");
+      }).catch((err) => {
           console.log(err);
       });
 
