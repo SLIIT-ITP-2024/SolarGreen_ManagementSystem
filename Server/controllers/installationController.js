@@ -8,10 +8,9 @@ const testController = (req, res) => {
 
 // get all projects
 // http://localhost:3000/api/v1/installation/projects/get
-const getProjects = async (req, res) => {
+const getProjects = (req, res) => {
   try {
-      // console.log("get all");
-      const projects = await Project.find();
+      const projects = Project.find().lean();
       res.status(200).json(projects);
   } catch (error) {
       res.status(500).json({message: error.message});
@@ -51,7 +50,7 @@ const addProject = async (req, res) => {
     const comments = req.body.comments;
       
       const newProject = new Project({
-        customerID,
+          customerID,
           customerName,
           projectID,
           date,
