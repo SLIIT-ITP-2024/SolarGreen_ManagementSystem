@@ -4,7 +4,7 @@ const { mainRouter } = require('./routes/_index');
 const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
-const { runDbCOnnection } = require('./config/db');
+const { connectToDb } = require('./config/db');
 const port = process.env.PORT || 8080;
 
 // Use body-parser middleware
@@ -26,7 +26,7 @@ app.get('/test', (req, res) => {
 app.listen(port, async () => {
   try {
     console.log(`Server is running on port ${port}`);
-    await runDbCOnnection(); // Connect to the database
+    await connectToDb(); // Connect to the database
     console.log("Database operations completed");
   } catch (error) {
     console.error("Server startup error:", error);

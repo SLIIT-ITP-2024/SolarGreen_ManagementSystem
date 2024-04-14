@@ -10,7 +10,7 @@ function AddProject() {
 
     const customerID = "";
     const customerName="";
-    const projectID = "";
+    // const [projectID, setProjectID] = useState("");
     const date = "";
     const [projectType, setProjectType] = useState("");
     const [projectSize, setProjectSize] = useState("");
@@ -19,7 +19,29 @@ function AddProject() {
     const [duration, setDuration] = useState(null);
     const [comments, setComments] = useState("");
 
-    console.log(status);
+    // // Fetch the existing projects to calculate the next project ID
+    // useEffect(() => {
+    //     axios.get("http://localhost:8070/project/")
+    //         .then((res) => {
+    //             const projects = res.data;
+    //             if (projects.length > 0) {
+    //                 const lastProjectID = projects[projects.length - 1].projectID;
+    //                 // Extract the numeric part of the last student ID and increment it by 1
+    //                 const numericPart = parseInt(lastProjectID.substring(1), 10) + 1;
+    //                 // Generate the next student ID with leading zeros
+    //                 setProjectID(`S${String(numericPart).padStart(3, '0')}`);
+    //             } else {
+    //                 // If there are no existing students, start with S001
+    //                 setProjectID("P001");
+    //             }
+    //         })
+    //         .catch((err) => {
+    //             console.error("Error fetching projects:", err);
+    //         });
+    // }, []);
+
+    // console.log(status);
+
     //Current date
     const getCurrentDate = () => {
         const date = new Date();
@@ -54,7 +76,7 @@ function AddProject() {
 
         setCost(calculatedCost);
         setDuration(calculatedDuration);
-        };
+    };
 
         return(
             <div className="container">
