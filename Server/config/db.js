@@ -27,14 +27,12 @@ async function getMongoClient() {
 async function runDbCOnnection() {
   try {
     const client = await getMongoClient();
-    // Use the client instance for your database operations
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
   } finally {
-    // Consider adding logic to handle connection errors and reconnections
-    // if necessary for your application's requirements.
+    
   }
 }
 
