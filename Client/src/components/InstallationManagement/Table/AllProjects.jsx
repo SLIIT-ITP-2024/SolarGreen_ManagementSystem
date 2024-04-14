@@ -31,7 +31,7 @@ function AllProjects() {
     if (confirmDelete) {
       try {
         await axios.delete(
-          `http://localhost:3000/api/v1/installation/projects/delete/:id`
+          `http://localhost:3000/api/v1/installation/projects/delete/${id}`
         );
         // Remove the deleted student from the state
         setProjects(projects.filter((project) => project._id !== id));
