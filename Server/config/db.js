@@ -1,42 +1,31 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
-
+const mongoose = require('mongoose');
+require('dotenv').config();
 const uri = process.env.MONGO_URL;
 if (!uri) {
   throw new Error("Mongo URI is missing. Please set it in the .env file.");
 }
-const clientOptions = {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  },
-};
 
-let mongoClient; // Private variable to hold the singleton instance
+(async function () {
+  let connection;
 
-async function getMongoClient() {
-  if (!mongoClient) {
-    mongoClient = new MongoClient(uri, clientOptions);
-    await mongoClient.connect();
-    console.log("Established new connection to MongoDB.");
+  async function connectToDb() {
+    if (!connection) {
+      connection = await mongoose.connect(uri);
+      console.log("Established new connection to MongoDB.");
+    }
+
+    return connection;
   }
 
-  return mongoClient;
-}
-
-async function runDbCOnnection() {
-  try {
-    const client = await getMongoClient();
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
-  } finally {
-    
+  async function closeConnection() {
+    if (connection) {
+      await connection.close();
+      console.log("Closed connection to MongoDB.");
+    }
   }
-}
 
-module.exports = {
-  runDbCOnnection,
-  getMongoClient, // Optionally expose for controlled access
-};
+  module.exports = {
+    connectToDb,
+    closeConnection, // Optional export
+  };
+})();
