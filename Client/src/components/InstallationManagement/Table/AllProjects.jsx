@@ -82,6 +82,7 @@ function AllProjects() {
                 >
                   Update
                 </Link>
+                <br />
                 <button
                   type="button"
                   className="btn btn-danger"
@@ -90,6 +91,7 @@ function AllProjects() {
                   Delete
                 </button>
               </td>
+              <hr />
             </tr>
           ))}
         </tbody>
