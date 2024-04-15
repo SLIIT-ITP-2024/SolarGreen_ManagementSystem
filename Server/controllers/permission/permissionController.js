@@ -1,11 +1,12 @@
 const UserRole = require("../../models/permissionModels/userRole.model");
 const uuid = require('uuid');
+const auth =  require('../../middleware/auth');
 
 const testController = (req, res) => {
   res.send('Permission controller is working!');
 }
 
-const createUserRole = async (req, res) => {
+const createUserRole =   async (req, res) => {
   try {
     const { email, username, password, role, validTime } = req.body;
 
