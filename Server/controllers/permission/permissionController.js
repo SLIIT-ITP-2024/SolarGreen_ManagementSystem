@@ -1,4 +1,4 @@
-const UserRole = require("../models/permissionModels/userRole.model");
+const UserRole = require("../../models/permissionModels/userRole.model");
 const uuid = require('uuid');
 
 const testController = (req, res) => {
@@ -73,5 +73,6 @@ const deleteUserRole = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 }
+
 
 module.exports = { testController, createUserRole, getAllUserRoles, getUserRoleByID, updateUserRole, deleteUserRole };

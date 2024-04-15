@@ -1,4 +1,4 @@
-const permissionController = require('../controllers/permissionController');
+const permissionController = require('../../controllers/permission/permissionController');
 const express = require('express');
 const permissionRouter = express.Router();
 
