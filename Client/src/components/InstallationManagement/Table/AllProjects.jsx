@@ -76,12 +76,12 @@ function AllProjects() {
               <td>{project.estimatedDuration}</td>
               <td>{project.comments}</td>
               <td>
-                {/* <Link
-                  to={`/update/${project._id}/`}
+                <Link
+                  to={`/installation-management/update-project/${project._id}`}
                   className="btn btn-success"
                 >
                   Update
-                </Link> */}
+                </Link>
                 <button
                   type="button"
                   className="btn btn-danger"
