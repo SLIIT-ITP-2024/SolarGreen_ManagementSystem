@@ -8,6 +8,7 @@ const testController = (req, res) => {
 
 const createUserRole =   async (req, res) => {
   try {
+    console.log(req.body);
     const { email, username, password, role, validTime } = req.body;
 
     const newRole = new UserRole({

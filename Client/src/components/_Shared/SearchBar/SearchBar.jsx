@@ -6,7 +6,7 @@ const SearchBar = () => {
     <div className='search-bar-outer'>
       <div className="inner">
        
-      <div class="search-container">
+      <div className="search-container">
             <CiSearch className="prefix-icon"/>
             <input type="text" placeholder="Search..." />
             <button>Search</button>
