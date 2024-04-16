@@ -102,9 +102,6 @@ const SearchProject = () => {
       ) : (
         <p>No projects found.</p>
       )}
-
-      {/* Display Error Message */}
-      {error && <p className="text-danger">{error}</p>}
     </div>
   );
 };
