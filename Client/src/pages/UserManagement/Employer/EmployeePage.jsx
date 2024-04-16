@@ -26,6 +26,7 @@ function employeePage () {
                         <tr>
                             <th>Employee Name</th>
                             <th>Employee ID</th>
+                            <th>Gender</th>
                             <th>Phone Number</th>
                             <th>Email</th>
                             <th>Role</th>
@@ -41,6 +42,7 @@ function employeePage () {
                                 <tr>
                                     <td>{employeePage.employeeName}</td>
                                     <td>{employeePage.employeeID}</td>
+                                    <td>{employeePage.gender}</td>
                                     <td>{employeePage.phoneNumber}</td>
                                     <td>{employeePage.email}</td>
                                     <td>{employeePage.role}</td>

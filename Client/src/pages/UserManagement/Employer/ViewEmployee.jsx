@@ -19,6 +19,7 @@ const EmployeeList = () => {
           <tr>
             <th>Employee Name</th>
             <th>Employee ID</th>
+            <th>Gender</th>
             <th>Phone Number</th>
             <th>Email</th>
             <th>Role</th>
@@ -33,6 +34,7 @@ const EmployeeList = () => {
             <tr key={employee._id}>
               <td>{employee.name}</td>
               <td>{employee.employeeId}</td>
+              <td>{employee.gender}</td>
               <td>{employee.phoneNumber}</td>
               <td>{employee.email}</td>
               <td>{employee.role}</td>
@@ -53,6 +55,7 @@ const EmployeeList = () => {
             <h2>Employee Details</h2>
             <p><strong>Employee Name:</strong> {selectedEmployee.name}</p>
             <p><strong>Employee ID:</strong> {selectedEmployee.employeeId}</p>
+            <p><strong>Gender:</strong> {selectedEmployee.gender}</p>
             <p><strong>Phone Number:</strong> {selectedEmployee.phoneNumber}</p>
             <p><strong>Email:</strong> {selectedEmployee.email}</p>
             <p><strong>Role:</strong> {selectedEmployee.role}</p>

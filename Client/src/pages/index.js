@@ -9,6 +9,7 @@ import UserManagementPage from "./UserManagement/UserManagementPage"
 import TransportManagementPage from "./TransportManagement/TransportManagementPage"
 import Dashboard from "./Dashboard"
 import NotFoundPage from "./NotFoundPage"
+import AddEmployee from "./UserManagement/Employer/AddEmployee"
 export{
     LoginPage,
     RegisterPage,
@@ -20,5 +21,6 @@ export{
     UserManagementPage,
     TransportManagementPage,
     Dashboard,
-    NotFoundPage
+    NotFoundPage,
+    AddEmployee
 }

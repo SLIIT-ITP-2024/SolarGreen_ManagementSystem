@@ -6,6 +6,7 @@ function UpdateUser () {
     const {id} = useParams()
     const [employeeName, setEmployeeName] = useState()
     const [employeeId, setEmployeeId] = useState()
+    const [gender, setGender] = useState()
     const [phoneNumber, setPhoneNumber] = useState()
     const [email, setEmail] = useState()
     const [role, setRole] = useState()
@@ -19,6 +20,7 @@ function UpdateUser () {
         .then(result => {console.log(result)
         setEmployeeName(result.data.employeeName)
         setEmployeeId(result.data.employeeId)
+        setGender(result.data.gender)
         setPhoneNumber(result.data.phoneNumber)
         setEmail(result.data.email)
         setRole(result.data.role)
@@ -31,7 +33,7 @@ function UpdateUser () {
 
     const Update =(e) => {
         e.preventDefault();
-        axios.put("http://localhost:3001/updateEmployee/"+id, {employeeName, employeeId, phoneNumber, email, role, startingDate, endingDate, personalDetails})
+        axios.put("http://localhost:3001/updateEmployee/"+id, {employeeName, employeeId, gender, phoneNumber, email, role, startingDate, endingDate, personalDetails})
         .then(result => {
           console.log(result)
           navigate('/')
@@ -58,6 +60,17 @@ function UpdateUser () {
             <label htmlFor="">Employee ID</label>
             <input type="text" className="form-control"
             value={employeeId} onChange={(e) => setEmployeeId(e.target.value)}/>
+          </div>
+          <div className="mb-2">
+            <label htmlFor="">Gender</label>
+              <div className="select is full-width">
+                <select
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
           </div>
           <div className="mb-2">
             <label htmlFor="">Phone Number</label>
