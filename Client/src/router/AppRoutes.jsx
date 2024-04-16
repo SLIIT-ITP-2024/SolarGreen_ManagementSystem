@@ -14,7 +14,7 @@ import {
   Dashboard,
   NotFoundPage
 } from '.././pages';
-import AddEmployer from '../pages/UserManagement/Employer/AddEmployee';
+import AddEmployee from '../pages/UserManagement/Employer/AddEmployee';
 
 const AppRouters = () => {
   return (
