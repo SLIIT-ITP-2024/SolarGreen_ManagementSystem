@@ -21,7 +21,7 @@ import {
 import Estimations from "../pages/InstallationManagement/Estimations";
 import AddProject from "../pages/InstallationManagement/AddProject/AddProject";
 import UpdateProject from "../pages/InstallationManagement/UpdateProject/UpdateProject";
-import Report from "../pages/InstallationManagement/Report";
+import Report from "../pages/InstallationManagement/Report/Report";
 //
 
 const AppRouters = () => {

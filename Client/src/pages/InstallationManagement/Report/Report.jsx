@@ -1,5 +1,5 @@
 import React from "react";
-import WithLayout from "../../hoc";
+import WithLayout from "../../../hoc";
 
 function Report() {
   return (
