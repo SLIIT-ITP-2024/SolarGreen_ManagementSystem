@@ -77,6 +77,7 @@ const AppRouters = () => {
           path="/installation-management/generate-report"
           element={<GenerateReport />}
         />
+
         {/*  */}
       </Routes>
     </Router>

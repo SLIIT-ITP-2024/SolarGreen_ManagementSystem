@@ -1,9 +1,16 @@
+import React from "react";
+import WithLayout from "../../../hoc/WithLayout";
+
 function GenerateReport() {
+  const name = "";
+
   return (
     <div>
-      <h3>Generate Report</h3>
+      <div className="container">
+        <h3>Report</h3>
+      </div>
     </div>
   );
 }
 
-export default GenerateReport;
+export default WithLayout(GenerateReport);
