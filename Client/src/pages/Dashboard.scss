@@ -1,0 +1,28 @@
+.dashboard-outer{
+    padding: 20px;
+    background-color: var(--secondary-color);
+   
+    
+    .top-section{
+     display: flex;
+  
+     justify-content: space-between;
+    height: fit-content;
+ 
+    }
+    .second-section{
+     display: flex;
+   
+     justify-content: space-between;
+     height: fit-content;
+     margin-top: 20px;
+ 
+    }
+    .third-section{
+       display: flex;
+      
+       justify-content: space-between;
+       height: fit-content;
+       margin-top: 20px;
+    }
+ }
