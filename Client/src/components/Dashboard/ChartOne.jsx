@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
-import './ChartOne.scss';
-
-import { useDarkMode } from '../../contexts/DarkModeContext';
+import React from 'react'
 
 const ChartOne = () => {
-  const { isDarkMode } = useDarkMode();
-
   return (
     <div>
-      <div className="my-div" data-theme={isDarkMode ? 'dark' : 'light'}></div>
-      </div>
-  );
-};
+        <h1>Chart One</h1>
+    </div>
+  )
+}
 
-export default ChartOne;
+export default ChartOne
