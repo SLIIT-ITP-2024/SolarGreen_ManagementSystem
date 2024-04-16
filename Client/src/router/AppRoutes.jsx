@@ -21,6 +21,7 @@ import {
 import Estimations from "../pages/InstallationManagement/Estimations";
 import AddProject from "../pages/InstallationManagement/AddProject/AddProject";
 import UpdateProject from "../pages/InstallationManagement/UpdateProject/UpdateProject";
+import GenerateReport from "../pages/InstallationManagement/GenerateReport/GenerateReport";
 //
 
 const AppRouters = () => {
@@ -74,7 +75,7 @@ const AppRouters = () => {
         />
         <Route
           path="/installation-management/generate-report"
-          element={<UpdateProject />}
+          element={<GenerateReport />}
         />
         {/*  */}
       </Routes>
