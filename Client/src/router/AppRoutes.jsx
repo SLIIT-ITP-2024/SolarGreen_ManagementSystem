@@ -72,6 +72,10 @@ const AppRouters = () => {
           path="/installation-management/update-project/:id"
           element={<UpdateProject />}
         />
+        <Route
+          path="/installation-management/generate-report"
+          element={<UpdateProject />}
+        />
         {/*  */}
       </Routes>
     </Router>
