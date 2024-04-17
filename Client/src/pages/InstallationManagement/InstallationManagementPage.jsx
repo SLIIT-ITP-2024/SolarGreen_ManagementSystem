@@ -8,7 +8,6 @@ import ProjectStatusChart from "../../components/InstallationManagement/ProjectS
 const InstallationManagementPage = () => {
   return (
     <div>
-      <h1>Installation Management</h1>
       <Buttons />
       <SearchProject />
       <AllProjects />
