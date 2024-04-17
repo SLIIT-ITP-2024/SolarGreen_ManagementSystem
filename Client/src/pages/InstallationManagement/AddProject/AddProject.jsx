@@ -294,23 +294,23 @@ function AddProject() {
                   <br />
 
                   <div className="form-group">
-                    <label htmlFor="cost">Estimated Cost</label>
+                    <label htmlFor="cost">Estimated Cost (Rs.)</label>
                     <input
                       type="text"
                       className="form-control"
                       id="estimatedCost"
-                      value={`Rs. ${cost}`}
+                      value={cost}
                       readOnly
                     />
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="duration">Estimated Duration</label>
+                    <label htmlFor="duration">Estimated Duration (Days)</label>
                     <input
                       type="text"
                       className="form-control"
                       id="estimatedDuration"
-                      value={`${duration} days`}
+                      value={duration}
                       readOnly
                     />
                   </div>
