@@ -152,7 +152,7 @@ function UpdateProject() {
                 <option value="Pending">Pending</option>
                 <option value="Completed">Completed</option>
                 <option value="On hold">On hold</option>
-                <option value="On hold">Terminated</option>
+                <option value="Terminated">Terminated</option>
               </select>
             </div>
           </div>
@@ -229,7 +229,7 @@ function UpdateProject() {
         </div>
         <br />
         <button className="btn btn-primary">Update</button> <br />
-        <Link to={`/`} className="btn btn-primary">
+        <Link to={`/installation-management`} className="btn btn-primary">
           Cancel
         </Link>
       </form>
