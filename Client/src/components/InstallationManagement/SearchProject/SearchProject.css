@@ -1,4 +1,4 @@
-.container{
+.container1{
     margin-bottom: 10px;
 }
 
@@ -6,4 +6,26 @@
     margin: 10px 15px;
     border-radius: 5px;
     color: #111;
-  }
+}
+
+
+/* Form */
+.search-form {
+    margin: 5px;
+}
+
+/* Input */
+.form-control {
+    border: 1px solid black; 
+    padding: 8px; 
+    transition: border-color 0.3s ease; 
+}
+  
+.form-control:focus {
+    border-color: #007bff; 
+}
+
+.search-component {
+    display: flex;
+}
+  

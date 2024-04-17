@@ -1,4 +1,7 @@
-
+.header {
+  text-align: center;
+  text-decoration: underline;
+}
 
 /* Table */
 table {
