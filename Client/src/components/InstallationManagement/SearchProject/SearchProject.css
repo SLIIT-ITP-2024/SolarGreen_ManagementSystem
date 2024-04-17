@@ -15,10 +15,9 @@
 }
 
 /* Input */
-.form-control {
+.form-control.search {
     border: 1px solid black; 
-    padding: 8px; 
-    transition: border-color 0.3s ease; 
+    padding: 5px; 
 }
   
 .form-control:focus {

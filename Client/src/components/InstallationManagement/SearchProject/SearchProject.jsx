@@ -49,7 +49,7 @@ const SearchProject = () => {
         <div className="search-component">
           <input
             type="text"
-            className="form-control"
+            className="form-control search"
             placeholder="Enter customer name"
             value={searchTerm}
             onChange={handleInputChange}
