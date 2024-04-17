@@ -17,7 +17,7 @@
 /* Input */
 .form-control.search {
     border: 1px solid black; 
-    padding: 5px; 
+    margin: 5px;
 }
   
 .form-control:focus {
@@ -28,3 +28,6 @@
     display: flex;
 }
   
+.result {
+    margin: 10px;
+}

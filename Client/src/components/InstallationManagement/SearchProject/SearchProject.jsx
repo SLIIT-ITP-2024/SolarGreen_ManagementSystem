@@ -65,7 +65,7 @@ const SearchProject = () => {
       {/* Display Search Results */}
       {searchResults.length > 0 && (
         <div>
-          <h4>Search Results</h4>
+          <p className="result">Search Results...</p>
 
           {searchResults.map((project) => (
             <div>
@@ -105,7 +105,9 @@ const SearchProject = () => {
         </div>
       )}
 
-      {!searchResults.length > 0 && error !== null && <p>{error}</p>}
+      {!searchResults.length > 0 && error !== null && (
+        <p className="result">{error}</p>
+      )}
     </div>
   );
 };
