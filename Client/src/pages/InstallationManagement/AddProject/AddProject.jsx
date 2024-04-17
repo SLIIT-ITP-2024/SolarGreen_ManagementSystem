@@ -325,14 +325,14 @@ function AddProject() {
                     />
                   </div>
                   <br />
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-warning">
                     Add Project
                   </button>
                 </div>
               )}
             </form>
             <br />
-            <Link to={"/installation-management"} className="btn btn-primary">
+            <Link to={"/installation-management"} className="btn btn-warning">
               Cancel
             </Link>
           </div>

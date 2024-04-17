@@ -52,7 +52,7 @@ const SearchProject = () => {
           onChange={handleInputChange}
         />
         <div className="input-group-append">
-          <button className="btn btn-primary" type="submit">
+          <button className="btn btn-warning" type="submit">
             Search
           </button>
         </div>
