@@ -1,5 +1,6 @@
 import React from "react";
-import WithLayout from "../../../hoc/WithLayout";
+import WithLayout from "../../hoc/WithLayout";
+import "./Estimation/Estimations.css";
 
 function Estimations() {
   return (
