@@ -35,6 +35,7 @@ function AllProjects() {
         );
         // Remove the deleted student from the state
         setProjects(projects.filter((project) => project._id !== id));
+        window.location.href = "/installation-management";
       } catch (error) {
         console.error("Error deleting record:", error);
         alert("An error occurred while deleting the record");
