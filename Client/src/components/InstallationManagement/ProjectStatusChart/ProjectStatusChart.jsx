@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Pie } from "react-chartjs-2";
+import "../Table/Tables.css";
 
 function ProjectStatusChart() {
   const [projects, setProjects] = useState([]);
@@ -82,8 +83,11 @@ function ProjectStatusChart() {
   };
 
   return (
-    <div style={{ height: "400px", width: "400px" }}>
-      <Pie data={data} options={options} />
+    <div>
+      <h4 className="header">Project Status</h4>
+      <div style={{ height: "300px", width: "300px" }}>
+        <Pie data={data} options={options} />
+      </div>
     </div>
   );
 }
