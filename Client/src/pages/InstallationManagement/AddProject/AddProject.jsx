@@ -275,7 +275,7 @@ function AddProject() {
 
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-info"
                 onClick={handleCalculate}
               >
                 Calculate Estimations
