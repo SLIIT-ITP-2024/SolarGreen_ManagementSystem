@@ -1,20 +1,26 @@
 
 
 /* Table */
-table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  th, td {
-    border: 1px solid #000;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  tr {
-    background-color: #f2f2f2;
-  }
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.thead th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  border: 1px solid #796e6e;
+  text-align: center;
+}
+
+.table td {
+  border: 1px solid #796e6e;
+  text-align: center;
+}
 
 
 .btn {

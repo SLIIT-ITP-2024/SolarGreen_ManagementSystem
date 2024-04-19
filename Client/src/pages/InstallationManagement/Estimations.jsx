@@ -49,7 +49,7 @@ function Estimations() {
   return (
     <div>
       <h3>Estimations</h3>
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th>EstimationID</th>
