@@ -44,16 +44,16 @@ function AllProjects() {
   };
 
   return (
-    <div className="container">
+    <div className="">
       <br></br>
       <h3 className="header">Projects</h3>
-      <table>
-        <thead>
+      <table className="table">
+        <thead className="thead">
           <tr>
             <th>ProjectID</th>
             <th>CustomerID</th>
             <th>CustomerName</th>
-            <th>Date</th>
+            <th>Created Date</th>
             <th>Type</th>
             <th>Size</th>
             <th>Status</th>
@@ -91,7 +91,6 @@ function AllProjects() {
                   Delete
                 </button>
               </td>
-              <hr />
             </tr>
           ))}
         </tbody>
