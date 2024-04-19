@@ -21,3 +21,8 @@ table {
   padding: 0;
   margin: 5px;
 }  
+
+
+.btn.btn-warning.btn-delete {
+  color: rgb(255, 0, 0);
+}

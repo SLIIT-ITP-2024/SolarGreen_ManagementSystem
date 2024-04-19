@@ -25,3 +25,8 @@ form {
     border-radius: 5px;
     color: #111;
 }
+
+.row1 {
+    display: flex;
+    flex-direction: row;
+}

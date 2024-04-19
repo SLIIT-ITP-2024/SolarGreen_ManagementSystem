@@ -75,14 +75,14 @@ function Estimations() {
               <td>
                 <Link
                   to={`/installation-management/update-project/${project._id}`}
-                  className="btn btn-success"
+                  className="btn btn-warning"
                 >
                   Update
                 </Link>
                 <br />
                 <button
                   type="button"
-                  className="btn btn-danger"
+                  className="btn btn-warning btn-delete"
                   onClick={() => handleDelete(project._id)}
                 >
                   Delete

@@ -228,10 +228,12 @@ function UpdateProject() {
           />
         </div>
         <br />
-        <button className="btn btn-primary">Update</button> <br />
-        <Link to={`/installation-management`} className="btn btn-primary">
-          Cancel
-        </Link>
+        <div className="row1">
+          <button className="btn btn-warning">Update</button> <br />
+          <Link to={`/installation-management`} className="btn btn-warning">
+            Cancel
+          </Link>
+        </div>
       </form>
     </div>
   );
