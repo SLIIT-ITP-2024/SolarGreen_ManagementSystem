@@ -57,8 +57,8 @@ function AllProjects() {
             <th>Type</th>
             <th>Size</th>
             <th>Status</th>
-            <th>Est. Cost</th>
-            <th>Est. Duration</th>
+            <th>Estimated Cost (Rs.)</th>
+            <th>Estimated Duration (Days)</th>
             <th>Comments</th>
             <th>Action</th>
           </tr>
