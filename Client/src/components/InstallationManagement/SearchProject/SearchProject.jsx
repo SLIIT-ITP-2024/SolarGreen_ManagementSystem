@@ -36,32 +36,36 @@ const SearchProject = () => {
     );
 
     setSearchResults(filteredProjects);
+
+    if (!searchResults.length > 0) {
+      setError("No projects found");
+    }
   };
 
   return (
-    <div className="container mt-4">
-      <h3>Project Search</h3>
-
+    <div className="container1">
       {/* Search Form */}
-      <form onSubmit={handleSearch} className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Enter customer name"
-          value={searchTerm}
-          onChange={handleInputChange}
-        />
-        <div className="input-group-append">
-          <button className="btn btn-primary" type="submit">
-            Search
-          </button>
+      <form onSubmit={handleSearch} className="search-form">
+        <div className="search-component">
+          <input
+            type="text"
+            className="form-control search"
+            placeholder="Enter customer name"
+            value={searchTerm}
+            onChange={handleInputChange}
+          />
+          <div className="input-group-append">
+            <button className="btn btn-warning" type="submit">
+              Search
+            </button>
+          </div>
         </div>
       </form>
 
       {/* Display Search Results */}
-      {searchResults.length > 0 ? (
+      {searchResults.length > 0 && (
         <div>
-          <h4>Search Results</h4>
+          <p className="result">Search Results...</p>
 
           {searchResults.map((project) => (
             <div>
@@ -99,8 +103,10 @@ const SearchProject = () => {
             </div>
           ))}
         </div>
-      ) : (
-        <p>No projects found.</p>
+      )}
+
+      {!searchResults.length > 0 && error !== null && (
+        <p className="result">{error}</p>
       )}
     </div>
   );

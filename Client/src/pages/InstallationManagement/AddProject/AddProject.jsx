@@ -275,7 +275,7 @@ function AddProject() {
 
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-info"
                 onClick={handleCalculate}
               >
                 Calculate Estimations
@@ -294,23 +294,23 @@ function AddProject() {
                   <br />
 
                   <div className="form-group">
-                    <label htmlFor="cost">Estimated Cost</label>
+                    <label htmlFor="cost">Estimated Cost (Rs.)</label>
                     <input
                       type="text"
                       className="form-control"
                       id="estimatedCost"
-                      value={`Rs. ${cost}`}
+                      value={cost}
                       readOnly
                     />
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="duration">Estimated Duration</label>
+                    <label htmlFor="duration">Estimated Duration (Days)</label>
                     <input
                       type="text"
                       className="form-control"
                       id="estimatedDuration"
-                      value={`${duration} days`}
+                      value={duration}
                       readOnly
                     />
                   </div>
@@ -325,14 +325,14 @@ function AddProject() {
                     />
                   </div>
                   <br />
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-warning">
                     Add Project
                   </button>
                 </div>
               )}
             </form>
             <br />
-            <Link to={"/installation-management"} className="btn btn-primary">
+            <Link to={"/installation-management"} className="btn btn-warning">
               Cancel
             </Link>
           </div>

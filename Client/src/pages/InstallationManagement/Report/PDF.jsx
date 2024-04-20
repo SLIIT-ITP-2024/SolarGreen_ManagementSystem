@@ -31,7 +31,7 @@ const PDF = ({ project }) => {
   return (
     <div>
       <h4>Project_Report - {project.projectID}</h4> <br />
-      <button onClick={generatePDF} className="btn btn-primary">
+      <button onClick={generatePDF} className="btn btn-warning">
         Generate PDF
       </button>
     </div>
