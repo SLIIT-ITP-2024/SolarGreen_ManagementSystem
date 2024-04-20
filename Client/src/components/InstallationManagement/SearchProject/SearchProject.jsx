@@ -68,7 +68,7 @@ const SearchProject = () => {
           <p className="result">Search Results...</p>
 
           {searchResults.map((project) => (
-            <div>
+            <div className="container">
               <br />
               <table>
                 <thead>
