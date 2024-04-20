@@ -161,7 +161,7 @@ function AddProject() {
             type="text"
             className="form-control"
             id="cID"
-            placeholder="Enter customer ID"
+            placeholder="Enter customer ID (Cxxx)"
             value={cID}
             onChange={(e) => setCID(e.target.value)}
           />
