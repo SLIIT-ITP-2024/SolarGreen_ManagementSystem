@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import { useDarkMode } from '../../../contexts/DarkModeContext';
+import './DataCard.scss';
 
-import './DataCard.scss'
-import Popup from '../updatePopup/Popup';
 
 const DataCard = (props) => {
     const [showModal, setShowModal] = useState(false);
@@ -10,7 +8,6 @@ const DataCard = (props) => {
     const handleShow = () => setShowModal(true);
     const handleClose = () => setShowModal(false);
 
-    const { isDarkMode } = useDarkMode();
 
     const updateBtn = () => {
         console.log('Update Button Clicked');
