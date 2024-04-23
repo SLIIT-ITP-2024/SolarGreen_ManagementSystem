@@ -1,5 +1,7 @@
 const Project = require('../models/installationModels/project');
+const TempCustomer = require('../models/installationModels/tempCustomer');
 
+// Project
 //http://localhost:3000/api/v1/installation/test
 const testController = (req, res) => {
   res.send('installation controller is working!');
@@ -130,11 +132,90 @@ const deleteProject = async (req, res) => {
   }
 };
 
+
+
+// Temporary Customer
+
+// get all customers
+// http://localhost:3000/api/v1/installation/customers/get
+const getCustomers = async (req, res) => {
+    try {
+        const customers = await TempCustomer.find();
+        res.status(200).json(customers);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+};
+
+// get single customer
+// http://localhost:3000/api/v1/installation/customers/get/:id
+const getCustomer = async (req, res) => {
+    try {
+        const {id} = req.params;
+
+        const get = await TempCustomer.findById(id).then((customer) => {
+            res.status(200).send({customer})
+        }).catch((err) => {
+            res.status(500).send({status: "Error with fetching customer!"})
+        })
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+};
+
+// add customer
+// http://localhost:3000/api/v1/installation/customers/add
+const addCustomer = async (req, res) => {
+    try {
+        const customerID = req.body.customerID;
+        const customerName = req.body.customerName;
+
+
+
+        const newCustomer = new TempCustomer({
+            customerID,
+            customerName
+        });
+
+        newCustomer.save().then(() => {
+            res.json("Customer Added!")
+        }).catch((err) => {
+            console.log(err);
+        });
+
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+};
+
+
+// delete customer
+// http://localhost:3000/api/v1/installation/customers/delete/:id
+const deleteCustomer= async (req, res) => {
+    try {
+        const {id} = req.params;
+
+        await TempCustomer.findByIdAndDelete(id).then(() => {
+            res.status(200).send({status: "Customer Deleted!"});
+        }).catch((err) => {
+            res.status(500).send({status: "Error with deleting project!"});
+        })
+
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+};
+
+
 module.exports = {
-  testController, 
-  getProjects,
-  getProject,
-  addProject,
-  updateProject,
-  deleteProject
+    testController, 
+    getProjects,
+    getProject,
+    addProject,
+    updateProject,
+    deleteProject,
+    getCustomers,
+    getCustomer,
+    addCustomer,
+    deleteCustomer
 };

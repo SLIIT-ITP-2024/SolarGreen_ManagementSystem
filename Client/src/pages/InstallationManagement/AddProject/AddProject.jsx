@@ -1,180 +1,347 @@
-import React, {useState} from 'react'
-import WithLayout from '../../../hoc/WithLayout'
-import './AddProject.css'
-import SolarWaterHeatingEquipment from '../../../components/InstallationManagement/EquipmentDetails/SolarWaterHeatingEquipment';
-import ResidentialRooftopSolarPVEquipment from '../../../components/InstallationManagement/EquipmentDetails/ResidentialRooftopSolarPVEquipment';
-import SolarStreetLightingEquipment from '../../../components/InstallationManagement/EquipmentDetails/SolarStreetLightingEquipment';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import WithLayout from "../../../hoc/WithLayout";
+import "./AddProject.css";
+import SolarWaterHeatingEquipment from "../../../components/InstallationManagement/EquipmentDetails/SolarWaterHeatingEquipment";
+import ResidentialRooftopSolarPVEquipment from "../../../components/InstallationManagement/EquipmentDetails/ResidentialRooftopSolarPVEquipment";
+import SolarStreetLightingEquipment from "../../../components/InstallationManagement/EquipmentDetails/SolarStreetLightingEquipment";
 
 function AddProject() {
+  // Validation
+  const [cID, setCID] = useState("");
+  const [message, setMessage] = useState("");
+  const [valid, setValid] = useState("");
+  const [customer, setCustomer] = useState([]);
+  const [customers, setCustomers] = useState([]);
 
-    const customerID = "";
-    const customerName="";
-    // const [projectID, setProjectID] = useState("");
-    const date = "";
-    const [projectType, setProjectType] = useState("");
-    const [projectSize, setProjectSize] = useState("");
-    const [status, setStatus] = useState("Pending");
-    const [cost, setCost] = useState(null);
-    const [duration, setDuration] = useState(null);
-    const [comments, setComments] = useState("");
+  // Form
+  const [customerID, setCustomerID] = useState("");
+  const [customerName, setCustomerName] = useState("");
+  const [projectID, setProjectID] = useState("");
+  const [date, setDate] = useState("");
+  const [projectType, setProjectType] = useState("");
+  const [projectSize, setProjectSize] = useState("");
+  const [status, setStatus] = useState("Pending");
+  const [cost, setCost] = useState(null);
+  const [duration, setDuration] = useState(null);
+  const [comments, setComments] = useState("");
 
-    // // Fetch the existing projects to calculate the next project ID
-    // useEffect(() => {
-    //     axios.get("http://localhost:8070/project/")
-    //         .then((res) => {
-    //             const projects = res.data;
-    //             if (projects.length > 0) {
-    //                 const lastProjectID = projects[projects.length - 1].projectID;
-    //                 // Extract the numeric part of the last student ID and increment it by 1
-    //                 const numericPart = parseInt(lastProjectID.substring(1), 10) + 1;
-    //                 // Generate the next student ID with leading zeros
-    //                 setProjectID(`S${String(numericPart).padStart(3, '0')}`);
-    //             } else {
-    //                 // If there are no existing students, start with S001
-    //                 setProjectID("P001");
-    //             }
-    //         })
-    //         .catch((err) => {
-    //             console.error("Error fetching projects:", err);
-    //         });
-    // }, []);
+  const fetchCustomers = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/api/v1/installation/customers/get"
+      );
+      setCustomers(response.data); // Assuming response.data is an array of student objects
+    } catch (error) {
+      console.error("Error fetching customers:", error);
+    }
+  };
 
-    // console.log(status);
+  const validate = async (e) => {
+    e.preventDefault();
 
-    //Current date
-    const getCurrentDate = () => {
-        const date = new Date();
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        return `${year}-${month}-${day}`;
-      };
+    // Check if the project ID exists in the list of students
+    const validCustomer = customers.find(
+      (customer) => customer.customerID === cID
+    );
 
-      const handleCalculate = () => {
-        // Placeholder logic for calculating estimated cost and duration
-        let calculatedCost = 0;
-        let calculatedDuration = 0;
-        if (projectType === "Solar Water Heating System") {
-            calculatedCost = 5000; // Example cost for Solar Water Heating System
-            calculatedDuration = 7; // Example duration in days
-        } else if (projectType === "Residential Rooftop Solar PV System") {
-            calculatedCost = 10000; // Example cost for Residential Rooftop Solar PV System
-            calculatedDuration = 14; // Example duration in days
-        } else if (projectType === "Solar Street Lighting System") {
-            calculatedCost = 8000; // Example cost for Solar Street Lighting System
-            calculatedDuration = 10; // Example duration in days
+    if (validCustomer) {
+      setCustomer(validCustomer);
+      setCustomerID(validCustomer.customerID);
+      setCustomerName(validCustomer.customerName);
+      setMessage("Valid Customer ID!");
+      setValid(true);
+    } else {
+      setMessage("Invalid Customer ID!");
+      setValid(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCustomers();
+  }, []);
+
+  // Fetch the existing projects to calculate the next project ID
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/v1/installation/projects/get")
+      .then((res) => {
+        const projects = res.data;
+        if (projects.length > 0) {
+          const lastProjectID = projects[projects.length - 1].projectID;
+          // Extract the numeric part of the last student ID and increment it by 1
+          const numericPart = parseInt(lastProjectID.substring(1), 10) + 1;
+          // Generate the next student ID with leading zeros
+          setProjectID(`P${String(numericPart).padStart(3, "0")}`);
+        } else {
+          // If there are no existing students, start with S001
+          setProjectID("P001");
         }
+      })
+      .catch((err) => {
+        console.error("Error fetching projects:", err);
+      });
+  }, []);
 
-        // Placeholder logic for considering project size
-        if (projectSize === "Large") {
-            calculatedCost *= 1.2; // Increase cost by 20% for large projects
-            calculatedDuration *= 1.1; // Increase duration by 10% for large projects
-        }
+  //Current date
+  const getCurrentDate = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
 
-        calculatedDuration = Math.ceil(calculatedDuration);
+  const handleCalculate = () => {
+    let calculatedCost = null;
+    let calculatedDuration = null;
+    if (projectType === "Solar Water Heating System") {
+      calculatedCost = 5000; // Example cost for Solar Water Heating System
+      calculatedDuration = 7; // Example duration in days
+    } else if (projectType === "Residential Rooftop Solar PV System") {
+      calculatedCost = 10000; // Example cost for Residential Rooftop Solar PV System
+      calculatedDuration = 14; // Example duration in days
+    } else if (projectType === "Solar Street Lighting System") {
+      calculatedCost = 8000; // Example cost for Solar Street Lighting System
+      calculatedDuration = 10; // Example duration in days
+    }
 
-        setCost(calculatedCost);
-        setDuration(calculatedDuration);
+    // Placeholder logic for considering project size
+    if (projectSize === "Large") {
+      calculatedCost *= 1.2; // Increase cost by 20% for large projects
+      calculatedDuration *= 1.1; // Increase duration by 10% for large projects
+    }
+
+    calculatedDuration = Math.ceil(calculatedDuration);
+
+    setCost(calculatedCost);
+    setDuration(calculatedDuration);
+  };
+
+  function sendData(e) {
+    e.preventDefault();
+
+    const newProject = {
+      customerID,
+      customerName,
+      projectID,
+      date: getCurrentDate(),
+      projectType,
+      projectSize,
+      status,
+      estimatedCost: cost,
+      estimatedDuration: duration,
+      comments,
     };
 
-        return(
-            <div className="container">
-                <h3>Create Project</h3>
-                <form>
-                    <div className="row">
-                        <div className="col">
-                            <div className="form-group">
-                                <label htmlFor="cID">Customer ID</label>
-                                <input type="text" className="form-control" id="customerID" value={"C00"} readOnly/>
-                            </div>
-                        </div>
-                        <div className="col">
-                            <div className="form-group">
-                                <label htmlFor="cName">Customer Name</label>
-                                <input type="text" className="form-control" id="customerName" value={"xxx"} readOnly/>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div className="row">
-                        <div className="col">
-                            <div className="form-group">
-                                <label htmlFor="cID">Project ID</label>
-                                <input type="text" className="form-control" id="projectID" value={"P00"} readOnly/>
-                            </div>
-                        </div>
-                        <div className="col">
-                            <div className="form-group">
-                                <label htmlFor="age">Date</label>
-                                <input type="text" className="form-control" id="date" value={getCurrentDate()} readOnly/>
-                            </div>
-                        </div>
-                    </div>
+    // console.log("New Project Data:", newProject);
 
-                    <div className="row">
-                        <div className="col">
-                            <div className="form-group">
-                                <label htmlFor="gender">Project Type</label>
-                                <select className="form-control" id="projectType" onChange={(e) => setProjectType(e.target.value)}>
-                                    <option value="">Select Type</option>
-                                    <option value="Solar Water Heating System">Solar Water Heating System</option>
-                                    <option value="Residential Rooftop Solar PV System">Residential Rooftop Solar PV System</option>
-                                    <option value="Solar Street Lighting System">Solar Street Lighting System</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div className="col">
-                            <div className="form-group">
-                                <label htmlFor="projectSize">Project Size</label>
-                                <select className="form-control" id="projectSize" onChange={(e) => setProjectSize(e.target.value)}>
-                                    <option value="">Select Size</option>
-                                    <option value="Small">Small</option>
-                                    <option value="Medium">Medium</option>
-                                    <option value="Large">Large</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+    axios
+      .post(
+        "http://localhost:3000/api/v1/installation/projects/add",
+        newProject
+      )
+      .then(() => {
+        alert("Project Added!");
+        window.location.href = "/installation-management";
+      })
+      .catch((err) => {
+        console.error("Error adding project:", err);
+        alert("Failed to add project. Please try again.");
+      });
+  }
 
-                   
-                    <button type="button" className="btn btn-secondary" onClick={handleCalculate}>Calculate Estimations</button>
+  return (
+    <div className="container">
+      <form onSubmit={validate}>
+        <div className="form-group">
+          <label for="name">Customer ID</label>
+          <input
+            type="text"
+            className="form-control"
+            id="cID"
+            placeholder="Enter customer ID"
+            value={cID}
+            onChange={(e) => setCID(e.target.value)}
+          />
+        </div>
 
-                    {cost !== null && duration !== null &&
-                        <div>
+        <button type="submit" className="btn btn-primary">
+          Validate ID
+        </button>
+      </form>
+      {/* Display validation message */}
+      {valid && (
+        <div>
+          <p className="mt-3">{message}</p>
 
-                            {projectType === "Solar Water Heating System" && projectSize !== "" && <SolarWaterHeatingEquipment/>}
-                            {projectType === "Residential Rooftop Solar PV System" && projectSize !== "" && <ResidentialRooftopSolarPVEquipment />}
-                            {projectType === "Solar Street Lighting System" && projectSize !== "" && <SolarStreetLightingEquipment />}
-                            <br />
+          <div className="container">
+            <h3>Create Project</h3>
 
-                            <div className="form-group">
-                                <label htmlFor="cost">Estimated Cost</label>
-                                <input type="text" className="form-control" id="estimatedCost" value={`Rs. ${cost}`} readOnly />
-                            </div>
+            <form onSubmit={sendData}>
+              <div className="row">
+                <div className="col">
+                  <div className="form-group">
+                    <label htmlFor="cID">Customer ID</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="customerID"
+                      value={customer.customerID}
+                      readOnly
+                    />
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="form-group">
+                    <label htmlFor="cName">Customer Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="customerName"
+                      value={customer.customerName}
+                      readOnly
+                    />
+                  </div>
+                </div>
+              </div>
 
-                            <div className="form-group">
-                                <label htmlFor="duration">Estimated Duration</label>
-                                <input type="text" className="form-control" id="estimatedDuration" value={`${duration} days`} readOnly />
-                            </div>
+              <div className="row">
+                <div className="col">
+                  <div className="form-group">
+                    <label htmlFor="cID">Project ID</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="projectID"
+                      value={projectID}
+                      readOnly
+                    />
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="form-group">
+                    <label htmlFor="age">Date</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="date"
+                      value={getCurrentDate()}
+                      readOnly
+                    />
+                  </div>
+                </div>
+              </div>
 
+              <div className="row">
+                <div className="col">
+                  <div className="form-group">
+                    <label htmlFor="gender">Project Type</label>
+                    <select
+                      className="form-control"
+                      id="projectType"
+                      onChange={(e) => setProjectType(e.target.value)}
+                    >
+                      <option value="">Select Type</option>
+                      <option value="Solar Water Heating System">
+                        Solar Water Heating System
+                      </option>
+                      <option value="Residential Rooftop Solar PV System">
+                        Residential Rooftop Solar PV System
+                      </option>
+                      <option value="Solar Street Lighting System">
+                        Solar Street Lighting System
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="form-group">
+                    <label htmlFor="projectSize">Project Size</label>
+                    <select
+                      className="form-control"
+                      id="projectSize"
+                      onChange={(e) => setProjectSize(e.target.value)}
+                    >
+                      <option value="">Select Size</option>
+                      <option value="Small">Small</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Large">Large</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
 
-                            <div className="form-group">
-                                <label htmlFor="comments">Comments</label>
-                                <input type="text" className="form-control" id="comments" onChange={(e) => setComments(e.target.value)}/>
-                            </div>
+              <button
+                type="button"
+                className="btn btn-info"
+                onClick={handleCalculate}
+              >
+                Calculate Estimations
+              </button>
 
-                            <button type="submit" className="btn btn-primary">Add Project</button>
-                        </div>
-                    }
+              {cost !== null && duration !== null && (
+                <div>
+                  {projectType === "Solar Water Heating System" &&
+                    projectSize !== "" && <SolarWaterHeatingEquipment />}
+                  {projectType === "Residential Rooftop Solar PV System" &&
+                    projectSize !== "" && (
+                      <ResidentialRooftopSolarPVEquipment />
+                    )}
+                  {projectType === "Solar Street Lighting System" &&
+                    projectSize !== "" && <SolarStreetLightingEquipment />}
+                  <br />
 
-                </form>
-                
-                <Link to={"/installation-management"} className="btn btn-primary">Cancel</Link>
+                  <div className="form-group">
+                    <label htmlFor="cost">Estimated Cost (Rs.)</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="estimatedCost"
+                      value={cost}
+                      readOnly
+                    />
+                  </div>
 
-            </div>
-        
-        )
+                  <div className="form-group">
+                    <label htmlFor="duration">Estimated Duration (Days)</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="estimatedDuration"
+                      value={duration}
+                      readOnly
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="comments">Comments</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="comments"
+                      onChange={(e) => setComments(e.target.value)}
+                    />
+                  </div>
+                  <br />
+                  <button type="submit" className="btn btn-warning">
+                    Add Project
+                  </button>
+                </div>
+              )}
+            </form>
+            <br />
+            <Link to={"/installation-management"} className="btn btn-warning">
+              Cancel
+            </Link>
+          </div>
+        </div>
+      )}
+      {/* Display validation message */}
+      {!valid && <p className="mt-3">{message}</p>}
+    </div>
+  );
 }
 
 export default WithLayout(AddProject);
