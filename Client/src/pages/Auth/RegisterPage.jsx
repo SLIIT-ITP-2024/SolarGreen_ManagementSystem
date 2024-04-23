@@ -49,10 +49,17 @@ const RegisterPage = () => {
     axios.post('http://localhost:3000/api/v1/permission/create', data)
       .then(response => {
         console.log('API response:', response.data);
+        if (response.status === 201)  {
+          window.location.href = '/login';
+        } else {
+          // Display error message to the user
+          alert('Registration failed. Please try again.');
+        }
     
       })
       .catch(error => {
         console.error('API error:', error);
+        alert('Registration failed. Please try again.');
     
       });
   };
