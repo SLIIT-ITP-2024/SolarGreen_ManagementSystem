@@ -5,11 +5,11 @@ const test = async (req, res) => {
 }
 
 const saveLoginAttempts = async (req, res) => {
-    const { username, password, ipAddress, time } = req.body;
+    const { email, password, ipAddress } = req.body;
     try {
         const newLoginAttempt = new loginAttempts({
             attemptID: uuid.v4(),
-            username,
+            email,
             password,
             ipAddress,
             time : new Date().toLocaleString()

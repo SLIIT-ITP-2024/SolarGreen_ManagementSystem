@@ -26,13 +26,18 @@ const LoginPage = () => {
       password
     };
     console.log(data)
-    axios.get('http://localhost:3000/api/v1/auth/login', data)
+    axios.post('http://localhost:3000/api/v1/auth/login', data)
       .then(response => {
         console.log('API response:', response.data);
         if (response.status === 200) {
+            // Save username and token to local storage
+          localStorage.setItem('username', response.data.user.username);
+          localStorage.setItem('role', response.data.user.role);
+          localStorage.setItem('token', response.data.token);
+ 
           window.location.href = '/';
         } else {
-          setError('Login failed. Please try again.');
+          setError('Login failed. Please try again Later.');
         }
       })
       .catch(error => {
