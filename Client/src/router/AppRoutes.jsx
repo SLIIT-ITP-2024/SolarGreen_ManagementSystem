@@ -22,7 +22,10 @@ import Estimations from "../pages/InstallationManagement/Estimations";
 import AddProject from "../pages/InstallationManagement/AddProject/AddProject";
 import UpdateProject from "../pages/InstallationManagement/UpdateProject/UpdateProject";
 import Report from "../pages/InstallationManagement/Report/Report";
-//
+//Maintenance Managemenet
+import RequestForm from '../pages/MaintenanceManagement/RequestForm/RequestForm'
+import Update from '../pages/MaintenanceManagement/Update/Update';
+import GenerateReports from '../pages/MaintenanceManagement/Generate/GenerateReports';
 
 const AppRouters = () => {
   return (
@@ -78,7 +81,24 @@ const AppRouters = () => {
           element={<Report />}
         />
 
-        {/*  */}
+         {/*Maintenance Management*/}
+         <Route
+          path="/maintanance-management/create"
+          element={<RequestForm/>}
+        />
+      
+      <Route
+          path="/maintanance-management/update/:id"
+          element={<Update/>}
+        />
+    
+    <Route
+          path="/maintanance-management/generate"
+          element={<GenerateReports/>}
+        />
+    
+       
+     
       </Routes>
     </Router>
   );
