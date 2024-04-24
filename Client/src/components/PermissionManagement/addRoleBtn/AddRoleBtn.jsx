@@ -4,7 +4,7 @@ import { IoMdArrowDropright } from 'react-icons/io';
 import './AddRoleBtn.scss';
 import AddRolePopup from '../addRolePopup/AddRolePopup';
 
-const AddRoleBtn = (props) => {
+const AddRoleBtn = ({ btnName, onRecordAdded }) => {
     const [showModal, setShowModal] = useState(false);
 
     const handleShow = () => setShowModal(true);
@@ -17,12 +17,12 @@ const AddRoleBtn = (props) => {
     return (
         <>
             <div className='navBtn-outer' onClick={handleClick}>
-                <h3>{props.btnName}</h3>
+                <h3>{btnName}</h3>
                 <IoMdArrowDropright className='icon'/>
                 
             </div>
 
-            <AddRolePopup showModal={showModal} handleClose={handleClose} />
+            <AddRolePopup showModal={showModal} handleClose={handleClose} onRecordAdded={onRecordAdded}  />
 
         </>
     );

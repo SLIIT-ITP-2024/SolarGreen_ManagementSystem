@@ -51,8 +51,9 @@ const getUserRoleByID = async (req, res) => {
 
 const updateUserRole = async (req, res) => {
   const userId = req.params.id;
-  const { roleID, email, username, password, role, validTime } = req.body;
-  const updatedRole = { roleID, email, username, password, role, validTime };
+  const { email, username, role, validTime } = req.body;
+  const updatedRole = { email, username, role, validTime };
+  console.log(updatedRole);
   try {
     const updatedRoleDocument = await UserRole.findByIdAndUpdate(userId, updatedRole, { new: true });
     if (!updatedRoleDocument) {

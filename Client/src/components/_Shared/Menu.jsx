@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation  } from "react-router-dom"; 
 
 import "./Menu.scss";
@@ -59,6 +59,17 @@ import { useDarkMode } from '../../contexts/DarkModeContext';
 const Menu = () => {
   const { isDarkMode} = useDarkMode();
   const location = useLocation();
+  //--------------
+  const [username, setUsername] = useState('');
+  const [role, setRole] = useState('');
+  useEffect(() => {
+    // Retrieve username and role from local storage
+    const storedUsername = localStorage.getItem('username');
+    const storedRole = localStorage.getItem('role');
+    setUsername(storedUsername);
+    setRole(storedRole);
+  }, []);
+  
   return (
     <div className={`menu-outer`} data-theme={isDarkMode ? 'dark' : 'light'}>
       <div className="menu-inner">
@@ -68,10 +79,10 @@ const Menu = () => {
               
             </div>
             <div className="name">
-              <h3>Mash</h3>
+              <h3>{role}</h3>
             </div>
             <div className="position">
-              <h3>Permission Manager</h3>
+              <h3>{username}</h3>
             </div>
           </div>
           <div className="nav-links">
