@@ -1,0 +1,33 @@
+.container1{
+    margin-bottom: 10px;
+}
+
+.btn-warning {
+    margin: 10px 15px;
+    border-radius: 5px;
+    color: #111;
+}
+
+
+/* Form */
+.search-form {
+    margin: 5px;
+}
+
+/* Input */
+.form-control.search {
+    border: 1px solid black; 
+    margin: 5px;
+}
+  
+.form-control:focus {
+    border-color: #007bff; 
+}
+
+.search-component {
+    display: flex;
+}
+  
+.result {
+    margin: 10px;
+}
