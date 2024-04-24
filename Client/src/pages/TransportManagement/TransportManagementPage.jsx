@@ -1,13 +1,10 @@
 import React from 'react'
+import MySearchBar from '../../components/TransportManagement/MySearchBar'
 import WithLayout from '../../hoc'
-import TransportManagement from '../../components/TransportManagement/TransportManagement'
-import SearchBar from '../../components/TransportManagement/SearchBar'
-
 const TransportManagementPage = () => {
   return (
     <div>
-       <TransportManagement />
-       <SearchBar/>
+       <MySearchBar />
     </div>
   )
 }
