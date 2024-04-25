@@ -6,6 +6,7 @@ const test = async (req, res) => {
 
 const saveLoginAttempts = async (req, res) => {
     const { email, password, ipAddress } = req.body;
+    console.log(req.body);
     try {
         const newLoginAttempt = new loginAttempts({
             attemptID: uuid.v4(),
