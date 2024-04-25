@@ -5,9 +5,13 @@ $font-color-primary: #333;
 $border-color: #ced4da;
 $header-4: 24px;
 
-@import '../../index.scss';
+@import '../../../index.scss';
 
-.checkout-page {
+.search-bar-outer {
+  margin-top: 30px; /* Add margin-top to create space */
+}
+
+.payment-details-page {
   max-width: 900px;
   margin: 0 auto;
   padding: 40px;
@@ -17,61 +21,41 @@ $header-4: 24px;
     font-size: $header-4;
     color: $primary-color;
     text-align: center;
-    margin-bottom: 40px;
+    margin-top: 40px;
   }
 
-  .order-details {
+  .table {
+    width: 100%;
+    border-collapse: collapse;
     border: 2px solid $border-color;
-    padding: 30px;
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-    label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    select,
-    textarea {
-      width: 100%;
+    th,
+    td {
       padding: 12px;
-      margin-bottom: 20px;
-      border: 2px solid $border-color;
-      border-radius: 5px;
-      box-sizing: border-box;
-      background-color: $background-color;
-      color: $primary-color;
-      font-family: 'Arial', sans-serif;
-      font-size: 16px;
+      border-bottom: 2px solid $border-color;
     }
 
-    .installment-options {
-      margin-top: 20px;
-
-      label {
-        margin-bottom: 5px;
-      }
-    }
-
-    .monthly-payment {
-      margin-top: 20px;
+    th {
       font-weight: bold;
       text-align: center;
+      background-color: $background-color;
+      color: $primary-color;
     }
-  }
 
-  .notification {
-    background-color: $accent-color-1;
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-weight: bold;
+    td {
+      text-align: center;
+    }
+
+    tbody {
+      tr {
+        &:nth-child(even) {
+          background-color: lighten($background-color, 2%);
+        }
+      }
+    }
   }
 
   button[type="submit"] {
@@ -90,7 +74,7 @@ $header-4: 24px;
   }
 
   @media (max-width: 768px) {
-    .checkout-page {
+    .payment-details-page {
       padding: 20px;
     }
   }

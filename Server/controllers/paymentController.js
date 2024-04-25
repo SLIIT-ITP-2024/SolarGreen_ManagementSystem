@@ -1,11 +1,13 @@
 const Payment = require("../models/paymentModels/payment.model");
 
 // Test controller
+// http://localhost:3000/api/v1/payment/test
 const testController = (req, res) => {
   res.send("Payment controller is working!");
 };
 
 // Get all payments
+// http://localhost:3000/api/v1/payment/payments/get
 const getPayments = async (req, res) => {
   try {
     const payments = await Payment.find();
@@ -16,6 +18,7 @@ const getPayments = async (req, res) => {
 };
 
 // Get single payment by ID
+// http://localhost:3000/api/v1/payment/payments/get/:id
 const getPayment = async (req, res) => {
   try {
     const { id } = req.params;
@@ -32,6 +35,7 @@ const getPayment = async (req, res) => {
 };
 
 // Add a new payment
+// http://localhost:3000/api/v1/payment/payments/add
 const addPayment = async (req, res) => {
   try {
     const newPayment = new Payment(req.body);
@@ -43,6 +47,7 @@ const addPayment = async (req, res) => {
 };
 
 // Update payment by ID
+// http://localhost:3000/api/v1/payment/payments/update/:id
 const updatePayment = async (req, res) => {
   try {
     const { id } = req.params;
@@ -55,6 +60,7 @@ const updatePayment = async (req, res) => {
 };
 
 // Delete payment by ID
+// http://localhost:3000/api/v1/payment/payments/delete/:id
 const deletePayment = async (req, res) => {
   try {
     const { id } = req.params;
