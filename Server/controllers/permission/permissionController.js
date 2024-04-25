@@ -76,5 +76,26 @@ const deleteUserRole = async (req, res) => {
   }
 }
 
+const searchByUsername = async (req, res) => {
+  try {
+    const username = req.params.username;
+    
+    // Create a regular expression to match partial usernames
+    const regex = new RegExp(username, 'i');
 
-module.exports = { testController, createUserRole, getAllUserRoles, getUserRoleByID, updateUserRole, deleteUserRole };
+    // Find users whose usernames match the regex
+    const users = await UserRole.find({ username: { $regex: regex } });
+
+    if (!users.length) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    return res.status(200).json(users);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+
+module.exports = { testController, createUserRole, getAllUserRoles, getUserRoleByID, 
+  updateUserRole, deleteUserRole,searchByUsername };
