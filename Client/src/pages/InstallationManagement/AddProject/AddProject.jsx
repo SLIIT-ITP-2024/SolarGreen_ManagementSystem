@@ -134,9 +134,7 @@ function AddProject() {
       duration === null ||
       comments === ""
     ) {
-      alert(
-        "Please fill out all required fields and calculate estimations before submitting."
-      );
+      alert("Please fill out all required fields!");
       return;
     }
 
