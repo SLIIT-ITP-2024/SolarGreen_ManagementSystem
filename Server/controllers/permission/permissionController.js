@@ -1,12 +1,14 @@
-const UserRole = require("../models/permissionModels/userRole.model");
+const UserRole = require("../../models/permissionModels/userRole.model");
 const uuid = require('uuid');
+const auth =  require('../../middleware/auth');
 
 const testController = (req, res) => {
   res.send('Permission controller is working!');
 }
 
-const createUserRole = async (req, res) => {
+const createUserRole =   async (req, res) => {
   try {
+    console.log(req.body);
     const { email, username, password, role, validTime } = req.body;
 
     const newRole = new UserRole({
@@ -49,8 +51,8 @@ const getUserRoleByID = async (req, res) => {
 
 const updateUserRole = async (req, res) => {
   const userId = req.params.id;
-  const { roleID, email, username, password, role, validTime } = req.body;
-  const updatedRole = { roleID, email, username, password, role, validTime };
+  const { email, username, role, validTime } = req.body;
+  const updatedRole = { email, username, role, validTime };
   try {
     const updatedRoleDocument = await UserRole.findByIdAndUpdate(userId, updatedRole, { new: true });
     if (!updatedRoleDocument) {
@@ -73,5 +75,6 @@ const deleteUserRole = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 }
+
 
 module.exports = { testController, createUserRole, getAllUserRoles, getUserRoleByID, updateUserRole, deleteUserRole };
