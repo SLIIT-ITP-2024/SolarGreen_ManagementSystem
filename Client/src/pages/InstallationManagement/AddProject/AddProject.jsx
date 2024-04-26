@@ -122,6 +122,20 @@ function AddProject() {
   function sendData(e) {
     e.preventDefault();
 
+    if (
+      !customerID ||
+      !projectID ||
+      !projectType ||
+      !projectSize ||
+      cost === null ||
+      duration === null
+    ) {
+      alert(
+        "Please fill out all required fields and calculate estimations before submitting."
+      );
+      return;
+    }
+
     const newProject = {
       customerID,
       customerName,
