@@ -1,4 +1,6 @@
-
+.createTitle {
+    text-align: center;
+}
 .container {
     background: #fff;
     padding: 20px;

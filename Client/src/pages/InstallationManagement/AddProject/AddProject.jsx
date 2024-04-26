@@ -99,6 +99,11 @@ function AddProject() {
   };
 
   const handleCalculate = () => {
+    if (projectSize === "" || projectSize === "") {
+      alert("Fill out Project Type and Project Size!");
+      return;
+    }
+
     let calculatedCost = null;
     let calculatedDuration = null;
     if (projectType === "Solar Water Heating System") {
@@ -193,7 +198,7 @@ function AddProject() {
           <p className="mt-3">{message}</p>
 
           <div className="container">
-            <h3>Create Project</h3>
+            <h3 className="createTitle">Create Project</h3>
 
             <form onSubmit={sendData}>
               <div className="row">
