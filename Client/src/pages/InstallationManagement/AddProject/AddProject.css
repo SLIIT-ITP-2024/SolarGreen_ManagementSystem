@@ -1,5 +1,6 @@
 .createTitle {
     text-align: center;
+    text-decoration: underline;
 }
 .container {
     background: #fff;
