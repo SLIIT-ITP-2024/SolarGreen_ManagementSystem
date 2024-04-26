@@ -3,7 +3,7 @@ import axios from "axios";
 import "./SearchProject.css";
 
 const SearchProject = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState(null);
   const [allProjects, setAllProjects] = useState([]);
@@ -29,6 +29,13 @@ const SearchProject = () => {
 
   const handleSearch = (event) => {
     event.preventDefault();
+
+    // If the search term is empty, display an error message
+    if (!searchTerm || searchTerm.trim() === "") {
+      setError("Please enter a search term");
+      setSearchResults([]); // Reset search results
+      return;
+    }
 
     // Filter projects based on customer names that contain the search term
     const filteredProjects = allProjects.filter((project) =>
@@ -65,10 +72,9 @@ const SearchProject = () => {
       {/* Display Search Results */}
       {searchResults.length > 0 && (
         <div>
-          <p className="result">Search Results...</p>
-
           {searchResults.map((project) => (
             <div className="container">
+              <p className="result">Search Results...</p>
               <br />
               <table className="table">
                 <thead>
