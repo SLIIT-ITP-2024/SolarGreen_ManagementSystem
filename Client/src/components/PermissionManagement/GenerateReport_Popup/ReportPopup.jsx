@@ -2,9 +2,19 @@ import React from 'react'
 import './ReportPopup.scss';
 import { Modal } from 'react-bootstrap';
 import { useDarkMode } from '../../../contexts/DarkModeContext';
+import axios from 'axios';
 
 const ReportPopup = ({showModal, handleClose}) => {
     const { isDarkMode } = useDarkMode();
+
+    const handleSavebtn = () => {
+        const pdfUrl = 'http://localhost:3000/api/v1/login-attempts/generate-report';
+          window.open(pdfUrl, '_blank');
+          handleClose()
+     
+      
+  }
+  
 
   return (
     <>
@@ -32,7 +42,7 @@ const ReportPopup = ({showModal, handleClose}) => {
         <button className='closeBtn' onClick={handleClose}>
           Close
         </button>
-        <button className='SaveBtn' onClick={handleClose}>
+        <button className='SaveBtn' onClick={handleSavebtn}>
           Generate
         </button>
       </Modal.Footer>
