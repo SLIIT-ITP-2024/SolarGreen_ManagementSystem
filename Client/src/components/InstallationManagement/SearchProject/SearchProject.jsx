@@ -70,7 +70,7 @@ const SearchProject = () => {
           {searchResults.map((project) => (
             <div className="container">
               <br />
-              <table>
+              <table className="table">
                 <thead>
                   <tr>
                     <th>ProjectID</th>
