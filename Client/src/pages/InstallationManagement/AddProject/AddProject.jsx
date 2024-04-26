@@ -41,6 +41,11 @@ function AddProject() {
   const validate = async (e) => {
     e.preventDefault();
 
+    if (cID === "") {
+      setMessage("Please enter a Customer ID!");
+      return;
+    }
+
     // Check if the project ID exists in the list of students
     const validCustomer = customers.find(
       (customer) => customer.customerID === cID
@@ -123,12 +128,11 @@ function AddProject() {
     e.preventDefault();
 
     if (
-      !customerID ||
-      !projectID ||
       !projectType ||
       !projectSize ||
       cost === null ||
-      duration === null
+      duration === null ||
+      comments === ""
     ) {
       alert(
         "Please fill out all required fields and calculate estimations before submitting."
@@ -289,7 +293,7 @@ function AddProject() {
 
               <button
                 type="button"
-                className="btn btn-info"
+                className="btn btn-success"
                 onClick={handleCalculate}
               >
                 Calculate Estimations
