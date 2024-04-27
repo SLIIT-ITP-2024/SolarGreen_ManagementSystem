@@ -41,13 +41,7 @@ function UpdateProject() {
     e.preventDefault();
 
     // Validation
-    if (
-      !projectType ||
-      !projectSize ||
-      cost === null ||
-      duration === null ||
-      comments === ""
-    ) {
+    if (estimatedCost === "" || estimatedDuration === "" || comments === "") {
       alert("Please fill out all fields!");
       return;
     }
