@@ -40,6 +40,18 @@ function UpdateProject() {
   function updateData(e) {
     e.preventDefault();
 
+    // Validation
+    if (
+      !projectType ||
+      !projectSize ||
+      cost === null ||
+      duration === null ||
+      comments === ""
+    ) {
+      alert("Please fill out all fields!");
+      return;
+    }
+
     const updatedProject = {
       customerID,
       customerName,

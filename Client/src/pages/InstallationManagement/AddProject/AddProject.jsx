@@ -140,7 +140,7 @@ function AddProject() {
       duration === null ||
       comments === ""
     ) {
-      alert("Please fill out all required fields!");
+      alert("Please fill out all fields!");
       return;
     }
 
