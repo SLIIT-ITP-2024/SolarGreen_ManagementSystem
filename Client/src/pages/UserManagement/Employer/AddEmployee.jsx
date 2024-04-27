@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const AddEmployee = () => {
+const Employees = () => {
   const [employeeName, setEmployeeName] = useState();
   const [employeeId, setEmployeeId] = useState();
-  const [gender, setGender] = useState("Male");
+  const [gender, setGender] = useState('Male');
   const [phoneNumber, setPhoneNumber] = useState();
   const [email, setEmail] = useState();
   const [role, setRole] = useState();
@@ -40,13 +40,18 @@ const AddEmployee = () => {
     navigate('/');
   };
 
+  const genderOnChange = (e) => {
+    e.preventDefault();
+    setGender(e.target.value);
+  };
+
   return (
     <div className="w-full h-full bg-white p-20">
       <form onSubmit={Submit} onClick={Cancel}>
         <h2>Add Employee</h2>
         <div className="mb-2">
           <label htmlFor="">Employee Name</label>
-          <input 
+          <input
             type="text"
             placeholder="Enter Name"
             className="form-control"
@@ -63,16 +68,14 @@ const AddEmployee = () => {
           />
         </div>
         <div className="mb-2">
-            <label htmlFor="">Gender</label>
-              <div className="select is full-width">
-                <select
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                </select>
-              </div>
+          <label htmlFor="">Gender</label>
+          <div className="select is full-width">
+            <select value={gender} onChange={genderOnChange}>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
           </div>
+        </div>
         <div className="mb-2">
           <label htmlFor="">Phone Number</label>
           <input
@@ -134,4 +137,4 @@ const AddEmployee = () => {
   );
 };
 
-export default AddEmployee;
+export default Employees;
