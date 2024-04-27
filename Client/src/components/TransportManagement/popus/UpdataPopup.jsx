@@ -7,20 +7,20 @@ import './UpdatePopup.scss';
 import { useDarkMode } from '../../../contexts/DarkModeContext';
 
 const UpdatePopup = ({ showModal, handleClose , id,
-    transportType,transportName, transportStatus, onRecordAdded}) => {
+    vehicleNumber,address, transportStatus, onRecordAdded}) => {
     const { isDarkMode } = useDarkMode(); 
 
-    const [_transportType, settransportType] = useState('');
-    const [_transportName, settransportName] = useState('');
+    const [_vehicleNumber, settransportType] = useState('');
+    const [_address, settransportName] = useState('');
     const [_transportStatus, settransportStatus] = useState('');
     const[_id,setId] = useState('');
 
     useEffect(() => {
-        settransportType(transportType);
-        settransportName(transportName);
+        settransportType(vehicleNumber);
+        settransportName(address);
         settransportStatus(transportStatus);
         setId(id);
-    }, [transportType, transportName, transportStatus, id]);
+    }, [vehicleNumber, address, transportStatus, id]);
 
     const handletransportTypeChange = (e) => {
         settransportType(e.target.value);
@@ -37,8 +37,8 @@ const UpdatePopup = ({ showModal, handleClose , id,
 
   const handleSave = () => {
     const data = {
-        transportType: _transportType,
-        transportName: _transportName,
+        vehicleNumber: _vehicleNumber,
+        address: _address,
         transportStatus: _transportStatus
     };
   
@@ -74,22 +74,22 @@ const UpdatePopup = ({ showModal, handleClose , id,
           onSubmit={handleSave}
           >
             <div className="form-group">
-              <label htmlFor="transportType">Transport Type</label>
+              <label htmlFor="vehicleNumber">Vehicle Number</label>
               <input
                 type="text"
                 className="form-control"
-                id="transportType"
-                value={_transportType}
+                id="vehicleNumber"
+                value={_vehicleNumber}
                 onChange={handletransportTypeChange}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="transportName">Transport Name</label>
+              <label htmlFor="address">Address</label>
               <input
                 type="text"
                 className="form-control"
-                id="transportName"
-                value={_transportName}
+                id="address"
+                value={_address}
                 onChange={handletransportNameChange}
               />
             </div>

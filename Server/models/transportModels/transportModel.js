@@ -4,16 +4,17 @@ const transportSchema = new mongoose.Schema({
     transportID: {
         type: String,
         required: true
+    
     },
-    transportType: {
-        type: String,
-        required: true
-    },
-    transportName: {
+    address: {
         type: String,
         required: true
     },
     transportStatus: {
+        type: String,
+        required: true
+    },
+    vehicleNumber: {
         type: String,
         required: true
     }

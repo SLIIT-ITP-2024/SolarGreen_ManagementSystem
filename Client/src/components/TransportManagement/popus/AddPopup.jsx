@@ -10,8 +10,8 @@ const AddPopup = ({ showModal, handleClose , onRecordAdded }) => {
 
   // State variables for form fields and success message
   const [TransportID, setTransportID] = useState('');
-  const [transportType, setTransportType] = useState('');
-  const [transportName, setTransportName] = useState('');
+  const [vehicleNumber, setTransportType] = useState('');
+  const [address, setTransportName] = useState('');
   const [transportStatus, setTransportStatus] = useState('Available');
 
   const handleTransportIDChange = (e) => {
@@ -34,8 +34,8 @@ const AddPopup = ({ showModal, handleClose , onRecordAdded }) => {
   const handleSave = () => {
     const data = {
         transportID:TransportID,
-        transportType: transportType,
-        transportName: transportName,
+        vehicleNumber: vehicleNumber,
+        address: address,
         transportStatus:transportStatus
     };
   console.log('Form submit data:', data);
@@ -74,17 +74,17 @@ const AddPopup = ({ showModal, handleClose , onRecordAdded }) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="transportType">Transport Type</label>
-                <input type="text" name="transportType" id="transportType" placeholder='transport Type' value={transportType} onChange={handletransportTypeChange} />
+                <label htmlFor="vehicleNumber">Vehicle Number</label>
+                <input type="text" name="vehicleNumber" id="vehicleNumber" placeholder='Vehicle Number' value={vehicleNumber} onChange={handletransportTypeChange} />
               </div>
 
               <div className="form-group">
-                <label htmlFor="transportName">Transport Name</label>
-                <input type="text" name="transportName" id="transportName" placeholder='Transpor tName' value={transportName} onChange={handletransportNameChange} />
+                <label htmlFor="address">Address</label>
+                <input type="text" name="address" id="address" placeholder='Address' value={address} onChange={handletransportNameChange} />
               </div>
 
               <div className="form-group">
-                <label htmlFor="transportStatus">transport Status</label>
+                <label htmlFor="transportStatus">Transport Status</label>
                 <select name="transportStatus" id="transportStatus" value={transportStatus} onChange={handletransportStatusChange}>
                   <option value="Available">Available</option>
                   <option value="Complete">Complete</option>
