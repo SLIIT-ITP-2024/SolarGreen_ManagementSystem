@@ -11,6 +11,9 @@ import Dashboard from "./Dashboard"
 import NotFoundPage from "./NotFoundPage"
 import InventoryManagementPage from "./InventoryManagement/InventoryManagementPage"
 import LoginAttemptsPage from "./PermissionManagement/LoginAttemptsPage"
+import InventoryAddForm from "./InventoryManagement/Create/InventoryAddForm"
+import InventoryUpdateForm from "./InventoryManagement/Update/InventoryUpdateForm"
+import GenerateReport from "./InventoryManagement/Report/GenerateReport"
 export{
     LoginPage,
     RegisterPage,
@@ -24,5 +27,8 @@ export{
     Dashboard,
     InventoryManagementPage,
     NotFoundPage,
-    LoginAttemptsPage
+    LoginAttemptsPage,
+    InventoryAddForm,
+    InventoryUpdateForm,
+    GenerateReport
 }

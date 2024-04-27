@@ -11,8 +11,9 @@ function Inventory() {
     useEffect(() => {
         function getInventories() {
             axios
-                .get("http://localhost:3000/api/v1/inventory/inventories/getAll")
+                .get("http://localhost:3000/api/v1/inventory/inventories/get")
                 .then((res) => {
+                    console.log(res.data)
                     setInventories(res.data);
                 })
                 .catch((err) => {
@@ -50,8 +51,9 @@ function Inventory() {
 
             <h3 className="header">Inventory</h3>
 
-            <Link to="/inventory-management/create"className='btn btn-success'>Add Inventory</Link>
+            <Link to="/inventory-management/add"className='btn btn-success'>Add Inventory</Link>
             <Link to="/inventory-management/generate"className='btn btn-success'>Generate Report</Link>
+            
 
             <table className="table">
                 <thead className="thead">

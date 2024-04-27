@@ -29,19 +29,22 @@ const Search = () => {
 
   const handleSearch = (event) => {
     event.preventDefault();
-
-    // Filter inventories based on inventory names that contain the search term
+  
+    // Filter inventories based on inventory names or IDs that contain the search term
     const filteredInventories = allInventories.filter((inventory) =>
-      inventory.inventoryName.toLowerCase().includes(searchTerm.toLowerCase())
+      inventory.inventoryName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      inventory.inventoryID.toString().toLowerCase().includes(searchTerm.toLowerCase())
     );
-
+  
     setSearchResults(filteredInventories);
-
-    if (!searchResults.length > 0) {
+  
+    if (!filteredInventories.length) {
       setError("No inventories found");
+    } else {
+      setError(null);
     }
   };
-
+  
   return (
     <div className="container1">
       {/* Search Form */}

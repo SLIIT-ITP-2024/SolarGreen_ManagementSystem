@@ -46,7 +46,7 @@ const addInventory = async (req, res) => {
     const noOfItems = req.body.noOfItems;
 
 
-    const newInventory = new Project({
+    const newInventory = new Inventory({
       inventoryID,
       inventoryName,
       price,

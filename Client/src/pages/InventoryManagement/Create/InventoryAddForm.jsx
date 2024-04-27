@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import WithLayout from "../../../hoc/WithLayout";
-import "./Update.css";
+import "./Create.css";
 
-const Update = () => {
+const InventoryAddForm = () => {
   // State for form data
   const [formData, setFormData] = useState({
-    InventoryID: "",
-    InventoryName: "",
-    Price: "",
-    Noofitems: "",
+    inventoryID: "",
+    inventoryName: "",
+    price: "",
+    noOfItems: "",
   });
 
   // State for validation errors
@@ -20,17 +20,11 @@ const Update = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        await axios.put(`http://localhost:3000/api/v1/inventory/inventories/update/${formData.inventoryID}`, formData);
-        console.log("Schedule updated successfully");
-        // Clear form data after successful submission
-        setFormData({
-            InventoryID: "",
-            InventoryName: "",
-            Price: "",
-            Noofitems: "",
-        });
+        await axios.post("http://localhost:3000/api/v1/inventory/inventories/add", formData);
+        console.log("Inventory created successfully");
+        window.location.href = "/inventory-management"
       } catch (error) {
-        console.error("Error updating schedule:", error);
+        console.error("Error creating inventory:", error);
       }
     } else {
       console.log("Form is not valid. Please fill in all required fields.");
@@ -43,20 +37,20 @@ const Update = () => {
     let errors = {};
 
     // Validate each field
-    if (!formData.InventoryID.trim()) {
+    if (!formData.inventoryID.trim()) {
       errors.inventoryID = "Inventory ID is required";
       valid = false;
     }
-    if (!formData.InventoryName.trim()) {
-      errors.InventoryName = "Inventory name is required";
+    if (!formData.inventoryName.trim()) {
+      errors.inventoryName = "Inventory Name is required";
       valid = false;
     }
-    if (!formData.Price.trim()) {
-      errors.Price = "Price is required";
+    if (!formData.price.trim()) {
+      errors.price = "Price is required";
       valid = false;
     }
-    if (!formData.Noofitems.trim()) {
-      errors.Noofitems = "No of items is required";
+    if (!formData.noOfItems.trim()) {
+      errors.noOfItems = "No Of Items is required";
       valid = false;
     }
 
@@ -77,59 +71,60 @@ const Update = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h2>Maintenance Request Form</h2>
+        <h2>Add Inventory</h2>
         <div className="form-group">
-          <label htmlFor="InventoryID">Inventory ID</label>
+          <label htmlFor="inventoryID">Inventory ID</label>
           <input
             type="text"
-            id="InventoryID"
-            name="InventoryID"
-            value={formData.InventoryID}
+            id="inventoryID"
+            name="inventoryID"
+            value={formData.inventoryID}
             onChange={handleInputChange}
             className="form-control"
           />
-          {errors.InventoryID && <span className="error">{errors.InventoryID}</span>}
+          {errors.inventoryID && <span className="error">{errors.inventoryID}</span>}
         </div>
         <div className="form-group">
-          <label htmlFor="InventoryName">Inventory Name</label>
+          <label htmlFor="inventoryName">Inventory Name</label>
           <input
             type="text"
-            id="InventoryName"
-            name="InventoryName"
-            value={formData.InventoryName}
+            id="inventoryName"
+            name="inventoryName"
+            value={formData.inventoryName}
             onChange={handleInputChange}
             className="form-control"
           />
-          {errors.InventoryName && <span className="error">{errors.InventoryName}</span>}
+          {errors.inventoryName && <span className="error">{errors.inventoryName}</span>}
         </div>
         <div className="form-group">
-          <label htmlFor="Price">Price</label>
+          <label htmlFor="price">Price</label>
           <input
             type="number"
-            id="Price"
-            name="Price"
-            value={formData.Price}
+            id="price"
+            name="price"
+            value={formData.price}
             onChange={handleInputChange}
             className="form-control"
           />
-          {errors.Price && <span className="error">{errors.Price}</span>}
+          {errors.price && <span className="error">{errors.price}</span>}
         </div>
         <div className="form-group">
-          <label htmlFor="Noofitems">No of items</label>
+          <label htmlFor="noOfItems">No of items</label>
           <input
             type="number"
-            id="Noofitems"
-            name="Noofitems"
-            value={formData.Noofitems}
+            id="noOfItems"
+            name="noOfItems"
+            value={formData.noOfItems}
             onChange={handleInputChange}
             className="form-control"
           />
-          {errors.Noofitems && <span className="error">{errors.Noofitems}</span>}
+          {errors.noOfItems && <span className="error">{errors.noOfItems}</span>}
         </div>
+        
         <button type="submit" className="btn btn-success">Submit</button>
       </form>
     </div>
   );
 };
 
-export default WithLayout(Update);
+export default WithLayout(InventoryAddForm);
