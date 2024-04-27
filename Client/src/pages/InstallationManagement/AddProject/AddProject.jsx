@@ -132,6 +132,7 @@ function AddProject() {
   function sendData(e) {
     e.preventDefault();
 
+    // Validation
     if (
       !projectType ||
       !projectSize ||
