@@ -1,0 +1,73 @@
+@import '../../../index.scss';
+
+.modal-content{
+    background-color: var(--foreground-color) !important;
+   
+ }
+ .modal-header{
+    color: var(--font-color-secondary) !important;
+ }
+.form{
+    .form-group{
+        
+        display: flex;
+        align-items: center;
+        label{
+            width: 10vw;
+            height: 40px;
+            background-color: $accent-color-1;
+            color: var(--font-color-secondary);
+            
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            border-top-left-radius: 10px;   
+            border-bottom-left-radius: 10px; 
+            
+        }
+        input , select{
+            padding-left: 10px;
+            width: 40vw;
+            height: 40px;
+            margin: 5px 0;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            padding: 0 20px;
+            &:focus {
+                outline: none; 
+               
+              }
+        }
+        
+        p{ 
+            color: var(--font-color-secondary);
+            font-size: $small-text;
+            margin-left: 25vw;
+            margin-top: 20px;
+        }
+    }
+}
+.footer{
+    display: flex;
+    flex-direction: row;
+
+    .SaveBtn ,.closeBtn{
+        
+        width: 10vw;
+        height: 40px;
+        background-color: $accent-color-3;
+        color: var(--font-color-secondary);
+        border: none;
+        border-radius: 20px;
+        font-size: $title-size;
+        font-weight: bold;
+        :focus{
+            outline: none;
+        }
+    }
+
+    .closeBtn{
+        background-color: rgb(219, 219, 219);
+        color: $danger-color;
+    }
+}
