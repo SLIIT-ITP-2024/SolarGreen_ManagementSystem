@@ -27,7 +27,7 @@ const AddEmployee = ({ closeModal, setLoader }) => {
     onSubmit: async (values) => {
       console.log('value: ', values);
       try {
-        const response = await axios.post(${apiUrl}/api/v1/customer-employee/add-employee, values);
+        const response = await axios.post(`${apiUrl}/api/v1/customer-employee/add-employee`, values);
         console.log('Server response:', response.data);
         if (response.data?.successMsg) {
           closeModal();

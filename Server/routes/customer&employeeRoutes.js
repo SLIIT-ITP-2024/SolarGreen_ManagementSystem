@@ -1,5 +1,3 @@
-server -> customer&employerRoutes
-
 const customerEmployeeController = require("../controllers/customer&employeeController");
 const express = require("express");
 const customerEmployeeRouter = express.Router();
@@ -46,4 +44,4 @@ customerEmployeeRouter.get(
   customerEmployeeController.getAllCustomerControl
 );
 
-module.exports = { customerEmployeeRouter };
+module.exports = { customerEmployeeRouter};

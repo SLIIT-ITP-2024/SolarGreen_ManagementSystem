@@ -5,7 +5,7 @@ import DropdownMenu from '../../../components/dropdown';
 import { genderOptions } from '../../../utils/dropdownConstOption';
 import { useFormik } from 'formik';
 
-const AddEmployee = ({ closeModal, setLoader }) => {
+const AddCustomer = ({ closeModal, setLoader, loader }) => {
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_APIURL;
 
@@ -25,11 +25,11 @@ const AddEmployee = ({ closeModal, setLoader }) => {
     onSubmit: async (values) => {
       console.log('value: ', values);
       try {
-        const response = await axios.post(${apiUrl}/api/v1/customer-employee/add-employee, values);
+        const response = await axios.post(`${apiUrl}/api/v1/customer-employee/add-customer`, values);
         console.log('Server response:', response.data);
         if (response.data?.successMsg) {
           closeModal();
-          setLoader(2);
+          setLoader(loader + 2);
         } else {
           console.log('error response:', response.data.errorMsg);
         }
@@ -43,7 +43,7 @@ const AddEmployee = ({ closeModal, setLoader }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-30">
       <div className="w-3/4 h-5/6 bg-white p-14 overflow-y-auto rounded-lg">
         <div className="flex justify-between items-center pb-10">
-          <h2 className="text-3xl font-bold">Add Employee</h2>
+          <h2 className="text-3xl font-bold">Add Customer</h2>
           <button onClick={closeModal} className="text-lg font-bold hover:bg-red-500 px-2 rounded-md hover:text-white">
             X
           </button>
@@ -129,4 +129,4 @@ const AddEmployee = ({ closeModal, setLoader }) => {
   );
 };
 
-export default AddEmployee;
+export default AddCustomer;

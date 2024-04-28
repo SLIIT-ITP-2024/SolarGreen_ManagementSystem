@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { PencilIcon, ShieldCheckIcon, TrashIcon } from '@heroicons/react/24/solid';
-import { formatDate } from '../../../utils/generalFunction';
 import EditEmployee from './EditEmployer';
+import { formatDate } from '../../../utils/generalFunction';
 const apiUrl = import.meta.env.VITE_APIURL;
 
 const EmployeeList = ({ loader, setLoader }) => {
@@ -15,7 +15,7 @@ const EmployeeList = ({ loader, setLoader }) => {
   useEffect(() => {
     const fetchAllEmployee = async () => {
       try {
-        const response = await axios.get(${apiUrl}/api/v1/customer-employee/employee);
+        const response = await axios.get(`${apiUrl}/api/v1/customer-employee/employee`);
         console.log('Server response:', response.data);
         if (response.data.successMsg) {
           setEmployees(response?.data?.employees);
@@ -34,7 +34,7 @@ const EmployeeList = ({ loader, setLoader }) => {
     console.log('employee dele: ', deleteEmployee);
     const deleteEmployeeFunc = async () => {
       try {
-        const response = await axios.post(${apiUrl}/api/v1/customer-employee/delete-employee, deleteEmployee);
+        const response = await axios.post(`${apiUrl}/api/v1/customer-employee/delete-employee`, deleteEmployee);
         console.log('Server response:', response.data);
         if (response.data.successMsg) {
           setEmployees(response?.data?.employees);
@@ -142,4 +142,4 @@ const EmployeeList = ({ loader, setLoader }) => {
   );
 };
 
-export default EmployeeList;
+export default EmployeeList;

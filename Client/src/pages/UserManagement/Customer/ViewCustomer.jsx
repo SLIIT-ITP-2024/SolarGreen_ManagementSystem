@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { PencilIcon, ShieldCheckIcon, TrashIcon } from '@heroicons/react/24/solid';
 import { formatDate } from '../../../utils/generalFunction';
-import EditEmployee from './EditCustomer';
+import EditCustomer from './EditCustomer';
 const apiUrl = import.meta.env.VITE_APIURL;
 
 const CustomerList = ({ loader, setLoader }) => {
@@ -15,7 +15,7 @@ const CustomerList = ({ loader, setLoader }) => {
   useEffect(() => {
     const fetchAllCustomer = async () => {
       try {
-        const response = await axios.get(${apiUrl}/api/v1/customer-employee/customer);
+        const response = await axios.get(`${apiUrl}/api/v1/customer-employee/customer`);
         console.log('Server response:', response.data);
         if (response.data.successMsg) {
           setCustomers(response?.data?.customers);
@@ -34,7 +34,7 @@ const CustomerList = ({ loader, setLoader }) => {
     console.log('employee dele: ', deleteEmployee);
     const deleteCustomerFunc = async () => {
       try {
-        const response = await axios.post(${apiUrl}/api/v1/customer-employee/delete-customer, deleteEmployee);
+        const response = await axios.post(`${apiUrl}/api/v1/customer-employee/delete-customer`, deleteEmployee);
         console.log('Server response:', response.data);
         if (response.data.successMsg) {
           setCustomers(response?.data?.employees);
@@ -97,7 +97,7 @@ const CustomerList = ({ loader, setLoader }) => {
         </tbody>
       </table>
       {modal && (
-        <EditEmployee closeModal={handleModalClose} customer={selectedCustomer} setLoader={setLoader} loader={loader} />
+        <EditCustomer closeModal={handleModalClose} customer={selectedCustomer} setLoader={setLoader} loader={loader} />
       )}
     </div>
   );

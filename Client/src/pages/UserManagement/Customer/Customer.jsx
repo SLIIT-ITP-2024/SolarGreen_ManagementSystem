@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import AddEmployee from './AddCustomer';
+import AddCustomer from './AddCustomer';
 import CustomerList from './ViewCustomer';
+import WithLayout from '../../../hoc';
 
 const Customer = () => {
   const [modal, setModal] = useState(false);
@@ -20,10 +21,10 @@ const Customer = () => {
         </button>
       </div>
       <CustomerList setLoader={setLoader} loader={loader} />
-      {modal && <AddEmployee closeModal={handleModalClose} setLoader={setLoader} />}
+      {modal && <AddCustomer closeModal={handleModalClose} setLoader={setLoader} loader={loader} />}
     </div>
   );
 };
 
-// export default WithLayout(UserManagementPage);
+// export default WithLayout(Customer);
 export default Customer;

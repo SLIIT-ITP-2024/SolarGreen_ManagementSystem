@@ -1,5 +1,5 @@
+const Employee = require("../models/Customer");
 const Customer = require("../models/Customer");
-const Employee = require("../models/Employee");
 
 const testController = (req, res) => {
   res.send("employee and customer controller is working!");

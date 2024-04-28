@@ -14,7 +14,7 @@ const DropdownMenu = ({ options, onSelect, placeholder, icon, className, value }
     <Menu as="div" className="relative inline-block text-left w-full">
       <div>
         <Menu.Button
-          className={flex ${className ? className : ''} justify-between items-center h-10 text-xs md:text-base w-full px-2 md:px-5 gap-x-5 rounded-md border-y-2 border-e-2 border-black hover:bg-gray-50}
+          className={`flex ${className ? className : ''} justify-between items-center h-10 text-xs md:text-base w-full px-2 md:px-5 gap-x-5 rounded-md border-y-2 border-e-2 border-black hover:bg-gray-50`}
         >
           {icon ? <img src={icon} alt="icon" /> : ''}
           {value || selectedOption?.label || placeholder}
@@ -37,7 +37,7 @@ const DropdownMenu = ({ options, onSelect, placeholder, icon, className, value }
               <Menu.Item>
                 {({ active }) => (
                   <div
-                    className={${active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'} block px-4 py-2 text-sm}
+                    className={`${active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'} block px-4 py-2 text-sm`}
                     onClick={() => handleItemClick(option?.value, option?.label)}
                   >
                     {option?.label}

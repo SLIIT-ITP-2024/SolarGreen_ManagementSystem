@@ -11,9 +11,11 @@ import {
   TransportManagementPage,
   Dashboard,
   NotFoundPage,
-  AddEmployee
+  AddEmployee,
+  UserManagementPage
 } from '.././pages';
 import Employee from '../pages/UserManagement/Employer/Employee';
+import Customer from '../pages/UserManagement/Customer/Customer';
 
 const AppRouters = () => {
   return (
@@ -27,13 +29,14 @@ const AppRouters = () => {
         <Route path="/maintenance-management" element={<MaintenanceManagementPage />} />
         <Route path="/payment-management" element={<PaymentManagementPage />} />
         <Route path="/permission-management" element={<PermissionManagementPage />} />
-        {/* <Route path="/user-management" element={<UserManagementPage />} /> */}
+        <Route path="/user-management" element={<UserManagementPage />} />
         {/* <Route path="/employee-page" element={<EmployeePage />} /> */}
         <Route path="/add-user" element={<AddEmployee />} />
         {/* <Route path="/update/:id" element={<UpdateEmployee />} /> */}
         <Route path="/transport-management" element={<TransportManagementPage />} />
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/employee" element={<Employee />} />
+        <Route path="/customer" element={<Customer />} />
       </Routes>
     </Router>
   );
