@@ -15,6 +15,7 @@ import {
   InventoryManagementPage,
   NotFoundPage,
   LoginAttemptsPage,
+  PaymentUpdatePage,
 } from ".././pages";
 
 // Installation Management
@@ -72,6 +73,10 @@ const AppRouters = () => {
         <Route
           path="/installation-management/update-project"
           element={<UpdateProject />}
+        />
+        <Route
+          path="/payment-management/update-project"
+          element={<PaymentUpdatePage />}
         />
 
         <Route path="/add-payment" element={<PaymentManagementPage />} />

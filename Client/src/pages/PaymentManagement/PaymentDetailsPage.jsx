@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import WithLayout from "../../hoc";
 import SearchBar from "../../components/_Shared/SearchBar/SearchBar";
 import "./styles/PaymentDetails.scss";
+import { Button } from "react-bootstrap";
 
 const PaymentDetailsPage = () => {
   const [dataList, setDataList] = useState([]);
@@ -29,17 +30,21 @@ const PaymentDetailsPage = () => {
   const handleBtn = () => {
     window.location.href = "add-payment";
   };
+  const updatehandle = () => {
+    console.log("update clicked");
+    window.location.href = "/payment-management/update-project";
+  };
 
   return (
     <>
       <button type="button" class="btn btn-primary" onClick={handleBtn}>
         Add Payment
       </button>
-
       <div className="payment-details-search-bar">
         <SearchBar />
-      </div>
-
+      </div>{" "}
+      <br />
+      <br />
       <table className="table">
         <thead>
           <tr>
@@ -52,14 +57,20 @@ const PaymentDetailsPage = () => {
           </tr>
         </thead>
         <tbody className="table-group-divider">
-          {dataList.map((data, index) => (
+          {dataList.map((i, index) => (
             <tr key={index}>
               <th scope="row">{index + 1}</th>
-              <td>{data.orderID}</td>
-              <td>{data.customerName}</td>
-              <td>{data.totalCost}</td>
-              <td>{data.paymentType}</td>
-              <td>{data.comments}</td>
+              <td>{i.orderID}</td>
+              <td>{i.customerName}</td>
+              <td>{i.totalCost}</td>
+              <td>{i.paymentType}</td>
+              <td>{i.comments}</td>
+              <td>
+                <Button onClick={updatehandle}>Update</Button>
+              </td>
+              <td>
+                <Button>Delete</Button>
+              </td>
             </tr>
           ))}
         </tbody>
