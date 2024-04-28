@@ -101,6 +101,7 @@ function AddProject() {
 
   // Calculation of estimations
   const handleCalculate = () => {
+    // Validation
     if (projectSize === "" || projectSize === "") {
       alert("Fill out Project Type and Project Size!");
       return;
