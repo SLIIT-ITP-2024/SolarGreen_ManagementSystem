@@ -40,7 +40,6 @@ const getProject = async (req, res) => {
 };
 
 // add project
-// http://localhost:3000/api/v1/installation/projects/add
 
 // Validate project data
 const validateProjectData = [
@@ -56,6 +55,7 @@ const validateProjectData = [
     body('comments').notEmpty().withMessage('Comments are required')
 ];
 
+// http://localhost:3000/api/v1/installation/projects/add
 const addProject = async (req, res) => {
     // Check for validation errors
     const errors = validationResult(req);
