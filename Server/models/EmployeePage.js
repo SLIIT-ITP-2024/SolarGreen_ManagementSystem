@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 
 const EmployeeSchema = new mongoose.Schema({
-    employeeName: String,
-    employeeId: String,
-    phoneNumber: String,
+    name: String,
+    phone: String,
+    gender: String,
     email: String,
     role: String,
     startingDate: Number,
     endingDate: Number,
-    personalDetails: String,
+    personalDetail: String,
 });
 
 const Employee = mongoose.model("Employee", EmployeeSchema);
