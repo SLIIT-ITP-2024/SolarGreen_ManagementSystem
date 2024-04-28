@@ -1,48 +1,100 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { PencilIcon, ShieldCheckIcon, TrashIcon } from '@heroicons/react/24/solid';
+import { formatDate } from '../../../utils/generalFunction';
+import EditEmployee from './EditEmployer';
+const apiUrl = import.meta.env.VITE_APIURL;
 
-const EmployeeList = () => {
+const EmployeeList = ({ loader, setLoader }) => {
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [employees, setEmployees] = useState([]);
+  const [modal, setModal] = useState(false);
 
-  const handleDetailsClick = (employeeId) => {
-    axios.get(`http://localhost:3001/employees/${employeeId}`)
-      .then(response => {
-        setSelectedEmployee(response.data);
-      })
-      .catch(error => console.error(error));
+  const handleModalClose = () => setModal(false);
+
+  useEffect(() => {
+    const fetchAllEmployee = async () => {
+      try {
+        const response = await axios.get(${apiUrl}/api/v1/customer-employee/employee);
+        console.log('Server response:', response.data);
+        if (response.data.successMsg) {
+          setEmployees(response?.data?.employees);
+        } else {
+          console.log('Error response:', response.data.errorMsg);
+        }
+      } catch (error) {
+        console.error('Error:', error.response.data.errorMsg);
+      }
+    };
+
+    fetchAllEmployee();
+  }, [loader]);
+
+  const handleEmployeeDelete = (deleteEmployee) => {
+    console.log('employee dele: ', deleteEmployee);
+    const deleteEmployeeFunc = async () => {
+      try {
+        const response = await axios.post(${apiUrl}/api/v1/customer-employee/delete-employee, deleteEmployee);
+        console.log('Server response:', response.data);
+        if (response.data.successMsg) {
+          setEmployees(response?.data?.employees);
+        } else {
+          console.log('Error response:', response.data.errorMsg);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+    deleteEmployeeFunc();
   };
 
+  console.log('employees: ', employees);
+
   return (
-    <div>
-      <table>
+    <div className="w-full">
+      <table className="w-full mt-10 table-auto">
         <thead>
-          <tr>
-            <th>Employee Name</th>
-            <th>Employee ID</th>
-            <th>Gender</th>
-            <th>Phone Number</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Starting Date</th>
-            <th>Ending Date</th>
-            <th>Personal Details</th>
-            <th>Action</th>
+          <tr className="border-b-[1px] text-x">
+            <th className="w-auto">Employee Name</th>
+            <th className="w-auto">Gender</th>
+            <th className="w-auto">Phone Number</th>
+            <th className="w-auto">Email</th>
+            <th className="w-auto">Role</th>
+            <th className="w-auto">Starting Date</th>
+            {/* <th className="w-auto">Personal Details</th> */}
+            <th className="w-auto"></th>
           </tr>
         </thead>
-        <tbody>
-          {employees.map(employee => (
-            <tr key={employee._id}>
-              <td>{employee.name}</td>
-              <td>{employee.employeeId}</td>
-              <td>{employee.gender}</td>
-              <td>{employee.phoneNumber}</td>
-              <td>{employee.email}</td>
-              <td>{employee.role}</td>
-              <td>{employee.startingDate}</td>
-              <td>{employee.endingDate}</td>
-              <td>{employee.personalDetails}</td>
+        <tbody className="">
+          {employees?.map((employee, index) => (
+            <tr key={index} className="bg-white h-10 w-full rounded-lg">
+              <td>{employee?.name}</td>
+              <td>{employee?.gender}</td>
+              <td>{employee?.phone}</td>
+              <td>{employee?.email}</td>
+              <td>{employee?.role}</td>
+              <td>{formatDate(employee?.startingDate)}</td>
+              {/* <td>{employee.personalDetail}</td> */}
               <td>
-                <button onClick={() => handleDetailsClick(employee._id)}>Details</button>
+                <div className="flex justify-center gap-x-2 items-center">
+                  <div
+                    onClick={() => {
+                      setModal(true);
+                      setSelectedEmployee(employee);
+                    }}
+                    className="w-8 h-8 hover:bg-green-400 p-1 rounded-md"
+                  >
+                    <PencilIcon />
+                  </div>
+                  <div
+                    onClick={() => {
+                      handleEmployeeDelete(employee);
+                    }}
+                    className="w-8 h-8 hover:bg-red-400 p-1 rounded-md"
+                  >
+                    <TrashIcon />
+                  </div>
+                </div>
               </td>
             </tr>
           ))}
@@ -53,20 +105,41 @@ const EmployeeList = () => {
         <div className="modal">
           <div className="modal-content">
             <h2>Employee Details</h2>
-            <p><strong>Employee Name:</strong> {selectedEmployee.name}</p>
-            <p><strong>Employee ID:</strong> {selectedEmployee.employeeId}</p>
-            <p><strong>Gender:</strong> {selectedEmployee.gender}</p>
-            <p><strong>Phone Number:</strong> {selectedEmployee.phoneNumber}</p>
-            <p><strong>Email:</strong> {selectedEmployee.email}</p>
-            <p><strong>Role:</strong> {selectedEmployee.role}</p>
-            <p><strong>Starting Date:</strong> {selectedEmployee.startingDate}</p>
-            <p><strong>Ending Date:</strong> {selectedEmployee.endingDate}</p>
-            <p><strong>Personal Details:</strong> {selectedEmployee.personalDetails}</p>
+            <p>
+              <strong>Employee Name:</strong> {selectedEmployee.name}
+            </p>
+            <p>
+              <strong>Employee ID:</strong> {selectedEmployee.employeeId}
+            </p>
+            <p>
+              <strong>Gender:</strong> {selectedEmployee.gender}
+            </p>
+            <p>
+              <strong>Phone Number:</strong> {selectedEmployee.phoneNumber}
+            </p>
+            <p>
+              <strong>Email:</strong> {selectedEmployee.email}
+            </p>
+            <p>
+              <strong>Role:</strong> {selectedEmployee.role}
+            </p>
+            <p>
+              <strong>Starting Date:</strong> {selectedEmployee.startingDate}
+            </p>
+            <p>
+              <strong>Ending Date:</strong> {selectedEmployee.endingDate}
+            </p>
+            <p>
+              <strong>Personal Details:</strong> {selectedEmployee.personalDetails}
+            </p>
           </div>
         </div>
+      )}
+      {modal && (
+        <EditEmployee closeModal={handleModalClose} employee={selectedEmployee} setLoader={setLoader} loader={loader} />
       )}
     </div>
   );
 };
 
-export default EmployeeList;
+export default EmployeeList;
