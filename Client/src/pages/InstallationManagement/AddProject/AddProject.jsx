@@ -38,6 +38,7 @@ function AddProject() {
     }
   };
 
+  // Validation of customer ID
   const validate = async (e) => {
     e.preventDefault();
 
@@ -67,7 +68,7 @@ function AddProject() {
     fetchCustomers();
   }, []);
 
-  // Fetch the existing projects to calculate the next project ID
+  // Fetching the existing projects to calculate the next project ID
   useEffect(() => {
     axios
       .get("http://localhost:3000/api/v1/installation/projects/get")
@@ -98,6 +99,7 @@ function AddProject() {
     return `${year}-${month}-${day}`;
   };
 
+  // Calculation of estimations
   const handleCalculate = () => {
     if (projectSize === "" || projectSize === "") {
       alert("Fill out Project Type and Project Size!");
@@ -106,21 +108,25 @@ function AddProject() {
 
     let calculatedCost = null;
     let calculatedDuration = null;
+
     if (projectType === "Solar Water Heating System") {
-      calculatedCost = 5000; // Example cost for Solar Water Heating System
-      calculatedDuration = 7; // Example duration in days
+      calculatedCost = 5000; // Cost for Solar Water Heating System
+      calculatedDuration = 7; // Duration in days
     } else if (projectType === "Residential Rooftop Solar PV System") {
-      calculatedCost = 10000; // Example cost for Residential Rooftop Solar PV System
-      calculatedDuration = 14; // Example duration in days
+      calculatedCost = 10000; // Cost for Residential Rooftop Solar PV System
+      calculatedDuration = 14; // Duration in days
     } else if (projectType === "Solar Street Lighting System") {
-      calculatedCost = 8000; // Example cost for Solar Street Lighting System
-      calculatedDuration = 10; // Example duration in days
+      calculatedCost = 8000; // Cost for Solar Street Lighting System
+      calculatedDuration = 10; // Duration in days
     }
 
-    // Placeholder logic for considering project size
+    // Project size
     if (projectSize === "Large") {
       calculatedCost *= 1.2; // Increase cost by 20% for large projects
-      calculatedDuration *= 1.1; // Increase duration by 10% for large projects
+      calculatedDuration *= 1.3; // Increase duration by 10% for large projects
+    } else if (projectSize === "Medium") {
+      calculatedCost *= 1.1; // Increase cost by 20% for medium projects
+      calculatedDuration *= 1.2; // Increase duration by 10% for medium projects
     }
 
     calculatedDuration = Math.ceil(calculatedDuration);
