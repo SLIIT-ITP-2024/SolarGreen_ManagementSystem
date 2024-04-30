@@ -6,13 +6,14 @@ const testController = (req, res) => {
 
 const createTransport = async (req, res) => {
   try {
-    const { transportID, transportType, transportName, transportStatus } = req.body;
+    const { transportID, vehicleNumber, address, transportStatus } = req.body;
 
     const newTransport = new Transport({
       transportID,
-      transportType,
-      transportName,
+      vehicleNumber,
+      address,
       transportStatus
+    
     });
 
     await newTransport.save();
@@ -44,8 +45,8 @@ const getTransportByID = async (req, res) => {
 }
 const updateTransport = async (req, res) => {
   const _id = req.params.id;
-  const { transportType, transportName, transportStatus } = req.body;
-  const updatedTransport = { transportType, transportName, transportStatus };
+  const { vehicleNumber, address, transportStatus } = req.body;
+  const updatedTransport = { vehicleNumber, address, transportStatus };
   try {
     const updatedTransportDocument = await Transport.findByIdAndUpdate(_id, updatedTransport, { new: true });
     if (!updatedTransportDocument) {

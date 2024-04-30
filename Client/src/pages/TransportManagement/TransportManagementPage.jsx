@@ -36,8 +36,8 @@ const dataCard = () => {
                 key={index}
                 id={data._id}
                 transportID={data.transportID}
-                transportType={data.transportType}
-                transportName={data.transportName}
+                vehicleNumber={data.vehicleNumber}
+                address={data.address}
                 transportStatus={data.transportStatus}
                 onRecordAdded={handleRecordAdded}
             />
@@ -63,8 +63,8 @@ const dataCard = () => {
                 <div className="inner">
                     <div className="header">
                         <h3>TransportID</h3>
-                        <h3>transport Type</h3>
-                        <h3>transport Name</h3>
+                        <h3>Vehicle Number</h3>
+                        <h3>Address</h3>
                         <h3>Status</h3>
                     </div>
                     <hr />
