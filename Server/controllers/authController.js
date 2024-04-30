@@ -2,6 +2,7 @@ const UserRole = require('../models/permissionModels/userRole.model');
 
 const login = async (req, res) => {
     const { email, password } = req.body;
+    console.log("login")
     try {
         const user = await UserRole.findOne({ email });
 

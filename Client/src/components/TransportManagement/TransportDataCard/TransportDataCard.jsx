@@ -7,8 +7,8 @@ import UpdatePopup from '../popus/UpdataPopup';
 const TransportDataCard = ({
     id,
     transportID,
-    transportType,
-    transportName,
+    vehicleNumber,
+    address,
     transportStatus,
     onRecordAdded
 }) => {
@@ -27,7 +27,7 @@ const TransportDataCard = ({
     const deleteBtn = () => {
         let confirmDelete = window.confirm('Are you sure you want to delete this record?');
         if (confirmDelete) {
-            axios.delete(`http://localhost:3000/api/v1/permission/delete/${id}`)
+            axios.delete(`http://localhost:3000/api/v1/transport/delete/${id}`)
             .then(response => {
                 console.log(response);
                 onRecordAdded();
@@ -45,8 +45,8 @@ const TransportDataCard = ({
             showModal={showModal}
             handleClose={handleClose}
             id={id}
-            transportType={transportType}
-            transportName={transportName}
+            vehicleNumber={vehicleNumber}
+            address={address}
             transportStatus={transportStatus}
             onRecordAdded={onRecordAdded}
         />
@@ -57,10 +57,10 @@ const TransportDataCard = ({
                     <h3>{transportID}</h3>
                 </div>
                 <div className="password">
-                    <h3>{transportType}</h3>
+                    <h3>{vehicleNumber}</h3>
                 </div>
                 <div className="expir-data">
-                    <h3>{transportName}</h3>
+                    <h3>{address}</h3>
                 </div>
                 <div className="role">
                     <h3>{transportStatus}</h3>

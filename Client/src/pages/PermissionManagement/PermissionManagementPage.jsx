@@ -12,6 +12,7 @@ const PermissionManagementPage = () => {
     const [userData, setUserData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filteredData, setFilteredData] = useState([]);
+    const[activeUserCount, setActiveUserCount] = useState(0);
 
     useEffect(() => {
         // Retrieve token from local storage
@@ -27,6 +28,7 @@ const PermissionManagementPage = () => {
             .then((response) => {
               setUserData(response.data);
               setFilteredData(response.data); // Initialize filtered data with all user data
+                setActiveUserCount(response.data.filter(data => data.roleStatus === 'active').length);
             })
             .catch((error) => {
               console.log(error);
@@ -78,8 +80,8 @@ const PermissionManagementPage = () => {
         <div className='outer'>
             <div className="top-section">
                 <div className="card">
-                    <StatusCard title="Active User Roles" count="07" />
-                    <StatusCard title="All User Roles" count="12" />
+                    <StatusCard title="Active User Roles" count={activeUserCount} />
+                    <StatusCard title="All User Roles" count={activeUserCount} />
                 </div>
                 <div className="btn">
                     <NavigationBtn key='1' btnName="Attempts" />
