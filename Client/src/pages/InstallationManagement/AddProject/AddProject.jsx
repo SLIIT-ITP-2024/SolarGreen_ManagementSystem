@@ -38,8 +38,14 @@ function AddProject() {
     }
   };
 
+  // Validation of customer ID
   const validate = async (e) => {
     e.preventDefault();
+
+    if (cID === "") {
+      setMessage("Please enter a Customer ID!");
+      return;
+    }
 
     // Check if the project ID exists in the list of students
     const validCustomer = customers.find(
@@ -62,7 +68,7 @@ function AddProject() {
     fetchCustomers();
   }, []);
 
-  // Fetch the existing projects to calculate the next project ID
+  // Fetching the existing projects to calculate the next project ID
   useEffect(() => {
     axios
       .get("http://localhost:3000/api/v1/installation/projects/get")
@@ -93,24 +99,35 @@ function AddProject() {
     return `${year}-${month}-${day}`;
   };
 
+  // Calculation of estimations
   const handleCalculate = () => {
-    let calculatedCost = null;
-    let calculatedDuration = null;
-    if (projectType === "Solar Water Heating System") {
-      calculatedCost = 5000; // Example cost for Solar Water Heating System
-      calculatedDuration = 7; // Example duration in days
-    } else if (projectType === "Residential Rooftop Solar PV System") {
-      calculatedCost = 10000; // Example cost for Residential Rooftop Solar PV System
-      calculatedDuration = 14; // Example duration in days
-    } else if (projectType === "Solar Street Lighting System") {
-      calculatedCost = 8000; // Example cost for Solar Street Lighting System
-      calculatedDuration = 10; // Example duration in days
+    // Validation
+    if (projectSize === "" || projectSize === "") {
+      alert("Fill out Project Type and Project Size!");
+      return;
     }
 
-    // Placeholder logic for considering project size
+    let calculatedCost = null;
+    let calculatedDuration = null;
+
+    if (projectType === "Solar Water Heating System") {
+      calculatedCost = 5000; // Cost for Solar Water Heating System
+      calculatedDuration = 7; // Duration in days
+    } else if (projectType === "Residential Rooftop Solar PV System") {
+      calculatedCost = 10000; // Cost for Residential Rooftop Solar PV System
+      calculatedDuration = 14; // Duration in days
+    } else if (projectType === "Solar Street Lighting System") {
+      calculatedCost = 8000; // Cost for Solar Street Lighting System
+      calculatedDuration = 10; // Duration in days
+    }
+
+    // Project size
     if (projectSize === "Large") {
       calculatedCost *= 1.2; // Increase cost by 20% for large projects
-      calculatedDuration *= 1.1; // Increase duration by 10% for large projects
+      calculatedDuration *= 1.3; // Increase duration by 10% for large projects
+    } else if (projectSize === "Medium") {
+      calculatedCost *= 1.1; // Increase cost by 20% for medium projects
+      calculatedDuration *= 1.2; // Increase duration by 10% for medium projects
     }
 
     calculatedDuration = Math.ceil(calculatedDuration);
@@ -121,6 +138,18 @@ function AddProject() {
 
   function sendData(e) {
     e.preventDefault();
+
+    // Validation
+    if (
+      !projectType ||
+      !projectSize ||
+      cost === null ||
+      duration === null ||
+      comments === ""
+    ) {
+      alert("Please fill out all fields!");
+      return;
+    }
 
     const newProject = {
       customerID,
@@ -161,7 +190,7 @@ function AddProject() {
             type="text"
             className="form-control"
             id="cID"
-            placeholder="Enter customer ID"
+            placeholder="Enter customer ID (Cxxx)"
             value={cID}
             onChange={(e) => setCID(e.target.value)}
           />
@@ -177,7 +206,7 @@ function AddProject() {
           <p className="mt-3">{message}</p>
 
           <div className="container">
-            <h3>Create Project</h3>
+            <h3 className="createTitle">Create Project</h3>
 
             <form onSubmit={sendData}>
               <div className="row">
@@ -275,7 +304,7 @@ function AddProject() {
 
               <button
                 type="button"
-                className="btn btn-info"
+                className="btn btn-success"
                 onClick={handleCalculate}
               >
                 Calculate Estimations

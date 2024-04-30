@@ -21,6 +21,7 @@ function UpdateProject() {
     axios
       .get(`http://localhost:3000/api/v1/installation/projects/get/${id}`)
       .then((res) => {
+        // console.log(res);
         const project = res.data.project;
         setCustomerID(project.customerID);
         setCustomerName(project.customerName);
@@ -39,6 +40,12 @@ function UpdateProject() {
 
   function updateData(e) {
     e.preventDefault();
+
+    // Validation
+    if (estimatedCost === "" || estimatedDuration === "" || comments === "") {
+      alert("Please fill out all fields!");
+      return;
+    }
 
     const updatedProject = {
       customerID,

@@ -1,6 +1,9 @@
 const Project = require('../models/installationModels/project');
 const TempCustomer = require('../models/installationModels/tempCustomer');
 
+const { body, validationResult } = require('express-validator');
+
+
 // Project
 //http://localhost:3000/api/v1/installation/test
 const testController = (req, res) => {
@@ -37,42 +40,63 @@ const getProject = async (req, res) => {
 };
 
 // add project
+
+// Validate project data
+const validateProjectData = [
+    body('customerID').notEmpty().withMessage('Customer ID is required'),
+    body('customerName').notEmpty().withMessage('Customer Name is required'),
+    body('projectID').notEmpty().withMessage('Project ID is required'),
+    body('date').notEmpty().withMessage('Date is required'),
+    body('projectType').notEmpty().withMessage('Project Type is required'),
+    body('projectSize').notEmpty().withMessage('Project Size is required'),
+    body('status').notEmpty().withMessage('Status is required'),
+    body('estimatedCost').notEmpty().withMessage('Estimated Cost is required').isNumeric().withMessage('Estimated Cost must be a number'),
+    body('estimatedDuration').notEmpty().withMessage('Estimated Duration is required').isNumeric().withMessage('Estimated Duration must be a number'),
+    body('comments').notEmpty().withMessage('Comments are required')
+];
+
 // http://localhost:3000/api/v1/installation/projects/add
 const addProject = async (req, res) => {
-  try {
-      const customerID = req.body.customerID;
-      const customerName = req.body.customerName;
-      const projectID = req.body.projectID;
-      const date = req.body.date;
-      const projectType = req.body.projectType;
-      const projectSize = req.body.projectSize;
-      const status = req.body.status;
-      const estimatedCost = Number(req.body.estimatedCost);
-      const estimatedDuration = Number(req.body.estimatedDuration);
-      const comments = req.body.comments;
+    // Check for validation errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400).json({ errors: errors.array() });
+    }
 
-      const newProject = new Project({
-          customerID,
-          customerName,
-          projectID,
-          date,
-          projectType,
-          projectSize,
-          status,
-          estimatedCost,
-          estimatedDuration,
-          comments
-      });
+    try {
+        const customerID = req.body.customerID;
+        const customerName = req.body.customerName;
+        const projectID = req.body.projectID;
+        const date = req.body.date;
+        const projectType = req.body.projectType;
+        const projectSize = req.body.projectSize;
+        const status = req.body.status;
+        const estimatedCost = Number(req.body.estimatedCost);
+        const estimatedDuration = Number(req.body.estimatedDuration);
+        const comments = req.body.comments;
 
-      newProject.save().then(() => {
-          res.json("Project Added!")
-      }).catch((err) => {
-          console.log(err);
-      });
+        const newProject = new Project({
+            customerID,
+            customerName,
+            projectID,
+            date,
+            projectType,
+            projectSize,
+            status,
+            estimatedCost,
+            estimatedDuration,
+            comments
+        });
 
-  } catch (error) {
-      res.status(500).json({message: error.message});
-  }
+        newProject.save().then(() => {
+            res.json("Project Added!")
+        }).catch((err) => {
+            console.log(err);
+        });
+
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
 };
 
 // update project
