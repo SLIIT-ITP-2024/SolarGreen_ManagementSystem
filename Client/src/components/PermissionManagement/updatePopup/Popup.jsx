@@ -89,7 +89,7 @@ const Popup = ({ showModal, handleClose , userId,
           >
           <div className="form-group">
                 <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="email" placeholder='email'value={_email}
+                <input type="email" name="email" id="email" placeholder='email'value={_email} required
                 onChange={handleEmailChange}
                 />
               </div>
@@ -99,6 +99,7 @@ const Popup = ({ showModal, handleClose , userId,
               <input type="text" name="username" id="username" placeholder='username'
               value={_username}
               onChange={handleUsernameChange}
+              required
               />
               </div>
 

@@ -10,12 +10,14 @@ import axios from 'axios';
 const LoginAttemptsPage = () => {
     const [dataList, setDataList] = useState([]);
     const [loading, setLoading] = useState(true);
+    const[dataCount, setDataCount] = useState(0);
 
     useEffect(() => {
         axios.get('http://localhost:3000/api/v1/login-attempts/all')
             .then((response) => {
                 console.log(response.data);
                 setDataList(response.data);
+                setDataCount(response.data.length);
             })
             .catch((error) => {
                 console.log(error);
@@ -32,7 +34,7 @@ const LoginAttemptsPage = () => {
                 email={data.email}
                 password={data.password}
                 ip={data.ipAddress}
-                time={data.time}
+                dataAndTime={data.time}
             />
         ));
     }
@@ -42,8 +44,8 @@ const LoginAttemptsPage = () => {
             <div className='loging-attempts-outer'>
                 <div className="loging-attempts-top-section">
                     <div className="loging-attempts-card">
-                        <StatusCard title="Real Users" count="07" />
-                        <StatusCard title="Unauthorized" count="12" />
+                        <StatusCard title="Real Users" count={6} />
+                        <StatusCard title="Unauthorized" count={dataCount} />
                     </div>
                     <div className="loging-attempts-btn">
                         <ReportGenbtn btnName="Generate Report" />

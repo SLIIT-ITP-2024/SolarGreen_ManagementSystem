@@ -30,44 +30,53 @@ const LoginPage = () => {
     };
 
     console.log(data);
-    axios
-      .post('http://localhost:3000/api/v1/auth/login', data)
-      .then((response) => {
+    axios.post('http://localhost:3000/api/v1/auth/login', data)
+    .then((response) => {
         console.log('API response:', response.data);
         if (response.status === 200) {
-          // Save username and token to local storage
-          localStorage.setItem('username', response.data.user.username);
-          localStorage.setItem('role', response.data.user.role);
-          localStorage.setItem('token', response.data.token);
+            // Save username, role, and token to local storage
+            localStorage.setItem('username', response.data.user.username);
+            localStorage.setItem('role', response.data.user.role);
+            localStorage.setItem('token', response.data.token);
 
-          window.location.href = '/';
+            window.location.href = '/'; // Redirect to home page after successful login
         } else {
-          
-
-          setError('Login failed. Please try again Later.');
-        }
-      })
-      .catch((error) => {
-        console.log('API error:', error.response.status == 401)
-        if (error.response.status == 401) {
-
-          axios.post('http://localhost:3000/api/v1/login-attempts/save', data)
-            .then((response) => {
-              console.log('API response:', response.data);
-              if (response.status === 201) {
-                console.log('Login attempts saved successfully');
-              } else {
-                setError('Save failed. Please try again.');
-              }
-            })
-            .catch((error) => {
-              console.error('API error:', error);
-            });
+            alert('Unknown error occurred');
+            }
+        
+    })
+    .catch((error) => {
+        console.error('API error:', error);
+        if (error.response && error.response.status === 401) {
+      
+          if (error.response.data.message === 'Invalid login credentials') {
+            alert('Invalid email. Please try again!');
+        } else if (error.response.data.message === 'Invalid password') {
+            alert('Invalid password. Please try again!');
         } else {
-          console.error('API error:', error);
-          setError('Login failed. Please try again.');
+            alert('Unknown error: ' + response.data.message);
         }
-      });
+
+
+            // If login failed due to unauthorized access, save the login attempt
+            axios.post('http://localhost:3000/api/v1/login-attempts/save', data)
+                .then((response) => {
+                    console.log('API response:', response.data);
+                    if (response.status === 201) {
+                        console.log('Login attempts saved successfully');
+                    } else {
+                        setError('Save failed. Please try again.');
+                    }
+                })
+                .catch((error) => {
+                    console.error('API error:', error);
+                    setError('Save failed. Please try again.');
+                });
+        } else {
+            setError('Login failed. Please try again.');
+        }
+    });
+
   };
 
   // Fetch IP address on component mount
@@ -106,6 +115,7 @@ const LoginPage = () => {
                   placeholder='email'
                   onChange={handleEmailChange}
                   value={email}
+                  required
                 />
               </div>
 
@@ -118,6 +128,7 @@ const LoginPage = () => {
                   placeholder='password'
                   onChange={handlePasswordChange}
                   value={password}
+                  required
                 />
               </div>
 

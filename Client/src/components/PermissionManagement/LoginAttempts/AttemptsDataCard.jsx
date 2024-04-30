@@ -20,7 +20,7 @@ const AttemptsDataCard = (props) => {
                     <h3>{props.ip}</h3>
                 </div>
                 <div className="role">
-                    <h3>{props.dateAndTime}</h3>
+                    <h3>{props.dataAndTime}</h3>
                 </div>
             </div>
             

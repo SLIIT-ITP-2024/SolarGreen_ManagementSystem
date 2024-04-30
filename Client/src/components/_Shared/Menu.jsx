@@ -69,7 +69,10 @@ const Menu = () => {
     setUsername(storedUsername);
     setRole(storedRole);
   }, []);
-  
+  const loggedOuthandle = ()=>{
+    localStorage.clear();
+    window.location.href = '/login';
+  }
   return (
     <div className={`menu-outer`} data-theme={isDarkMode ? 'dark' : 'light'}>
       <div className="menu-inner">
@@ -100,7 +103,7 @@ const Menu = () => {
           </div>
           <div className="logout">
           <RiLogoutCircleLine className="logout-icon" />
-            <button>logout</button>
+            <button onClick={loggedOuthandle}>logout</button>
           </div>
         </div>
       </div>
