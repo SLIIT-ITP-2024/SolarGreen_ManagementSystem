@@ -76,6 +76,7 @@ function Inventory() {
                                 <Link
                                     to={`/inventory-management/update-inventory/${inventory._id}`}
                                     className="btn btn-warning"
+                                    style={{width:'80px'}}
                                 >
                                     Update
                                 </Link>
