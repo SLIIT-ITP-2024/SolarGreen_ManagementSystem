@@ -1,7 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-// Import your components
 import {
   LoginPage,
   RegisterPage,
@@ -16,18 +14,23 @@ import {
   InventoryManagementPage,
   NotFoundPage,
   LoginAttemptsPage,
+  PaymentUpdatePage,
+
 } from ".././pages";
 
 // Installation Management
 import Estimations from "../pages/InstallationManagement/Estimations";
 import AddProject from "../pages/InstallationManagement/AddProject/AddProject";
 import UpdateProject from "../pages/InstallationManagement/UpdateProject/UpdateProject";
+
+import PaymentDetailsPage from "../pages/PaymentManagement/PaymentDetailsPage";
 import Report from "../pages/InstallationManagement/Report/Report";
 
 // Maintenance Management
 import RequestForm from "../pages/MaintenanceManagement/RequestForm/RequestForm";
 import Update from "../pages/MaintenanceManagement/Update/Update";
 import GenerateReports from "../pages/MaintenanceManagement/Generate/GenerateReports";
+
 
 const AppRouters = () => {
   const isLogged = localStorage.getItem("token") ? true : false;
@@ -104,6 +107,13 @@ const AppRouters = () => {
               path="/maintanance-management/generate"
               element={<GenerateReports />}
             />
+                
+                <Route
+          path="/payment-management/update-project"
+          element={<PaymentUpdatePage />}
+        />
+
+        <Route path="/add-payment" element={<PaymentManagementPage />} />
           </>
         ) : (
           <>

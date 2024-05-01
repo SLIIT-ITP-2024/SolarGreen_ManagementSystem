@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import WithLayout from "../../hoc/WithLayout";
 import "./styles/Payment.scss";
 
-const PaymentManagement = () => {
+const PaymentUpdatePage = () => {
   const [orderID, setOrderID] = useState("");
   const [customerName, setCustomerName] = useState("");
-  const [totalCost, setTotalCost] = useState(0);
-  const [paymentType, setPaymentType] = useState("Pay in Full");
-  const [installmentPeriod, setInstallmentPeriod] = useState(12);
+  const [totalCost, setTotalCost] = useState("");
+  const [paymentType, setPaymentType] = useState("");
+  const [installmentPeriod, setInstallmentPeriod] = useState("");
   const [comments, setComments] = useState("");
 
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -33,7 +33,7 @@ const PaymentManagement = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/payment/add",
+        "http://localhost:3000/api/v1/payment/update",
         {
           orderID,
           customerName,
@@ -44,8 +44,8 @@ const PaymentManagement = () => {
         }
       );
 
-      console.log("Payment added successfully:", response.data);
-      toast.success("Payment added successfully");
+      console.log("Payment updated successfully:", response.data);
+      toast.success("Payment updated successfully");
 
       setTimeout(() => {
         window.location.href = "/payment-details";
@@ -76,7 +76,7 @@ const PaymentManagement = () => {
   return (
     <div className="CheckoutPage">
       <ToastContainer />
-      <h1>Add New Payment</h1>
+      <h1>Update Payment</h1>
       <div className="order-details">
         <form onSubmit={handleSubmit}>
           <label>Enter Order ID:</label>
@@ -137,4 +137,4 @@ const PaymentManagement = () => {
   );
 };
 
-export default WithLayout(PaymentManagement);
+export default WithLayout(PaymentUpdatePage);
