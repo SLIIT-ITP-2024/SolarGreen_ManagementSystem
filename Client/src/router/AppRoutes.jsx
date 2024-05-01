@@ -114,6 +114,7 @@ const AppRouters = () => {
         />
 
         <Route path="/add-payment" element={<PaymentManagementPage />} />
+        <Route path="/payment-details" element={<PaymentDetailsPage />} />
           </>
         ) : (
           <>
