@@ -84,6 +84,7 @@ function Schedule() {
                 <Link
                   to={`/maintanance-management/update/${schedule._id}`}
                   className="btn btn-warning"
+                  style={{width:'80px'}}
                 >
                   Update
                 </Link>

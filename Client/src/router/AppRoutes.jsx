@@ -16,7 +16,7 @@ import {
   LoginAttemptsPage,
   InventoryAddForm,
   InventoryUpdateForm,
-  GenerateReport
+  GenerateReport,
   PaymentUpdatePage,
 
 } from ".././pages";

@@ -1,7 +1,7 @@
 import WithLayout from "../../../hoc";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import PDF from "./PDF";
+import PDF from "./InvenPDF";
 
 function GenerateReport() {
   const [iID, setIID] = useState("");

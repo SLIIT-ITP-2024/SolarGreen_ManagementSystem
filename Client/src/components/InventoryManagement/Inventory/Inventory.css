@@ -38,4 +38,5 @@
   
   .btn.btn-warning.btn-delete {
     color: rgb(255, 0, 0);
+    width: 80px;
   }
