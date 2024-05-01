@@ -14,6 +14,9 @@ import {
   InventoryManagementPage,
   NotFoundPage,
   LoginAttemptsPage,
+  InventoryAddForm,
+  InventoryUpdateForm,
+  GenerateReport
   PaymentUpdatePage,
 
 } from ".././pages";
@@ -30,6 +33,8 @@ import Report from "../pages/InstallationManagement/Report/Report";
 import RequestForm from "../pages/MaintenanceManagement/RequestForm/RequestForm";
 import Update from "../pages/MaintenanceManagement/Update/Update";
 import GenerateReports from "../pages/MaintenanceManagement/Generate/GenerateReports";
+
+
 
 
 const AppRouters = () => {
@@ -113,6 +118,21 @@ const AppRouters = () => {
           element={<PaymentUpdatePage />}
         />
 
+            {/*Inventory Management*/}
+      <Route
+          path="/inventory-management/add"
+          element={<InventoryAddForm />}
+        />
+
+      <Route
+          path="/inventory-management/update-inventory/:id"
+          element={<InventoryUpdateForm />}
+        />
+
+      <Route
+          path="/inventory-management/generate-report"
+          element={<GenerateReport />}
+        />
         <Route path="/add-payment" element={<PaymentManagementPage />} />
         <Route path="/payment-details" element={<PaymentDetailsPage />} />
           </>
