@@ -1,3 +1,4 @@
+
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
@@ -8,18 +9,14 @@ import {
   MaintenanceManagementPage,
   PaymentManagementPage,
   PermissionManagementPage,
-  UserManagementPage,
   TransportManagementPage,
   Dashboard,
-  InventoryManagementPage,
   NotFoundPage,
-  LoginAttemptsPage,
-  InventoryAddForm,
-  InventoryUpdateForm,
-  GenerateReport,
-  PaymentUpdatePage,
-
-} from ".././pages";
+  AddEmployee,
+  UserManagementPage
+} from '.././pages';
+import Employee from '../pages/UserManagement/Employer/Employee';
+import Customer from '../pages/UserManagement/Customer/Customer';
 
 // Installation Management
 import Estimations from "../pages/InstallationManagement/Estimations";
@@ -136,6 +133,10 @@ const AppRouters = () => {
         <Route path="/add-payment" element={<PaymentManagementPage />} />
         <Route path="/payment-details" element={<PaymentDetailsPage />} />
           </>
+      {/* <Route path="/employee-page" element={<EmployeePage />} /> */}
+        <Route path="/add-user" element={<AddEmployee />} />
+           <Route path="/employee" element={<Employee />} />
+        <Route path="/customer" element={<Customer />} />
         ) : (
           <>
             <Route path="/" element={<LoginPage />} />
@@ -150,4 +151,4 @@ const AppRouters = () => {
   );
 };
 
-export default AppRouters;
+export default AppRouters;

@@ -27,6 +27,8 @@ export {
   UserManagementPage,
   TransportManagementPage,
   Dashboard,
+
+  Employees as AddEmployee
   InventoryManagementPage,
   NotFoundPage,
   LoginAttemptsPage,
@@ -35,4 +37,5 @@ export {
   InventoryUpdateForm,
   GenerateReport
 };
+
 
