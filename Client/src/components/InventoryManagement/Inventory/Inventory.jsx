@@ -52,7 +52,7 @@ function Inventory() {
             <h3 className="header">Inventory</h3>
 
             <Link to="/inventory-management/add"className='btn btn-success'>Add Inventory</Link>
-            <Link to="/inventory-management/generate"className='btn btn-success'>Generate Report</Link>
+            <Link to="/installation-management/generate-report"className='btn btn-success'>Generate Report</Link>
             
 
             <table className="table">
