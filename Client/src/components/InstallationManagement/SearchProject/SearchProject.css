@@ -1,0 +1,50 @@
+
+.btn-warning {
+    margin: 10px 15px;
+    border-radius: 5px;
+    color: #111;
+}
+
+
+/* Form */
+.search-form {
+    margin: 5px;
+}
+
+/* Input */
+.form-control.search {
+    border: 1px solid black; 
+    margin: 5px;
+}
+  
+.form-control:focus {
+    border-color: #007bff; 
+}
+
+.search-component {
+    display: flex;
+}
+  
+.result {
+    margin: 10px;
+}
+
+.table {
+    width: fit-content;
+    border-collapse: collapse;
+  }
+  
+  .tbody th, td {
+    padding: 5px;
+    text-align: center;
+  }
+  
+  .table th {
+    border: 1px solid #796e6e;
+    text-align: center;
+  }
+  
+  .table td {
+    border: 1px solid #796e6e;
+    text-align: center;
+  }
