@@ -64,7 +64,7 @@ function Report() {
               type="text"
               className="form-control"
               id="pID"
-              placeholder="Enter project ID"
+              placeholder="Enter Project ID (Pxxx)"
               value={pID}
               onChange={(e) => setPID(e.target.value)}
             />

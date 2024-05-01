@@ -11,7 +11,7 @@ const AttemptsDataCard = (props) => {
         <div className="AttemptsDataCard-inner">
             <div className="AttemptsDataCard-top-row shadow-sm">
                 <div className="username">
-                    <h3>{props.username}</h3>
+                    <h3>{props.email}</h3>
                 </div>
                 <div className="password">
                     <h3>{props.password}</h3>
@@ -20,7 +20,7 @@ const AttemptsDataCard = (props) => {
                     <h3>{props.ip}</h3>
                 </div>
                 <div className="role">
-                    <h3>{props.dateAndTime}</h3>
+                    <h3>{props.dataAndTime}</h3>
                 </div>
             </div>
             

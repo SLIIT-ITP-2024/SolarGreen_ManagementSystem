@@ -5,13 +5,13 @@
 
 /* Table */
 .table {
-  width: 100%;
+  width: fit-content;
   border-collapse: collapse;
 }
 
-.thead th, td {
+.tbody th, td {
   padding: 5px;
-  text-align: left;
+  text-align: center;
 }
 
 .table th {
@@ -27,8 +27,6 @@
 .btn-delete {
   margin-left: 5px; /* Adjust button margin */
 }
-
-
 
 .btn-warning {
   margin: 5px;

@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './AddRolePopup.scss';
 import { useDarkMode } from '../../../contexts/DarkModeContext';
 import axios from 'axios';
 
-const AddRolePopup = ({ showModal, handleClose }) => {
+const AddRolePopup = ({ showModal, handleClose , onRecordAdded }) => {
   const { isDarkMode } = useDarkMode(); 
 
-  // State variables for form fields
+  // State variables for form fields and success message
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -35,7 +37,6 @@ const AddRolePopup = ({ showModal, handleClose }) => {
   };
 
   const handleSave = () => {
-    // Prepare data object to send to the API
     const data = {
       email,
       username,
@@ -44,7 +45,6 @@ const AddRolePopup = ({ showModal, handleClose }) => {
       validTime
     };
   
-    // Send POST request to the API endpoint
     axios.post('http://localhost:3000/api/v1/permission/create', data, {
       headers: {
         'Content-Type': 'application/json'
@@ -53,12 +53,19 @@ const AddRolePopup = ({ showModal, handleClose }) => {
       .then(response => {
         console.log('API response:', response.data);
         
-        // Close the modal
-        handleClose();
+        // Show toast notification
+        toast.success('Record saved successfully.', {
+          position: 'top-right'
+        });
+
+        // Close the modal after 2 seconds
+        setTimeout(() => {
+          handleClose();
+          onRecordAdded ();
+        }, 2000);
       })
       .catch(error => {
         console.error('API error:', error);
-      
       });
   };
 
@@ -73,17 +80,17 @@ const AddRolePopup = ({ showModal, handleClose }) => {
             <form>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="email" placeholder='email' value={email} onChange={handleEmailChange} />
+                <input type="email" name="email" id="email" placeholder='email' value={email} onChange={handleEmailChange} required />
               </div>
 
               <div className="form-group">
                 <label htmlFor="username">Username</label>
-                <input type="text" name="username" id="username" placeholder='username' value={username} onChange={handleUsernameChange} />
+                <input type="text" name="username" id="username" placeholder='username' value={username} onChange={handleUsernameChange} required />
               </div>
 
               <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="password" placeholder='password' value={password} onChange={handlePasswordChange} />
+                <input type="password" name="password" id="password" placeholder='password' value={password} onChange={handlePasswordChange}  required/>
               </div>
 
               <div className="form-group">
@@ -117,6 +124,9 @@ const AddRolePopup = ({ showModal, handleClose }) => {
           </button>
         </Modal.Footer>
       </Modal>
+
+      {/* Toast Container */}
+      <ToastContainer />
     </>
   );
 }
