@@ -1,0 +1,86 @@
+$primary-color: #333;
+$accent-color-1: #007bff;
+$background-color: #f8f9fa;
+$font-color-primary: #333;
+$border-color: #ced4da;
+$header-4: 24px;
+
+@import '../../../index.scss';
+
+.search-bar-outer {
+  margin-top: 30px; /* Add margin-top to create space */
+}
+
+.payment-details-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: $background-color;
+
+  h1 {
+    font-size: $header-4;
+    color: $primary-color;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid $border-color;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    th,
+    td {
+      padding: 12px;
+      border-bottom: 2px solid $border-color;
+    }
+
+    th {
+      font-weight: bold;
+      text-align: center;
+      background-color: $background-color;
+      color: $primary-color;
+    }
+
+    td {
+      text-align: center;
+    }
+
+    tbody {
+      tr {
+        &:nth-child(even) {
+          background-color: lighten($background-color, 2%);
+        }
+      }
+    }
+  }
+
+  button[type="submit"] {
+    padding: 12px 24px;
+    background-color: $accent-color-1;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken($accent-color-1, 10%);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .payment-details-page {
+      padding: 20px;
+    }
+  }
+}
+.btn{
+  width: 150px;
+  margin-top: 20px;
+  margin-bottom: 0;
+}

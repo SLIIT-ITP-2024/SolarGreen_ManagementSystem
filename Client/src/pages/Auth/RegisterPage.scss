@@ -1,0 +1,75 @@
+@import '../../index.scss';
+
+.reg-outer{
+    height: 100vh;
+    background-color: var(--background-color);
+
+    .reg-inner{
+        padding-top: 20vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .title{
+            font-size: $header-2;
+            color: var(--font-color-secondary);
+            margin-bottom: 20px;
+        }
+        .form{
+            .form-group{
+                
+                display: flex;
+                align-items: center;
+                label{
+                    width: 10vw;
+                    height: 40px;
+                    background-color: var(--accent-color-1);
+                    color: var(--font-color-secondary);
+                    
+                    display: flex;
+                    align-items: center;
+                    padding-left: 20px;
+                    border-top-left-radius: 10px;   
+                    border-bottom-left-radius: 10px; 
+                    
+                }
+                input , select{
+                    padding-left: 10px;
+                    width: 40vw;
+                    height: 40px;
+                    margin: 5px 0;
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                    padding: 0 20px;
+                    &:focus {
+                        outline: none; // Removes the default focus outline
+                        border: none; // Removes the border when input is focused
+                      }
+                }
+                button{
+                    margin-left: 10vw;
+                    margin-top: 20px;
+                    width: 40vw;
+                    height: 40px;
+                    background-color: var(--accent-color-1);
+                    color: var(--font-color-secondary);
+                    border: none;
+                    border-radius: 20px;
+                    font-size: $title-size;
+                    font-weight: bold;
+                    :focus{
+                        outline: none;
+                    }
+                }
+                p{
+                    color: var(--font-color-secondary);
+                    font-size: $small-text;
+                    margin-left: 25vw;
+                    margin-top: 20px;
+                }
+            }
+        }
+
+    }
+}

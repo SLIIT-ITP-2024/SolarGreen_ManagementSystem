@@ -1,0 +1,33 @@
+@import '../../../index.scss';
+
+.AttemptsDataCard-outer{
+    width: 100%;
+    height: auto;
+    background-color: transparent !important;
+    border: none;
+    .AttemptsDataCard-inner{
+        background-color: transparent !important;
+        .AttemptsDataCard-top-row{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--foreground-color);
+            border-radius: 20px;
+            padding: 10px 5px;
+            margin-bottom: 10px;
+            padding-right: 20px;
+            h3{
+                font-size: $text-size;
+                color: var(--font-color-secondary);
+                margin-bottom: 0;
+                
+            }
+            .username{
+                margin-left: 20px;
+            }
+
+        }
+        
+    }
+}

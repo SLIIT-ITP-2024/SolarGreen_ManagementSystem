@@ -1,4 +1,9 @@
+
 import { useNavigate } from 'react-router-dom';
+
+import React from 'react'
+import WithLayout from '../../hoc'
+
 
 const UserManagementPage = () => {
   const navigate = useNavigate();

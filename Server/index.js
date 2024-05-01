@@ -1,10 +1,10 @@
-require("dotenv").config();
-const express = require("express");
-const { mainRouter } = require("./routes/_index");
-const bodyParser = require("body-parser");
+require('dotenv').config();
+const express = require('express');
+const { mainRouter } = require('./routes/_index');
+const bodyParser = require('body-parser');
 const app = express();
-const cors = require("cors");
-const { connectToDb } = require("./config/db");
+const cors = require('cors');
+const { connectToDb } = require('./config/db');
 const port = process.env.PORT || 8080;
 
 // Use body-parser middleware
@@ -15,11 +15,11 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // base route
-app.use("/api/v1", mainRouter);
+app.use('/api/v1', mainRouter);
 
 // testing router ----------------------
-app.get("/test", (req, res) => {
-  res.send("Hello from the backend!");
+app.get('/test', (req, res) => {
+  res.send('Hello from the backend!');
 });
 
 // local server----------------------
@@ -28,10 +28,12 @@ app.listen(port, async () => {
     console.log(`Server is running on port ${port}`);
     await connectToDb(); // Connect to the database
     console.log("Database operations completed");
-  } 
-  
-  catch (error) {
+  } catch (error) {
     console.error("Server startup error:", error);
     process.exit(1);
-  }
-});
+  }
+});;
+
+
+
+
