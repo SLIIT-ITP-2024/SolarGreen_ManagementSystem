@@ -52,7 +52,6 @@ export {
   MaintenanceManagementPage,
   PaymentManagementPage,
   PermissionManagementPage,
-  UserManagementPage,
   TransportManagementPage,
   Dashboard,
 
@@ -74,7 +73,6 @@ export {
   PaymentDetailsPage,
   PaymentUpdatePage,
 
-  LoginAttemptsPage,
 
   UserManagementPage,
   AddEmployee,
