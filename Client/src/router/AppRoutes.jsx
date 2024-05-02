@@ -91,7 +91,7 @@ const MaintenanceManagementPageRoutes = () => (
   <Routes>
     <Route path="/" element={<MaintenanceManagementPage />} />
     <Route path="request-form" element={<RequestForm />} />
-    <Route path="update-form" element={<UpdateForm />} />
+    <Route path="update-form/:id" element={<UpdateForm />} />
     <Route path="generate-reports" element={<GenerateReports />} />
   </Routes>
 );
