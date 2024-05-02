@@ -98,9 +98,9 @@ const MaintenanceManagementPageRoutes = () => (
 
 const PaymentManagementPageRoutes = () => (
   <Routes>
-    <Route path="/" element={<PaymentManagementPage />} />
-    <Route path="add-payment" element={<PaymentDetailsPage />} />
-    <Route path="payment-details" element={<PaymentUpdatePage />} />
+    <Route path="/" element={<PaymentDetailsPage />} />
+    <Route path="add-payment" element={<PaymentManagementPage />} /> 
+    <Route path="payment-update/:_id" element={<PaymentUpdatePage />} />
   </Routes>
 );
 

@@ -48,7 +48,7 @@ const PaymentManagement = () => {
       toast.success("Payment added successfully");
 
       setTimeout(() => {
-        window.location.href = "/payment-details";
+        window.location.href = "/payment-management";
       }, 1000);
 
       setPaymentDetails({

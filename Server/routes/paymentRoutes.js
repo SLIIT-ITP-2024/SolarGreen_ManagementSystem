@@ -10,7 +10,7 @@ paymentRouter.get("/test", paymentController.testController);
 paymentRouter.get("/getAll", paymentController.getPayments);
 
 // Get single payment by ID
-paymentRouter.get("/get/:id", paymentController.getPayment);
+paymentRouter.get("/get/:id", paymentController.getPaymentById);
 
 // Add a new payment
 paymentRouter.post("/add", paymentController.addPayment);
