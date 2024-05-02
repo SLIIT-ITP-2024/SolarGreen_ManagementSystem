@@ -19,7 +19,7 @@ const getPayments = async (req, res) => {
 
 // Get single payment by ID
 // http://localhost:3000/api/v1/payment/payments/get/:id
-const getPayment = async (req, res) => {
+const getPaymentById = async (req, res) => {
   try {
     const { id } = req.params;
     const payment = await Payment.findById(id);
@@ -74,7 +74,7 @@ const deletePayment = async (req, res) => {
 module.exports = {
   testController,
   getPayments,
-  getPayment,
+  getPaymentById,
   addPayment,
   updatePayment,
   deletePayment,

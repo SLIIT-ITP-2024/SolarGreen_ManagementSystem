@@ -44,7 +44,7 @@ const items = [
   {
     name: "Payment",
     icon: payment_icon,
-    link: "/payment-details",
+    link: "/payment-management",
   },
   {
     name: "Inventory",

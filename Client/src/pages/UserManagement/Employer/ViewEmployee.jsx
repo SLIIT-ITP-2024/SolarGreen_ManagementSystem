@@ -3,9 +3,10 @@ import axios from 'axios';
 import { PencilIcon, ShieldCheckIcon, TrashIcon } from '@heroicons/react/24/solid';
 import EditEmployee from './EditEmployer';
 import { formatDate } from '../../../utils/generalFunction';
+import WithLayout from '../../../hoc';
 const apiUrl = import.meta.env.VITE_APIURL;
 
-const EmployeeList = ({ loader, setLoader }) => {
+const ViewEmployeeList = ({ loader, setLoader }) => {
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   const [employees, setEmployees] = useState([]);
   const [modal, setModal] = useState(false);
@@ -15,7 +16,7 @@ const EmployeeList = ({ loader, setLoader }) => {
   useEffect(() => {
     const fetchAllEmployee = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/api/v1/customer-employee/employee`);
+        const response = await axios.get(`http://localhost:3000/api/v1/customer-employee/all-employee`);
         console.log('Server response:', response.data);
         if (response.data.successMsg) {
           setEmployees(response?.data?.employees);
@@ -30,23 +31,26 @@ const EmployeeList = ({ loader, setLoader }) => {
     fetchAllEmployee();
   }, [loader]);
 
-  const handleEmployeeDelete = (deleteEmployee) => {
-    console.log('employee dele: ', deleteEmployee);
-    const deleteEmployeeFunc = async () => {
-      try {
-        const response = await axios.post(`${apiUrl}/api/v1/customer-employee/delete-employee`, deleteEmployee);
-        console.log('Server response:', response.data);
-        if (response.data.successMsg) {
-          setEmployees(response?.data?.employees);
-        } else {
-          console.log('Error response:', response.data.errorMsg);
-        }
-      } catch (error) {
-        console.error('Error:', error);
+  const handleEmployeeDelete = async (deleteEmployee) => {
+    try {
+      console.log('Employee to delete: ', deleteEmployee);
+  
+      const response = await axios.delete(`http://localhost:3000/api/v1/customer-employee/delete-employee`, {
+        data: deleteEmployee // Sending deleteEmployee data in the request body
+      });
+  
+      console.log('Server response:', response.data);
+  
+      if (response.data.successMsg) {
+        setEmployees(response.data.employees);
+      } else {
+        console.log('Error response:', response.data.errorMsg);
       }
-    };
-    deleteEmployeeFunc();
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
+  
 
   console.log('employees: ', employees);
 
@@ -142,4 +146,4 @@ const EmployeeList = ({ loader, setLoader }) => {
   );
 };
 
-export default EmployeeList;
+export default WithLayout(ViewEmployeeList);

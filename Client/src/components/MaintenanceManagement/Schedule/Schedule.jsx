@@ -36,7 +36,7 @@ function Schedule() {
               );
               // Remove the deleted student from the state
               setSchedules(schedules.filter((schedule) => schedule._id !== id));
-              window.location.href = "/maintanance-management";
+              window.location.href = "/maintenance-management";
             } catch (error) {
               console.error("Error deleting record:", error);
               alert("An error occurred while deleting the record");
@@ -51,8 +51,8 @@ function Schedule() {
         <Search/>
             <button className="filter green">Filter</button>
         
-        <Link to="/maintanance-management/create"className='btn btn-success'>Request Form</Link>
-        <Link to="/maintanance-management/generate"className='btn btn-success'>Generate Report</Link>
+        <Link to="/maintenance-management/request-form"className='btn btn-success'>Request Form</Link>
+        <Link to="/maintenance-management/generate-reports"className='btn btn-success'>Generate Report</Link>
         <table className="table">
             <thead>
                 <tr>
@@ -82,7 +82,7 @@ function Schedule() {
                             <td>{schedule.Status}</td>
                             <td>
                 <Link
-                  to={`/maintanance-management/update/${schedule._id}`}
+                  to={`/maintenance-management/update-form/${schedule._id}`}
                   className="btn btn-warning"
                   style={{width:'80px'}}
                 >

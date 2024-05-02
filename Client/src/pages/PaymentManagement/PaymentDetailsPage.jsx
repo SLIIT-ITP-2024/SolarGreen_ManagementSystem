@@ -28,12 +28,23 @@ const PaymentDetailsPage = () => {
   }, []);
 
   const handleBtn = () => {
-    window.location.href = "add-payment";
+    window.location.href = "/payment-management/add-payment";
   };
-  const updatehandle = () => {
-    console.log("update clicked");
-    window.location.href = "/payment-management/update-project";
+  const updatehandle = (_id) => {
+    console.log("update clicked" + _id);
+    window.location.href = `/payment-management/payment-update/${_id}`;
   };
+  const deleteHandle = async (_id) => {
+    console.log("delete clicked" + _id);
+    try {
+      await fetch(`http://localhost:3000/api/v1/payment/delete/${_id}`, {
+        method: "DELETE",
+      });
+      setDataList(dataList.filter((data) => data._id !== _id));
+    } catch (error) {
+      console.error("Error deleting payment:", error);
+    }
+  }
 
   return (
     <>
@@ -66,10 +77,11 @@ const PaymentDetailsPage = () => {
               <td>{i.paymentType}</td>
               <td>{i.comments}</td>
               <td>
-                <Button onClick={updatehandle}>Update</Button>
+              <Button onClick={() => updatehandle(i._id)}>Update</Button>
+
               </td>
               <td>
-                <Button>Delete</Button>
+                <Button onClick={()=> deleteHandle(i._id)} >Delete</Button>
               </td>
             </tr>
           ))}

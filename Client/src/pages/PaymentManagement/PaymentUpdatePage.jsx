@@ -4,8 +4,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import WithLayout from "../../hoc/WithLayout";
 import "./styles/Payment.scss";
+import { useParams } from "react-router-dom";
 
 const PaymentUpdatePage = () => {
+  const {_id} = useParams();
+  console.log(_id)
   const [orderID, setOrderID] = useState("");
   const [customerName, setCustomerName] = useState("");
   const [totalCost, setTotalCost] = useState("");
@@ -32,8 +35,8 @@ const PaymentUpdatePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/v1/payment/update",
+      const response = await axios.put(
+        `http://localhost:3000/api/v1/payment/update/${_id}`, // Corrected URL
         {
           orderID,
           customerName,
@@ -43,35 +46,20 @@ const PaymentUpdatePage = () => {
           comments,
         }
       );
-
+  
       console.log("Payment updated successfully:", response.data);
       toast.success("Payment updated successfully");
-
+  
       setTimeout(() => {
-        window.location.href = "/payment-details";
+        window.location.href = "/payment-management";
       }, 1000);
-
-      setPaymentDetails({
-        orderID,
-        customerName,
-        totalCost,
-        paymentType,
-        installmentPeriod,
-        comments,
-      });
+  
       setFormSubmitted(true);
-
-      setOrderID("#");
-      setCustomerName("");
-      setTotalCost(0);
-      setPaymentType("Pay in Full");
-      setInstallmentPeriod(12);
-      setComments("");
     } catch (error) {
-      console.error("Error adding payment:", error.response.data);
-      toast.error("Error adding payment");
+      toast.error("Error updating payment");
     }
   };
+  
 
   return (
     <div className="CheckoutPage">
