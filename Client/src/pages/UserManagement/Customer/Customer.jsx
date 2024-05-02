@@ -3,7 +3,7 @@ import AddCustomer from './AddCustomer';
 import CustomerList from './ViewCustomer';
 import WithLayout from '../../../hoc';
 
-const Customer = () => {
+const CustomerPage = () => {
   const [modal, setModal] = useState(false);
   const [loader, setLoader] = useState(1);
 
@@ -27,4 +27,4 @@ const Customer = () => {
 };
 
 // export default WithLayout(Customer);
-export default Customer;
+export default CustomerPage;
