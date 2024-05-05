@@ -20,7 +20,8 @@ const AddCustomer = ({ closeModal, setLoader, loader }) => {
       gender: '',
       phone: '',
       email: '',
-      dob: ''
+      dob: '',
+      address ''
     },
     onSubmit: async (values) => {
       console.log('value: ', values);
@@ -111,6 +112,21 @@ const AddCustomer = ({ closeModal, setLoader, loader }) => {
                 placeholder="Enter Starting Date"
                 className="form-control"
                 value={formik.values.dob}
+                onChange={formik.handleChange}
+              />
+            </div>
+          </div>
+          <div className="flex items-start h-10">
+            <div className="w-1/3 h-full flex items-center pl-5 bg-solo-green1 rounded-l-lg text-lg font-medium">
+              Address
+            </div>
+            <div className=" h-full border-y-2 border-e-2 w-full rounded-r-lg border-black">
+              <input
+                name="text"
+                type="text"
+                placeholder="Enter Address"
+                className="form-control h-full border-0 focus:ring-0 focus:border-transparent"
+                value={formik.values.address}
                 onChange={formik.handleChange}
               />
             </div>
