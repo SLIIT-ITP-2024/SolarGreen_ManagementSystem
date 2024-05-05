@@ -1,10 +1,16 @@
 import AppRouters from "./router/AppRoutes"
-import './App.scss'
 
+import './App.scss'
 function App() {
  
   return (
-    <AppRouters />
+    <>
+   <h1 className="text-2xl font-bold underline ">
+      Hello world!
+    </h1>
+    
+    <div className="text">Header</div>
+     </>
   )
 }
 
