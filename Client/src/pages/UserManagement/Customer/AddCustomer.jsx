@@ -1,55 +1,70 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import DropdownMenu from '../../../components/dropdown';
-import { genderOptions } from '../../../utils/dropdownConstOption';
-import { useFormik } from 'formik';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import DropdownMenu from "../../../components/dropdown";
+import {
+  customerStatusOption,
+  genderOptions,
+} from "../../../utils/dropdownConstOption";
+import { useFormik } from "formik";
+const apiUrl = import.meta.env.VITE_APIURL;
 
 const AddCustomer = ({ closeModal, setLoader, loader }) => {
-  const navigate = useNavigate();
-  const apiUrl = import.meta.env.VITE_APIURL;
+  console.log("apiUrl: ", apiUrl);
 
   const handleGenderSelect = ({ value }) => {
-    console.log('Selected Date Posted Value:', value);
-    formik.setFieldValue('gender', value);
+    formik.setFieldValue("gender", value);
+  };
+
+  const handleStatusSelect = ({ value }) => {
+    formik.setFieldValue("status", value);
   };
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      gender: '',
-      phone: '',
-      email: '',
-      dob: '',
-      address ''
+      name: "",
+      gender: "",
+      phone: "",
+      email: "",
+      projectDate: "",
+      status: "",
     },
     onSubmit: async (values) => {
-      console.log('value: ', values);
+      console.log("value: ", values);
       try {
-        const response = await axios.post(`${apiUrl}/api/v1/customer-employee/add-customer`, values);
-        console.log('Server response:', response.data);
+        const response = await axios.post(
+          `${apiUrl}/api/v1/customer-employee/add-customer`,
+          values
+        );
+        console.log("Server response:", response.data);
         if (response.data?.successMsg) {
           closeModal();
           setLoader(loader + 2);
         } else {
-          console.log('error response:', response.data.errorMsg);
+          console.log("error response:", response.data.errorMsg);
         }
       } catch (error) {
-        console.error('Error:', error.response.data.errorMsg);
+        console.error("Error:", error.response.data.errorMsg);
       }
-    }
+    },
   });
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-30">
       <div className="w-3/4 h-5/6 bg-white p-14 overflow-y-auto rounded-lg">
-        <div className="flex justify-between items-center pb-10">
+        <div className="flex w-full justify-between items-center pb-10">
           <h2 className="text-3xl font-bold">Add Customer</h2>
-          <button onClick={closeModal} className="text-lg font-bold hover:bg-red-500 px-2 rounded-md hover:text-white w-10">
+          <button
+            onClick={closeModal}
+            className="text-lg font-bold w-fit hover:bg-red-500 px-2 rounded-md hover:text-white"
+          >
             X
           </button>
         </div>
-        <form onSubmit={formik.handleSubmit} className="flex flex-col w-full gap-y-5">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="flex flex-col w-full gap-y-5"
+        >
           <div className=" flex items-start h-10">
             <div className="w-1/3 h-full flex items-center pl-5 bg-solo-green1 rounded-l-lg text-lg font-medium">
               Customer Name
@@ -69,7 +84,11 @@ const AddCustomer = ({ closeModal, setLoader, loader }) => {
             <div className="w-1/3 h-full flex items-center pl-5 bg-solo-green1 rounded-l-lg text-lg font-medium">
               Gender
             </div>
-            <DropdownMenu placeholder={'Gender'} options={genderOptions} onSelect={handleGenderSelect} />
+            <DropdownMenu
+              placeholder={"Select Gender"}
+              options={genderOptions}
+              onSelect={handleGenderSelect}
+            />
           </div>
           <div className="flex items-start h-10">
             <div className="w-1/3 h-full flex items-center pl-5 bg-solo-green1 rounded-l-lg text-lg font-medium">
@@ -103,41 +122,38 @@ const AddCustomer = ({ closeModal, setLoader, loader }) => {
           </div>
           <div className="flex items-start h-10">
             <div className="w-1/3 h-full flex items-center pl-5 bg-solo-green1 rounded-l-lg text-lg font-medium">
-              Date of Birth
+              Project Date
             </div>
             <div className=" h-full border-y-2 border-e-2 w-full rounded-r-lg border-black">
               <input
-                name="dob"
+                name="projectDate"
                 type="date"
                 placeholder="Enter Starting Date"
                 className="form-control"
-                value={formik.values.dob}
+                value={formik.values.projectDate}
                 onChange={formik.handleChange}
               />
             </div>
           </div>
           <div className="flex items-start h-10">
             <div className="w-1/3 h-full flex items-center pl-5 bg-solo-green1 rounded-l-lg text-lg font-medium">
-              Address
+              Status
             </div>
-            <div className=" h-full border-y-2 border-e-2 w-full rounded-r-lg border-black">
-              <input
-                name="text"
-                type="text"
-                placeholder="Enter Address"
-                className="form-control h-full border-0 focus:ring-0 focus:border-transparent"
-                value={formik.values.address}
-                onChange={formik.handleChange}
-              />
-            </div>
+            <DropdownMenu
+              placeholder={"Select Status"}
+              options={customerStatusOption}
+              onSelect={handleStatusSelect}
+            />
           </div>
-          <div className="flex w-full">
-            <button
-              type="submit"
-              className="px-6 py-2 bg-solo-green1 hover:bg-emerald-400 text-xl font-bold rounded-xl"
-            >
-              Submit
-            </button>
+          <div className="flex w-full justify-end">
+            <div>
+              <button
+                type="submit"
+                className="px-6 py-2 bg-solo-green1 hover:bg-emerald-400 text-xl font-bold rounded-xl"
+              >
+                Submit
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -145,4 +161,4 @@ const AddCustomer = ({ closeModal, setLoader, loader }) => {
   );
 };
 
-export default AddCustomer;
+export default AddCustomer;

@@ -1,60 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { PencilIcon, ShieldCheckIcon, TrashIcon } from '@heroicons/react/24/solid';
-import { formatDate } from '../../../utils/generalFunction';
-import EditCustomer from './EditCustomer';
-import WithLayout from '../../../hoc';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import {
+  PencilIcon,
+  ShieldCheckIcon,
+  TrashIcon,
+} from "@heroicons/react/24/solid";
+import { formatDate } from "../../../utils/generalFunction";
+import EditCustomer from "./EditCustomer";
 const apiUrl = import.meta.env.VITE_APIURL;
 
-const CustomerList = ({ loader, setLoader }) => {
+const CustomerList = ({ loader, setLoader, customers, setCustomers }) => {
   const [selectedCustomer, setSelectCustomer] = useState(null);
-  const [customers, setCustomers] = useState([]);
   const [modal, setModal] = useState(false);
 
   const handleModalClose = () => setModal(false);
 
-  useEffect(() => {
-    const fetchAllCustomer = async () => {
+  const handleCustomerDelete = (deleteEmployee) => {
+    console.log("employee dele: ", deleteEmployee);
+    const deleteCustomerFunc = async () => {
       try {
-        const response = 
-        await axios.get(`http://localhost:3000/api/v1/customer-employee/all-customer`);
-
-        console.log('Server response:', response.data);
+        const response = await axios.post(
+          `${apiUrl}/api/v1/customer-employee/delete-customer`,
+          deleteEmployee
+        );
+        console.log("Server response:", response.data);
         if (response.data.successMsg) {
-          setCustomers(response?.data?.customers);
+          setLoader(loader + 1);
         } else {
-          console.log('Error response:', response.data.errorMsg);
+          console.log("Error response:", response.data.errorMsg);
         }
       } catch (error) {
-        console.error('Error:', error.response.data.errorMsg);
+        console.error("Error:", error);
       }
     };
-
-    fetchAllCustomer();
-  }, [loader]);
-
-  const handleCustomerDelete = async (deleteEmployee) => {
-    try {
-      console.log('Employee to delete: ', deleteEmployee);
-  
-      const response = await axios.delete(`http://localhost:3000/api/v1/customer-employee/delete-customer`, {
-        data: deleteEmployee // Send deleteEmployee data in the request body
-      });
-  
-      console.log('Server response:', response.data);
-      
-      if (response.data.successMsg) {
-        setCustomers(response.data.employees);
-      } else {
-        console.log('Error response:', response.data.errorMsg);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    deleteCustomerFunc();
   };
-  
+
   return (
-    <div className="w-full">
+    <div className="w-full rounded-lg">
       <table className="w-full mt-10 table-auto">
         <thead>
           <tr className="border-b-[1px] text-x">
@@ -62,8 +45,9 @@ const CustomerList = ({ loader, setLoader }) => {
             <th className="w-auto">Gender</th>
             <th className="w-auto">Phone Number</th>
             <th className="w-auto">Email</th>
-            <th className="w-auto">Date of Birth</th>
-            {/* <th className="w-auto">Personal Details</th> */}
+            <th className="w-auto">Project Date</th>
+            <th className="w-auto">Status</th>
+            <th className="w-auto">Membership</th>
             <th className="w-auto"></th>
           </tr>
         </thead>
@@ -74,8 +58,9 @@ const CustomerList = ({ loader, setLoader }) => {
               <td>{customer?.gender}</td>
               <td>{customer?.phone}</td>
               <td>{customer?.email}</td>
-              <td>{formatDate(customer?.dob)}</td>
-              {/* <td>{employee.personalDetail}</td> */}
+              <td>{formatDate(customer?.projectDate)}</td>
+              <td>{customer?.status}</td>
+              <td>{customer?.membership}</td>
               <td>
                 <div className="flex justify-center gap-x-2 items-center">
                   <div
@@ -102,10 +87,15 @@ const CustomerList = ({ loader, setLoader }) => {
         </tbody>
       </table>
       {modal && (
-        <EditCustomer closeModal={handleModalClose} customer={selectedCustomer} setLoader={setLoader} loader={loader} />
+        <EditCustomer
+          closeModal={handleModalClose}
+          customer={selectedCustomer}
+          setLoader={setLoader}
+          loader={loader}
+        />
       )}
     </div>
   );
 };
 
-export default WithLayout(CustomerList)
+export default CustomerList;

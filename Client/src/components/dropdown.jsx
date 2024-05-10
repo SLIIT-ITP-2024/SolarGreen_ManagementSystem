@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
-import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/24/solid';
+import React, { useState } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
-const DropdownMenu = ({ options, onSelect, placeholder, icon, className, value }) => {
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+const DropdownMenu = ({
+  options,
+  onSelect,
+  placeholder,
+  icon,
+  className,
+  value,
+}) => {
+  const [selectedOption, setSelectedOption] = useState();
 
   const handleItemClick = (value, label) => {
     setSelectedOption({ value, label });
@@ -14,11 +21,14 @@ const DropdownMenu = ({ options, onSelect, placeholder, icon, className, value }
     <Menu as="div" className="relative inline-block text-left w-full">
       <div>
         <Menu.Button
-          className={`flex ${className ? className : ''} justify-between items-center h-10 text-xs md:text-base w-full px-2 md:px-5 gap-x-5 rounded-md border-y-2 border-e-2 border-black hover:bg-gray-50`}
+          className={`flex ${className ? className : ""} justify-between items-center h-10 text-xs md:text-base w-full px-2 md:px-5 gap-x-5 rounded-md border-2 border-black hover:bg-gray-50`}
         >
-          {icon ? <img src={icon} alt="icon" /> : ''}
+          {icon ? <img src={icon} alt="icon" /> : ""}
           {value || selectedOption?.label || placeholder}
-          <ChevronDownIcon className="-mr-1 h-6 w-6 text-gray-400 border-2 rounded-md" aria-hidden="true" />
+          <ChevronDownIcon
+            className="-mr-1 h-6 w-6 text-gray-400 border-2 rounded-md"
+            aria-hidden="true"
+          />
         </Menu.Button>
       </div>
 
@@ -37,8 +47,10 @@ const DropdownMenu = ({ options, onSelect, placeholder, icon, className, value }
               <Menu.Item>
                 {({ active }) => (
                   <div
-                    className={`${active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'} block px-4 py-2 text-sm`}
-                    onClick={() => handleItemClick(option?.value, option?.label)}
+                    className={`${active ? "bg-gray-100 text-gray-900" : "text-gray-700"} block px-4 py-2 text-sm`}
+                    onClick={() =>
+                      handleItemClick(option?.value, option?.label)
+                    }
                   >
                     {option?.label}
                   </div>
@@ -52,4 +64,4 @@ const DropdownMenu = ({ options, onSelect, placeholder, icon, className, value }
   );
 };
 
-export default DropdownMenu;
+export default DropdownMenu;

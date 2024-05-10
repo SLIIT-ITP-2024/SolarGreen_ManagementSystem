@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 
-function EmployeePage () {
+function employeePage () {
     const [employeePage, setEmployeePage] = useState([])
 
     useEffect(() => {
@@ -64,4 +64,4 @@ function EmployeePage () {
     )
 }
 
-export default EmployeePage;
+export default employeePage;

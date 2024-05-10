@@ -1,58 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { PencilIcon, ShieldCheckIcon, TrashIcon } from '@heroicons/react/24/solid';
-import EditEmployee from './EditEmployer';
-import { formatDate } from '../../../utils/generalFunction';
-import WithLayout from '../../../hoc';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import {
+  PencilIcon,
+  ShieldCheckIcon,
+  TrashIcon,
+} from "@heroicons/react/24/solid";
+import EditEmployee from "./EditEmployer";
+import { formatDate } from "../../../utils/generalFunction";
 const apiUrl = import.meta.env.VITE_APIURL;
 
-const ViewEmployeeList = ({ loader, setLoader }) => {
+const EmployeeList = ({ loader, setLoader, employees, setEmployees }) => {
   const [selectedEmployee, setSelectedEmployee] = useState(null);
-  const [employees, setEmployees] = useState([]);
   const [modal, setModal] = useState(false);
 
   const handleModalClose = () => setModal(false);
 
-  useEffect(() => {
-    const fetchAllEmployee = async () => {
+  const handleEmployeeDelete = (deleteEmployee) => {
+    console.log("employee dele: ", deleteEmployee);
+    const deleteEmployeeFunc = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/v1/customer-employee/all-employee`);
-        console.log('Server response:', response.data);
+        const response = await axios.post(
+          `${apiUrl}/api/v1/customer-employee/delete-employee`,
+          deleteEmployee
+        );
+        console.log("Server response:", response.data);
         if (response.data.successMsg) {
-          setEmployees(response?.data?.employees);
+          setLoader(loader + 1);
         } else {
-          console.log('Error response:', response.data.errorMsg);
+          console.log("Error response:", response.data.errorMsg);
         }
       } catch (error) {
-        console.error('Error:', error.response.data.errorMsg);
+        console.error("Error:", error);
       }
     };
-
-    fetchAllEmployee();
-  }, [loader]);
-
-  const handleEmployeeDelete = async (deleteEmployee) => {
-    try {
-      console.log('Employee to delete: ', deleteEmployee);
-  
-      const response = await axios.delete(`http://localhost:3000/api/v1/customer-employee/delete-employee`, {
-        data: deleteEmployee // Sending deleteEmployee data in the request body
-      });
-  
-      console.log('Server response:', response.data);
-  
-      if (response.data.successMsg) {
-        setEmployees(response.data.employees);
-      } else {
-        console.log('Error response:', response.data.errorMsg);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    deleteEmployeeFunc();
   };
-  
 
-  console.log('employees: ', employees);
+  console.log("employees: ", employees);
 
   return (
     <div className="w-full">
@@ -134,16 +118,22 @@ const ViewEmployeeList = ({ loader, setLoader }) => {
               <strong>Ending Date:</strong> {selectedEmployee.endingDate}
             </p>
             <p>
-              <strong>Personal Details:</strong> {selectedEmployee.personalDetails}
+              <strong>Personal Details:</strong>{" "}
+              {selectedEmployee.personalDetails}
             </p>
           </div>
         </div>
       )}
       {modal && (
-        <EditEmployee closeModal={handleModalClose} employee={selectedEmployee} setLoader={setLoader} loader={loader} />
+        <EditEmployee
+          closeModal={handleModalClose}
+          employee={selectedEmployee}
+          setLoader={setLoader}
+          loader={loader}
+        />
       )}
     </div>
   );
 };
 
-export default WithLayout(ViewEmployeeList);
+export default EmployeeList;

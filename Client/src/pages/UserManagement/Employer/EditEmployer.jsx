@@ -1,62 +1,69 @@
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import DropdownMenu from '../../../components/dropdown';
-import { genderOptions } from '../../../utils/dropdownConstOption';
-import { useFormik } from 'formik';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import DropdownMenu from "../../../components/dropdown";
+import { customerStatusOption } from "../../../utils/dropdownConstOption";
+import { useFormik } from "formik";
 
 const EditEmployee = ({ closeModal, employee, setLoader, loader }) => {
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_APIURL;
 
   const handleGenderSelect = ({ value }) => {
-    console.log('Selected Date Posted Value:', value);
-    formik.setFieldValue('gender', value);
+    console.log("Selected Date Posted Value:", value);
+    formik.setFieldValue("gender", value);
   };
 
-  const startingDate = employee?.startingDate ? new Date(employee.startingDate).toISOString().split('T')[0] : '';
+  const startingDate = employee?.startingDate
+    ? new Date(employee.startingDate).toISOString().split("T")[0]
+    : "";
 
   const formik = useFormik({
     initialValues: {
-      _id: employee?._id || '',
-      name: employee?.name || '',
-      gender: employee?.gender || '',
-      phone: employee?.phone || '',
-      email: employee?.email || '',
-      role: employee?.role || '',
+      _id: employee?._id || "",
+      name: employee?.name || "",
+      gender: employee?.gender || "",
+      phone: employee?.phone || "",
+      email: employee?.email || "",
+      role: employee?.role || "",
       startingDate: startingDate,
-      personalDetail: employee?.personalDetail || ''
+      personalDetail: employee?.personalDetail || "",
     },
     onSubmit: async (values) => {
+      console.log("value: ", values);
       try {
-        console.log('Values:', values);
-    
-        const response = await axios.put(`http://localhost:3000/api/v1/customer-employee/edit-employee`, values);
-    
-        console.log('Server response:', response.data);
-    
-        if (response.data.successMsg) {
+        const response = await axios.post(
+          `${apiUrl}/api/v1/customer-employee/edit-employee`,
+          values
+        );
+        console.log("Server response:", response.data);
+        if (response.data?.successMsg) {
           closeModal();
           setLoader(loader + 1);
         } else {
-          console.log('Error response:', response.data.errorMsg);
+          console.log("error response:", response.data.errorMsg);
         }
       } catch (error) {
-        console.error('Error:', error.response ? error.response.data.errorMsg : error.message);
+        console.error("Error:", error.response.data.errorMsg);
       }
-    }
-    
+    },
   });
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-30">
       <div className="w-3/4 h-5/6 bg-white p-14 overflow-y-auto rounded-lg">
-        <div className="flex justify-between items-center pb-10">
+        <div className="flex w-full justify-between items-center pb-10">
           <h2 className="text-3xl font-bold">Edit Employee</h2>
-          <button onClick={closeModal} className="text-lg font-bold hover:bg-red-500 px-2 rounded-md hover:text-white">
+          <button
+            onClick={closeModal}
+            className="text-lg w-fit font-bold hover:bg-red-500 px-2 rounded-md hover:text-white"
+          >
             X
           </button>
         </div>
-        <form onSubmit={formik.handleSubmit} className="flex flex-col w-full gap-y-5">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="flex flex-col w-full gap-y-5"
+        >
           <div className=" flex items-start h-10">
             <div className="w-1/3 h-full flex items-center pl-5 bg-solo-green1 rounded-l-lg text-lg font-medium">
               Employee Name
@@ -77,8 +84,8 @@ const EditEmployee = ({ closeModal, employee, setLoader, loader }) => {
               Gender
             </div>
             <DropdownMenu
-              placeholder={'Gender'}
-              options={genderOptions}
+              placeholder={"Gender"}
+              options={customerStatusOption}
               onSelect={handleGenderSelect}
               value={employee?.gender}
             />
@@ -173,4 +180,4 @@ const EditEmployee = ({ closeModal, employee, setLoader, loader }) => {
   );
 };
 
-export default EditEmployee;
+export default EditEmployee;
