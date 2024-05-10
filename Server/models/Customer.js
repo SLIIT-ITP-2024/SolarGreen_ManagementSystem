@@ -5,7 +5,9 @@ const CustomerSchema = new mongoose.Schema({
   phone: String,
   gender: String,
   email: String,
-  dob: String,
+  projectDate: Number,
+  status: String,
+  membership: { type: "String", default: "Silver" },
 });
 
 const Customer = mongoose.model("Customer", CustomerSchema);

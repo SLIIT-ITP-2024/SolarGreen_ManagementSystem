@@ -7,16 +7,18 @@ const testController = (req, res) => {
 
 const addCustomerControl = async (req, res) => {
   try {
-    const { email, name, gender, phone, dob } = req.body;
+    const { email, name, gender, phone, projectDate, status } = req.body;
 
-    
+    console.log("cus req.body: ", req.body);
 
     if (!email) return res.status(400).json({ errorMsg: "Email is required" });
     if (!name) return res.status(400).json({ errorMsg: "Name is required" });
     if (!gender)
       return res.status(400).json({ errorMsg: "Gender is required" });
-    if (!dob)
-      return res.status(400).json({ errorMsg: "Starting date is required" });
+    if (!projectDate)
+      return res
+        .status(400)
+        .json({ errorMsg: "Project date date is required" });
 
     // Check if the email is already registered
     const existingUser = await Customer.findOne({ email });
@@ -27,34 +29,47 @@ const addCustomerControl = async (req, res) => {
     }
 
     // Email not registered, proceed with user creation
-    const newEmployee = new Customer({
+    const newCustomer = new Customer({
       email,
       name,
       gender,
       phone,
-      dob: new Date(dob),
+      projectDate: new Date(projectDate),
+      status,
     });
 
-    await newEmployee.save();
+    await newCustomer.save();
 
     return res.status(200).json({
-      successMsg: "Customers created successfully",
-      customer: newEmployee,
+      successMsg: "Customer created successfully",
+      customer: newCustomer,
     });
   } catch (error) {
-    return res.status(500).json({ errorMsg: "Error creating customers" });
+    console.error(error);
+    return res.status(500).json({ errorMsg: "Error creating customer" });
   }
 };
 
 const getAllCustomerControl = async (req, res) => {
+  const { name, status } = req.query;
+  const filter = {};
+
+  if (name) {
+    filter.name = { $regex: new RegExp(name, "i") };
+  }
+
+  if (status) {
+    filter.status = status;
+  }
   try {
-    Customer.find().then((customers) => {
+    Customer.find(filter).then((customers) => {
       return res.status(200).json({
         customers: customers,
         successMsg: "Fetch all customers successfully",
       });
     });
   } catch (error) {
+    console.error(error);
     return res.status(500).json({ errorMsg: "Error fetching customers" });
   }
 };
@@ -69,6 +84,7 @@ const editCustomerControl = async (req, res) => {
     { new: true }
   )
     .then((updatedCustomer) => {
+      console.log(updatedCustomer);
       if (!updatedCustomer) {
         return res.status(500).json({ errorMsg: "Error edit customer" });
       }
@@ -78,15 +94,18 @@ const editCustomerControl = async (req, res) => {
       });
     })
     .catch((error) => {
+      console.error("Update error:", error);
       return res.status(500).json({ errorMsg: "Error edit customer" });
     });
 };
 
 const deleteCustomerControl = async (req, res) => {
+  console.log("req.body delete: ", req.body._id);
   if (!req.body._id) return res.status(500).json({ errorMsg: msg.noDataError });
 
   Customer.findOneAndDelete({ _id: req.body._id })
     .then((deletedCustomer) => {
+      console.log(deletedCustomer);
       if (!deletedCustomer) {
         return res.status(500).json({ errorMsg: "Error delete customer" });
       }
@@ -96,7 +115,7 @@ const deleteCustomerControl = async (req, res) => {
       });
     })
     .catch((error) => {
-      
+      console.error("Update error:", error);
       return res.status(500).json({ errorMsg: "Error delete customer" });
     });
 };
@@ -106,7 +125,7 @@ const addEmployeeControl = async (req, res) => {
     const { email, name, gender, role, startingDate, personalDetail, phone } =
       req.body;
 
-   
+    console.log("req.body: ", req.body);
 
     if (!email) return res.status(400).json({ errorMsg: "Email is required" });
     if (!name) return res.status(400).json({ errorMsg: "Name is required" });
@@ -144,27 +163,38 @@ const addEmployeeControl = async (req, res) => {
       employee: newEmployee,
     });
   } catch (error) {
-  
+    console.error(error);
     return res.status(500).json({ errorMsg: "Error creating employee" });
   }
 };
 
 const getAllEmployeeControl = async (req, res) => {
+  const { name, role } = req.query;
+  const filter = {};
+
+  if (name) {
+    filter.name = { $regex: new RegExp(name, "i") };
+  }
+
+  if (role) {
+    filter.role = role;
+  }
+
   try {
-    Employee.find().then((employees) => {
+    Employee.find(filter).then((employees) => {
       return res.status(200).json({
         employees: employees,
         successMsg: "Fetch all employee successfully",
       });
     });
   } catch (error) {
-  
+    console.error(error);
     return res.status(500).json({ errorMsg: "Error fetching employee" });
   }
 };
 
 const editEmployeeControl = async (req, res) => {
-
+  console.log("req.body: ", req.body._id);
   if (!req.body._id) return res.status(500).json({ errorMsg: msg.noDataError });
 
   Employee.findOneAndUpdate(
@@ -183,40 +213,31 @@ const editEmployeeControl = async (req, res) => {
       });
     })
     .catch((error) => {
-     
+      console.error("Update error:", error);
       return res.status(500).json({ errorMsg: "Error edit employee" });
     });
 };
 
 const deleteEmployeeControl = async (req, res) => {
-  try {
-   
-    const { _id } = req.body;
+  console.log("req.body delete: ", req.body._id);
+  if (!req.body._id) return res.status(500).json({ errorMsg: msg.noDataError });
 
-    // Validate if _id is provided
-    if (!_id) {
-      return res.status(400).json({ errorMsg: "No employee ID provided" });
-    }
-
-    // Find and delete the employee
-    const deletedEmployee = await Employee.findOneAndDelete({ _id });
-
-    // Check if employee was found and deleted
-    if (!deletedEmployee) {
-      return res.status(404).json({ errorMsg: "Employee not found" });
-    }
-
-    // Send success response
-    return res.status(200).json({
-      successMsg: "Employee deleted successfully",
-      employee: deletedEmployee,
+  Employee.findOneAndDelete({ _id: req.body._id })
+    .then((deletedEmployee) => {
+      console.log(deletedEmployee);
+      if (!deletedEmployee) {
+        return res.status(500).json({ errorMsg: "Error delete employee" });
+      }
+      return res.status(200).json({
+        successMsg: "delete employee successfully",
+        employee: deletedEmployee,
+      });
+    })
+    .catch((error) => {
+      console.error("Update error:", error);
+      return res.status(500).json({ errorMsg: "Error delete employee" });
     });
-  } catch (error) {
-  
-    return res.status(500).json({ errorMsg: "Error deleting employee" });
-  }
 };
-
 
 module.exports = {
   addEmployeeControl,
