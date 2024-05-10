@@ -3,10 +3,11 @@ import axios from "axios";
 import "./SearchProject.css";
 
 const SearchProject = () => {
-  const [searchTerm, setSearchTerm] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState(null);
   const [allProjects, setAllProjects] = useState([]);
+  const [statusFilter, setStatusFilter] = useState("");
 
   useEffect(() => {
     function getProjects() {
@@ -31,7 +32,7 @@ const SearchProject = () => {
     event.preventDefault();
 
     // If the search term is empty, display an error message
-    if (!searchTerm || searchTerm.trim() === "") {
+    if (!searchTerm.trim()) {
       setError("Please enter a search term");
       setSearchResults([]); // Reset search results
       return;
@@ -44,8 +45,39 @@ const SearchProject = () => {
 
     setSearchResults(filteredProjects);
 
-    if (!searchResults.length > 0) {
+    if (filteredProjects.length === 0) {
       setError("No projects found");
+    } else {
+      setError(null);
+    }
+  };
+
+  const handleStatusFilterChange = (status) => {
+    setStatusFilter(status);
+    filterProjects(searchTerm, status);
+  };
+
+  const filterProjects = (searchTerm, statusFilter) => {
+    let filteredProjects = allProjects;
+
+    if (searchTerm.trim()) {
+      filteredProjects = filteredProjects.filter((project) =>
+        project.customerName.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    if (statusFilter) {
+      filteredProjects = filteredProjects.filter(
+        (project) => project.status === statusFilter
+      );
+    }
+
+    setSearchResults(filteredProjects);
+
+    if (filteredProjects.length === 0) {
+      setError("No projects found");
+    } else {
+      setError(null);
     }
   };
 
@@ -69,12 +101,75 @@ const SearchProject = () => {
         </div>
       </form>
 
+      {/* Filter Options */}
+      <div className="mt-3">
+        <label htmlFor="msg" className="form-check-label">
+          Filter Projects by Status:
+        </label>
+        <div className="form-check">
+          <input
+            type="radio"
+            id="completed"
+            name="statusFilter"
+            value="Completed"
+            checked={statusFilter === "Completed"}
+            onChange={() => handleStatusFilterChange("Completed")}
+            className="form-check-input"
+          />
+          <label htmlFor="completed" className="form-check-label">
+            Completed
+          </label>
+        </div>
+        <div className="form-check">
+          <input
+            type="radio"
+            id="pending"
+            name="statusFilter"
+            value="Pending"
+            checked={statusFilter === "Pending"}
+            onChange={() => handleStatusFilterChange("Pending")}
+            className="form-check-input"
+          />
+          <label htmlFor="pending" className="form-check-label">
+            Pending
+          </label>
+        </div>
+        <div className="form-check">
+          <input
+            type="radio"
+            id="terminated"
+            name="statusFilter"
+            value="Terminated"
+            checked={statusFilter === "Terminated"}
+            onChange={() => handleStatusFilterChange("Terminated")}
+            className="form-check-input"
+          />
+          <label htmlFor="terminated" className="form-check-label">
+            Terminated
+          </label>
+        </div>
+        <div className="form-check">
+          <input
+            type="radio"
+            id="on hold"
+            name="statusFilter"
+            value="On hold"
+            checked={statusFilter === "On hold"}
+            onChange={() => handleStatusFilterChange("On hold")}
+            className="form-check-input"
+          />
+          <label htmlFor="on hold" className="form-check-label">
+            On hold
+          </label>
+        </div>
+      </div>
+
       {/* Display Search Results */}
       {searchResults.length > 0 && (
         <div>
+          <p className="result">Search Results...</p>
           {searchResults.map((project) => (
             <div className="container">
-              <p className="result">Search Results...</p>
               <br />
               <table className="table">
                 <thead>
@@ -111,9 +206,7 @@ const SearchProject = () => {
         </div>
       )}
 
-      {!searchResults.length > 0 && error !== null && (
-        <p className="result">{error}</p>
-      )}
+      {!searchResults.length > 0 && error && <p className="result">{error}</p>}
     </div>
   );
 };
