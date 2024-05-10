@@ -1,0 +1,97 @@
+$primary-color: #333;
+$accent-color-1: #007bff;
+$background-color: #f8f9fa;
+$font-color-primary: #333;
+$border-color: #ced4da;
+$header-4: 24px;
+
+@import '../../../index.scss';
+
+.CheckoutPage{
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: $background-color;
+
+  h1 {
+    font-size: $header-4;
+    color: $primary-color;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .order-details {
+    border: 2px solid $border-color;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 2px solid $border-color;
+      border-radius: 5px;
+      box-sizing: border-box;
+      background-color: $background-color;
+      color: $primary-color;
+      font-family: 'Arial', sans-serif;
+      font-size: 16px;
+    }
+
+    .installment-options {
+      margin-top: 20px;
+
+      label {
+        margin-bottom: 5px;
+      }
+    }
+
+    .monthly-payment {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+
+  .notification {
+    background-color: $accent-color-1;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  button[type="submit"] {
+    padding: 12px 24px;
+    background-color: $accent-color-1;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken($accent-color-1, 10%);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .checkout-page {
+      padding: 20px;
+    }
+  }
+}

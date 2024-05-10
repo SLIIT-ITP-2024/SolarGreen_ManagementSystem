@@ -1,0 +1,35 @@
+.createTitle {
+    text-align: center;
+    text-decoration: underline;
+}
+.container {
+    background: #fff;
+    padding: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.form-group {
+    margin: 10px 5px;
+}
+
+.btn-success {
+    margin: 15px 5px;
+}
+
+form {
+    margin-top: 20px;
+}
+
+.btn-warning {
+    margin: 10px 15px;
+    border-radius: 5px;
+    color: #111;
+}
+
+.row1 {
+    display: flex;
+    flex-direction: row;
+}

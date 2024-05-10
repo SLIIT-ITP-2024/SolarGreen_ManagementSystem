@@ -16,12 +16,21 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
+    "class-validator": "^0.14.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.18.3",
+    "express-validator": "^7.0.1",
+    "ipify": "^6.0.0",
+    "joi": "^17.13.0",
     "jsonwebtoken": "^9.0.2",
+    "luxon": "^3.4.4",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.5.45",
     "mongodb": "^6.5.0",
-    "mongoose": "^8.2.2",
-    "nodemon": "^3.1.0"
+    "mongoose": "^8.3.1",
+    "nodemon": "^3.1.0",
+    "puppeteer": "^22.7.0",
+    "uuid": "^9.0.1"
   }
 }

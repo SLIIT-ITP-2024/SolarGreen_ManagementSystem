@@ -1,0 +1,39 @@
+.header {
+  text-align: center;
+  text-decoration: underline;
+}
+
+/* Table */
+.table {
+  width: fit-content;
+  border-collapse: collapse;
+}
+
+.tbody th, td {
+  padding: 3px;
+  text-align: center;
+}
+
+.table th {
+  border: 1px solid #796e6e;
+  text-align: center;
+}
+
+.table td {
+  border: 1px solid #796e6e;
+  text-align: center;
+}
+
+.btn-delete {
+  margin-left: 5px; /* Adjust button margin */
+}
+
+.btn-warning {
+  margin: 5px;
+  border-radius: 5px;
+  color: #111;
+}
+
+.btn.btn-warning.btn-delete {
+  color: rgb(255, 0, 0);
+}

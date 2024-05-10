@@ -1,0 +1,34 @@
+
+
+/* Table */
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.thead th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  border: 1px solid #796e6e;
+  text-align: center;
+}
+
+.table td {
+  border: 1px solid #796e6e;
+  text-align: center;
+}
+
+
+.btn {
+  padding: 0;
+  margin: 5px;
+}  
+
+
+.btn.btn-warning.btn-delete {
+  color: rgb(255, 0, 0);
+}

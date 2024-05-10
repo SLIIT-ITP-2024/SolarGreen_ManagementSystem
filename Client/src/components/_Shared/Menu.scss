@@ -1,0 +1,115 @@
+@import "../../index.scss";
+
+.menu-outer {
+    width: 20vw;
+    max-height: 100vh;
+    overflow-y: auto;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+  
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.1);
+  }
+
+
+.menu-inner {
+    width: 100%;
+    height: fit-content;
+    background-color: var(--primary-color);
+    padding-bottom: 20px;
+
+    .content {
+        .profile-section {
+            width: 100%;
+            height: 200px;
+            background-color: var(--accent-color-2);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .profile-img {
+                width: 80px;
+                height: 80px;
+                border: solid 1px rgb(255, 255, 255);
+                border-radius: 50%;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                border: solid 1px white;
+                overflow: hidden; 
+                background-image: url("https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?t=st=1711827794~exp=1711831394~hmac=8ddbc3b9ae3f5cc8efbd0e7d9baeb377016f80ddaef67f59ecdaf061113ba916&w=740");
+                background-size: cover;
+                background-position: center;
+                
+              }
+              
+             
+
+            h3 {
+                color: $font-color-white;
+                font-size: $title-size;
+            }
+        }
+
+        .nav-links {
+            width: 100%;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .nav-link {
+                width: 90%;
+                height: 46px;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                margin-bottom: 10px;
+                border-radius: 20px;
+                color: $font-color-white;
+                text-decoration: none;
+                padding-left: 20px;
+                cursor: pointer;
+
+                &:last-child {
+                    margin-bottom: 0; // Remove margin-bottom for last child
+                }
+
+                &.active {
+                    border: solid 1px var(--border-color); // Add border style for active link
+                
+                   }
+
+                .icon {
+                    width: 25px;
+                    height: 25px;
+                    margin-right: 10px;
+                }
+
+                .name h3 {
+                    font-size:$title-size;
+                    color: $font-color-white;
+                }
+            }  
+        }
+        .logout{
+            display: flex;
+            margin-left: 20px;
+            margin-top: 20px;
+            align-items: center;
+           
+            padding: 10px;
+            button{
+                color: $font-color-white;
+                margin-left: 10px;
+                width: 80px;
+            }
+            .logout-icon{
+                color: $danger-color;
+            }
+        }
+    }
+}
