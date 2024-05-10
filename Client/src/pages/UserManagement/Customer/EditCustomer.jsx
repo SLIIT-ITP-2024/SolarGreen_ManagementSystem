@@ -25,20 +25,24 @@ const EditCustomer = ({ closeModal, customer, setLoader, loader }) => {
       dob: dob
     },
     onSubmit: async (values) => {
-      console.log('value: ', values);
       try {
-        const response = await axios.post(`${apiUrl}/api/v1/customer-employee/edit-customer`, values);
+        console.log('Values:', values);
+    
+        const response = await axios.put(`http://localhost:3000/api/v1/customer-employee/edit-customer`, values);
+    
         console.log('Server response:', response.data);
-        if (response.data?.successMsg) {
+    
+        if (response.data.successMsg) {
           closeModal();
           setLoader(loader + 1);
         } else {
-          console.log('error response:', response.data.errorMsg);
+          console.log('Error response:', response.data.errorMsg);
         }
       } catch (error) {
-        console.error('Error:', error.response.data.errorMsg);
+        console.error('Error:', error.response ? error.response.data.errorMsg : error.message);
       }
     }
+    
   });
 
   return (
@@ -136,4 +140,4 @@ const EditCustomer = ({ closeModal, customer, setLoader, loader }) => {
   );
 };
 
-export default EditCustomer;
+export default EditCustomer;

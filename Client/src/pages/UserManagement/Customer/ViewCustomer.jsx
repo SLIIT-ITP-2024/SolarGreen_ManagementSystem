@@ -3,6 +3,7 @@ import axios from 'axios';
 import { PencilIcon, ShieldCheckIcon, TrashIcon } from '@heroicons/react/24/solid';
 import { formatDate } from '../../../utils/generalFunction';
 import EditCustomer from './EditCustomer';
+import WithLayout from '../../../hoc';
 const apiUrl = import.meta.env.VITE_APIURL;
 
 const CustomerList = ({ loader, setLoader }) => {
@@ -15,7 +16,9 @@ const CustomerList = ({ loader, setLoader }) => {
   useEffect(() => {
     const fetchAllCustomer = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/api/v1/customer-employee/customer`);
+        const response = 
+        await axios.get(`http://localhost:3000/api/v1/customer-employee/all-customer`);
+
         console.log('Server response:', response.data);
         if (response.data.successMsg) {
           setCustomers(response?.data?.customers);
@@ -30,24 +33,26 @@ const CustomerList = ({ loader, setLoader }) => {
     fetchAllCustomer();
   }, [loader]);
 
-  const handleCustomerDelete = (deleteEmployee) => {
-    console.log('employee dele: ', deleteEmployee);
-    const deleteCustomerFunc = async () => {
-      try {
-        const response = await axios.post(`${apiUrl}/api/v1/customer-employee/delete-customer`, deleteEmployee);
-        console.log('Server response:', response.data);
-        if (response.data.successMsg) {
-          setCustomers(response?.data?.employees);
-        } else {
-          console.log('Error response:', response.data.errorMsg);
-        }
-      } catch (error) {
-        console.error('Error:', error);
+  const handleCustomerDelete = async (deleteEmployee) => {
+    try {
+      console.log('Employee to delete: ', deleteEmployee);
+  
+      const response = await axios.delete(`http://localhost:3000/api/v1/customer-employee/delete-customer`, {
+        data: deleteEmployee // Send deleteEmployee data in the request body
+      });
+  
+      console.log('Server response:', response.data);
+      
+      if (response.data.successMsg) {
+        setCustomers(response.data.employees);
+      } else {
+        console.log('Error response:', response.data.errorMsg);
       }
-    };
-    deleteCustomerFunc();
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
-
+  
   return (
     <div className="w-full">
       <table className="w-full mt-10 table-auto">
@@ -103,4 +108,4 @@ const CustomerList = ({ loader, setLoader }) => {
   );
 };
 
-export default CustomerList;
+export default WithLayout(CustomerList)

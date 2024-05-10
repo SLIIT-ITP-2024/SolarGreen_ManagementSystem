@@ -45,7 +45,7 @@ const AddCustomer = ({ closeModal, setLoader, loader }) => {
       <div className="w-3/4 h-5/6 bg-white p-14 overflow-y-auto rounded-lg">
         <div className="flex justify-between items-center pb-10">
           <h2 className="text-3xl font-bold">Add Customer</h2>
-          <button onClick={closeModal} className="text-lg font-bold hover:bg-red-500 px-2 rounded-md hover:text-white">
+          <button onClick={closeModal} className="text-lg font-bold hover:bg-red-500 px-2 rounded-md hover:text-white w-10">
             X
           </button>
         </div>

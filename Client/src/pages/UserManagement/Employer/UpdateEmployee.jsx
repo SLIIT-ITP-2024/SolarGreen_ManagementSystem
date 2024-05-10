@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import axios from 'axios'
 
-function UpdateUser () {
+function UpdateEmployee () {
     const {id} = useParams()
     const [employeeName, setEmployeeName] = useState()
     const [employeeId, setEmployeeId] = useState()
@@ -111,4 +111,4 @@ function UpdateUser () {
     )
 }
 
-export default UpdateUser;
+export default UpdateEmployee;
