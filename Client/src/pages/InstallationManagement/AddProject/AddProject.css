@@ -15,8 +15,11 @@ label {
     margin: 10px 5px;
 }
 
-.btn-success {
+.btn.btn-success {
     margin: 15px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 200px;
 }
 
 form {
