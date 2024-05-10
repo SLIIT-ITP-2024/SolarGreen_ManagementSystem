@@ -2,6 +2,7 @@ import WithLayout from "../../../hoc";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PDF from "./PDF";
+import "./../AddProject/AddProject.css";
 
 function Report() {
   const [pID, setPID] = useState("");
@@ -55,8 +56,8 @@ function Report() {
 
   return (
     <div>
-      <h3>Generate report</h3>
       <div className="container">
+        <h3 className="createTitle">Generate report</h3>
         <form onSubmit={validate}>
           <div className="form-group">
             <label for="name">Project ID</label>
