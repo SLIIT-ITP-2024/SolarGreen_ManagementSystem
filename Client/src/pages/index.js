@@ -44,6 +44,7 @@ import CustomerPage from "./UserManagement/Customer/Customer";
 import EditCustomer from "./UserManagement/Customer/EditCustomer";
 import CustomerList from "./UserManagement/Customer/ViewCustomer";
 
+import SendingEmailPage from "./PermissionManagement/SendingEmailPage";
 export {
   LoginPage,
   RegisterPage,
@@ -86,7 +87,7 @@ export {
   Employee,
   EditEmployee,
 
-
+  SendingEmailPage
 };
 
 
