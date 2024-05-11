@@ -1,52 +1,46 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import DropdownMenu from "../../../components/dropdown";
-import {
-  customerStatusOption,
-  genderOptions,
-} from "../../../utils/dropdownConstOption";
-import { useFormik } from "formik";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import DropdownMenu from '../../../components/dropdown';
+import { customerStatusOption, genderOptions } from '../../../utils/dropdownConstOption';
+import { useFormik } from 'formik';
 const apiUrl = import.meta.env.VITE_APIURL;
 
 const AddCustomer = ({ closeModal, setLoader, loader }) => {
-  console.log("apiUrl: ", apiUrl);
+  console.log('apiUrl: ', apiUrl);
 
   const handleGenderSelect = ({ value }) => {
-    formik.setFieldValue("gender", value);
+    formik.setFieldValue('gender', value);
   };
 
   const handleStatusSelect = ({ value }) => {
-    formik.setFieldValue("status", value);
+    formik.setFieldValue('status', value);
   };
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      gender: "",
-      phone: "",
-      email: "",
-      projectDate: "",
-      status: "",
+      name: '',
+      gender: '',
+      phone: '',
+      email: '',
+      projectDate: '',
+      status: ''
     },
     onSubmit: async (values) => {
-      console.log("value: ", values);
+      console.log('value: ', values);
       try {
-        const response = await axios.post(
-          `${apiUrl}/api/v1/customer-employee/add-customer`,
-          values
-        );
-        console.log("Server response:", response.data);
+        const response = await axios.post(`${apiUrl}/api/v1/customer-employee/add-customer`, values);
+        console.log('Server response:', response.data);
         if (response.data?.successMsg) {
           closeModal();
           setLoader(loader + 2);
         } else {
-          console.log("error response:", response.data.errorMsg);
+          console.log('error response:', response.data.errorMsg);
         }
       } catch (error) {
-        console.error("Error:", error.response.data.errorMsg);
+        console.error('Error:', error.response.data.errorMsg);
       }
-    },
+    }
   });
 
   return (
@@ -61,10 +55,7 @@ const AddCustomer = ({ closeModal, setLoader, loader }) => {
             X
           </button>
         </div>
-        <form
-          onSubmit={formik.handleSubmit}
-          className="flex flex-col w-full gap-y-5"
-        >
+        <form onSubmit={formik.handleSubmit} className="flex flex-col w-full gap-y-5">
           <div className=" flex items-start h-10">
             <div className="w-1/3 h-full flex items-center pl-5 bg-solo-green1 rounded-l-lg text-lg font-medium">
               Customer Name
@@ -84,11 +75,7 @@ const AddCustomer = ({ closeModal, setLoader, loader }) => {
             <div className="w-1/3 h-full flex items-center pl-5 bg-solo-green1 rounded-l-lg text-lg font-medium">
               Gender
             </div>
-            <DropdownMenu
-              placeholder={"Select Gender"}
-              options={genderOptions}
-              onSelect={handleGenderSelect}
-            />
+            <DropdownMenu placeholder={'Select Gender'} options={genderOptions} onSelect={handleGenderSelect} />
           </div>
           <div className="flex items-start h-10">
             <div className="w-1/3 h-full flex items-center pl-5 bg-solo-green1 rounded-l-lg text-lg font-medium">
@@ -139,11 +126,7 @@ const AddCustomer = ({ closeModal, setLoader, loader }) => {
             <div className="w-1/3 h-full flex items-center pl-5 bg-solo-green1 rounded-l-lg text-lg font-medium">
               Status
             </div>
-            <DropdownMenu
-              placeholder={"Select Status"}
-              options={customerStatusOption}
-              onSelect={handleStatusSelect}
-            />
+            <DropdownMenu placeholder={'Select Status'} options={customerStatusOption} onSelect={handleStatusSelect} />
           </div>
           <div className="flex w-full justify-end">
             <div>

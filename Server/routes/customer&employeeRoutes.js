@@ -9,18 +9,18 @@ customerEmployeeRouter.post(
   customerEmployeeController.addEmployeeControl
 );
 
-customerEmployeeRouter.put(
+customerEmployeeRouter.post(
   "/edit-employee",
   customerEmployeeController.editEmployeeControl
 );
 
-customerEmployeeRouter.delete(
+customerEmployeeRouter.post(
   "/delete-employee",
   customerEmployeeController.deleteEmployeeControl
 );
 
 customerEmployeeRouter.get(
-  "/all-employee",
+  "/employee",
   customerEmployeeController.getAllEmployeeControl
 );
 
@@ -29,19 +29,19 @@ customerEmployeeRouter.post(
   customerEmployeeController.addCustomerControl
 );
 
-customerEmployeeRouter.put(
+customerEmployeeRouter.post(
   "/edit-customer",
   customerEmployeeController.editCustomerControl
 );
 
-customerEmployeeRouter.delete(
+customerEmployeeRouter.post(
   "/delete-customer",
   customerEmployeeController.deleteCustomerControl
 );
 
 customerEmployeeRouter.get(
-  "/all-customer",
+  "/customer",
   customerEmployeeController.getAllCustomerControl
 );
 
-module.exports = { customerEmployeeRouter};
+module.exports = { customerEmployeeRouter };
