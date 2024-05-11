@@ -25,7 +25,7 @@ const AddCustomer = ({ closeModal, setLoader, loader }) => {
     onSubmit: async (values) => {
       console.log('value: ', values);
       try {
-        const response = await axios.post(`${apiUrl}/api/v1/customer-employee/add-customer`, values);
+        const response = await axios.post(`http://localhost:3000/api/v1/customer-employee/add-customer`, values);
         console.log('Server response:', response.data);
         if (response.data?.successMsg) {
           closeModal();

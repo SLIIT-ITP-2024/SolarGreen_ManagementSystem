@@ -2,6 +2,8 @@ const UserRole = require("../../models/permissionModels/userRole.model");
 const uuid = require('uuid');
 const auth = require('../../middleware/auth');
 const validator = require('./valitation/permissionControllerValidator');
+const nodemailer = require('nodemailer');
+
 
 const testController = (req, res) => {
   res.send('Permission controller is working!');
@@ -108,5 +110,40 @@ const searchByUsername = async (req, res) => {
   }
 }
 
+const sendEmail = async (req, res) => {
+    const { email, subject, context } = req.body;
+  
+    // Create a Nodemailer transporter using SMTP
+    let transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: 'madhusa720@gmail.com',
+        pass: 'wcyr zewb ajig mhzb'
+      }
+    });
+    
+  
+    try {
+      // Send mail with defined transport object
+      let info = await transporter.sendMail({
+        from: 'Solar Greeen Company',
+        to: email,
+        subject: subject,
+        text: context
+      });
+      console.log('Email sent: ' + info.response);
+      res.status(200).send('Email sent successfully!');
+    }catch (error) {
+      console.error('Error sending email:', error);
+      res.status(500).send('Failed to send email. Please try again later.');
+    }
+  }
+
+    
+    
+
+
 module.exports = { testController, createUserRole, getAllUserRoles, getUserRoleByID, 
-  updateUserRole, deleteUserRole, searchByUsername };
+  updateUserRole, deleteUserRole, searchByUsername, sendEmail };

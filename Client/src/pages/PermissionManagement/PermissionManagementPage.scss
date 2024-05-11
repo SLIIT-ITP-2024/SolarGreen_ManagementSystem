@@ -16,12 +16,13 @@
             border: none;
         }
         .btn{
-            height: 100px;
+            height: 140px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             color: var(--font-color-secondary);
             border: none;
+            margin-right: 40px;
         }
     }
     .search-bar{

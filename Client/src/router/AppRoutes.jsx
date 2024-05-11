@@ -40,6 +40,7 @@ import {
   Estimations,
   AddProject,
   UpdateProject,
+  SendingEmailPage,
 } from ".././pages";
 
 const AppRouters = () => {
@@ -56,8 +57,8 @@ const AppRouters = () => {
             <Route path="/leave-and-payroll-management" element={<LeaveAndPayrollManagementPage />} />
             <Route path="/maintenance-management/*" element={<MaintenanceManagementPageRoutes />} />
             <Route path="/payment-management/*" element={<PaymentManagementPageRoutes />} />
-            <Route path="/permission-management" element={<PermissionManagementPage />} />
-            <Route path="/login-attempts" element={<LoginAttemptsPage />} />
+            <Route path="/permission-management/*" element={<PermissionManagementPageRoutes />} />
+            
             <Route path="/transport-management" element={<TransportManagementPage />} />
             <Route path="/inventory-management/*" element={<InventoryManagementPageRoutes />} />
             <Route path="/user-management/*" element={<UserManagementPageRoutes />} />
@@ -84,6 +85,14 @@ const InstallationManagementRoutes = () => (
     <Route path="new-project" element={<AddProject />} />
     <Route path="update-project/:id" element={<UpdateProject />} />
     <Route path="generate-report" element={<Report />} />
+  </Routes>
+);
+
+const PermissionManagementPageRoutes = () => (
+  <Routes>
+    <Route path="/" element={<PermissionManagementPage />} />
+    <Route path="sending-email" element={<SendingEmailPage />} />
+    <Route path="login-attempts" element={<LoginAttemptsPage />} />
   </Routes>
 );
 
