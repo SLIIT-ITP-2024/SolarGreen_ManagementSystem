@@ -20,7 +20,7 @@ const getSchedules= async (req, res) => {
 
 // get single schedule
 // http://localhost:3000/api/v1/maintenance/schedules/get/:id
-const getSchedule = async (req, res) => {
+const getScheduleById = async (req, res) => {
   try {
       const {id} = req.params;
 
@@ -77,32 +77,33 @@ const addSchedule = async (req, res) => {
 // update Schedule
 // http://localhost:3000/api/v1/maintenance/schedules/update/:id
 const updateSchedule = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { ProjectID, MaintenanceID, TeamID, Task, Location, Date, Status } = req.body;
-      
-    const updatedSchedule = {
-      ProjectID,
-      MaintenanceID,
-      TeamID,
-      Task,
-      Location,
-      Date,
-      Status
-    };
-
-    const updatedScheduleDocument = await Schedule.findByIdAndUpdate(id, updatedSchedule, { new: true });
-    // The { new: true } option ensures that the updated document is returned
-
-    if (!updatedScheduleDocument) {
-      return res.status(404).json({ status: "Schedule not found" });
+    try {
+      const _id = req.params.id;
+      const { ProjectID, MaintenanceID, TeamID, Task, Location, Date, Status } = req.body;
+  
+      const updatedSchedule = {
+        ProjectID,
+        MaintenanceID,
+        TeamID,
+        Task,
+        Location,
+        Date,
+        Status
+      };
+  
+      const schedule = await Schedule.findById(_id);
+      if (!schedule) {
+        return res.status(404).json({ message: "Schedule not found" });
+      }
+  
+      await Schedule.findByIdAndUpdate(_id, updatedSchedule);
+      res.status(200).json({ status: "Schedule updated" });
+    } catch (error) {
+      console.error("Error updating schedule:", error);
+      res.status(500).json({ message: "Error updating schedule" });
     }
-
-    res.status(200).json({ status: "Schedule updated", updatedSchedule: updatedScheduleDocument });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+  };
+  
 
 
 // delete project
@@ -166,7 +167,7 @@ const deleteSchedule = async (req, res) => {
   module.exports={
     testController, 
     getSchedules,
-    getSchedule,
+    getScheduleById,
     addSchedule,
     updateSchedule,
     deleteSchedule,

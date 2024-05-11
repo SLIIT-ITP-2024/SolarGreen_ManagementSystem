@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './AddRolePopup.scss';
 import { useDarkMode } from '../../../contexts/DarkModeContext';
 import axios from 'axios';
-
-const AddRolePopup = ({ showModal, handleClose }) => {
+import { validateForm } from '../../../utils/permissionManagement.Utils/filedValidator';
+const AddRolePopup = ({ showModal, handleClose , onRecordAdded }) => {
   const { isDarkMode } = useDarkMode(); 
 
-  // State variables for form fields
+  // State variables for form fields and success message
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('Admin');
   const [validTime, setTime] = useState('one-day');
+  const [errors, setErrors] = useState({});
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -35,7 +38,6 @@ const AddRolePopup = ({ showModal, handleClose }) => {
   };
 
   const handleSave = () => {
-    // Prepare data object to send to the API
     const data = {
       email,
       username,
@@ -44,23 +46,37 @@ const AddRolePopup = ({ showModal, handleClose }) => {
       validTime
     };
   
-    // Send POST request to the API endpoint
-    axios.post('http://localhost:3000/api/v1/permission/create', data, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => {
-        console.log('API response:', response.data);
-        
-        // Close the modal
-        handleClose();
+    const formErrors = validateForm(email, username, password); // Validate the form data
+    setErrors(formErrors); // Set validation errors
+  
+    if (Object.keys(formErrors).length === 0) {
+      // If there are no validation errors, proceed with saving data
+      axios.post('http://localhost:3000/api/v1/permission/create', data, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
-      .catch(error => {
-        console.error('API error:', error);
-      
-      });
+        .then(response => {
+          console.log('API response:', response.data);
+  
+          // Show toast notification
+          toast.success('Record saved successfully.', {
+            position: 'top-right'
+          });
+  
+          // Close the modal after 2 seconds
+          setTimeout(() => {
+            handleClose();
+            onRecordAdded();
+          }, 2000);
+        })
+        .catch(error => {
+          console.error('API error:', error);
+        });
+    }
   };
+  
+
 
   return (
     <>
@@ -73,18 +89,20 @@ const AddRolePopup = ({ showModal, handleClose }) => {
             <form>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="email" placeholder='email' value={email} onChange={handleEmailChange} />
+                <input type="email" name="email" id="email" placeholder='email' value={email} onChange={handleEmailChange} required />
               </div>
 
               <div className="form-group">
                 <label htmlFor="username">Username</label>
-                <input type="text" name="username" id="username" placeholder='username' value={username} onChange={handleUsernameChange} />
+                <input type="text" name="username" id="username" placeholder='username' value={username} onChange={handleUsernameChange} required />
               </div>
 
               <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="password" placeholder='password' value={password} onChange={handlePasswordChange} />
+                <input type="password" name="password" id="password" placeholder='password' value={password} onChange={handlePasswordChange}  required/>
+               
               </div>
+              
 
               <div className="form-group">
                 <label htmlFor="role">Role</label>
@@ -104,6 +122,11 @@ const AddRolePopup = ({ showModal, handleClose }) => {
                   <option value="for year">for year</option>
                 </select>
               </div>
+
+
+              {errors.password && <span className="error">{errors.password}</span>}
+              {errors.email && <span className="error">{errors.email}</span>}
+              {errors.username && <span className="error">{errors.username}</span>}
             </form>
           </div>
         </Modal.Body>
@@ -117,6 +140,9 @@ const AddRolePopup = ({ showModal, handleClose }) => {
           </button>
         </Modal.Footer>
       </Modal>
+
+      {/* Toast Container */}
+      <ToastContainer />
     </>
   );
 }

@@ -21,6 +21,7 @@ function UpdateProject() {
     axios
       .get(`http://localhost:3000/api/v1/installation/projects/get/${id}`)
       .then((res) => {
+        // console.log(res);
         const project = res.data.project;
         setCustomerID(project.customerID);
         setCustomerName(project.customerName);
@@ -40,47 +41,64 @@ function UpdateProject() {
   function updateData(e) {
     e.preventDefault();
 
-    const updatedProject = {
-      customerID,
-      customerName,
-      projectID,
-      projectType,
-      projectSize,
-      status,
-      estimatedCost,
-      estimatedDuration,
-      comments,
-    };
+    // Validation
+    if (
+      estimatedCost === "" ||
+      estimatedDuration === "" ||
+      comments === "" ||
+      projectType === "" ||
+      projectSize === "" ||
+      status === ""
+    ) {
+      alert("Please fill out all fields!");
+      return;
+    } else if (estimatedCost <= 0 || estimatedDuration <= 0) {
+      alert("Please enter valid values!");
+      return;
+    } else {
+      const updatedProject = {
+        customerID,
+        customerName,
+        projectID,
+        projectType,
+        projectSize,
+        status,
+        estimatedCost,
+        estimatedDuration,
+        comments,
+      };
 
-    axios
-      .put(
-        `http://localhost:3000/api/v1/installation/projects/update/${id}`,
-        updatedProject
-      )
-      .then(() => {
-        alert("Project Updated!");
-        window.location.href = "/installation-management";
-      })
-      .catch((err) => {
-        alert(err);
-      });
+      axios
+        .put(
+          `http://localhost:3000/api/v1/installation/projects/update/${id}`,
+          updatedProject
+        )
+        .then(() => {
+          alert("Project Updated!");
+          window.location.href = "/installation-management";
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
   }
 
+  // Estimation calculation
   const handleCalculate = () => {
     let calculatedCost = null;
     let calculatedDuration = null;
     if (projectType === "Solar Water Heating System") {
-      calculatedCost = 5000; // Example cost for Solar Water Heating System
-      calculatedDuration = 7; // Example duration in days
+      calculatedCost = 5000; // cost
+      calculatedDuration = 7; // duration
     } else if (projectType === "Residential Rooftop Solar PV System") {
-      calculatedCost = 10000; // Example cost for Residential Rooftop Solar PV System
-      calculatedDuration = 14; // Example duration in days
+      calculatedCost = 10000; // cost
+      calculatedDuration = 14; // duration
     } else if (projectType === "Solar Street Lighting System") {
-      calculatedCost = 8000; // Example cost for Solar Street Lighting System
-      calculatedDuration = 10; // Example duration in days
+      calculatedCost = 8000; // cost
+      calculatedDuration = 10; // duration
     }
 
-    // Placeholder logic for considering project size
+    // Updating estimations according to project size
     if (projectSize === "Large") {
       calculatedCost *= 1.2; // Increase cost by 20% for large projects
       calculatedDuration *= 1.1; // Increase duration by 10% for large projects

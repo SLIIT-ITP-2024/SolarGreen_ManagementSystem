@@ -2,7 +2,7 @@ const UserRole = require('../models/permissionModels/userRole.model');
 
 const login = async (req, res) => {
     const { email, password } = req.body;
-    console.log(req.body)
+    console.log("login")
     try {
         const user = await UserRole.findOne({ email });
 
@@ -18,7 +18,7 @@ const login = async (req, res) => {
 
         const token = await user.generateAuthToken();
 
-        res.status(200).json({ message: 'Login successful', token });
+        res.status(200).json({ message: 'Login successful',user, token });
     } catch (error) {
         console.error('Login error:', error);
         res.status(500).json({ message: 'Internal server error' });

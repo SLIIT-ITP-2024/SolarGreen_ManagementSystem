@@ -57,8 +57,8 @@ function AllProjects() {
             <th>Type</th>
             <th>Size</th>
             <th>Status</th>
-            <th>Est. Cost</th>
-            <th>Est. Duration</th>
+            <th>Estimated Cost (Rs.)</th>
+            <th>Estimated Duration (Days)</th>
             <th>Comments</th>
             <th>Action</th>
           </tr>
@@ -79,14 +79,16 @@ function AllProjects() {
               <td>
                 <Link
                   to={`/installation-management/update-project/${project._id}`}
-                  className="btn btn-warning"
+                  className="btn btn-warning btn-class"
+                  style={{width:'80px'}}
                 >
                   Update
                 </Link>
                 <button
                   type="button"
-                  className="btn btn-warning btn-delete"
+                  className="btn btn-warning btn-delete btn-class"
                   onClick={() => handleDelete(project._id)}
+                  
                 >
                   Delete
                 </button>

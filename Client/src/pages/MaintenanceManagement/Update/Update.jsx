@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom"; // Import useParams hook
 import axios from "axios";
 import WithLayout from "../../../hoc/WithLayout";
 import "./Update.css";
-import { useParams } from 'react-router-dom';
 
-const Update = () => {
-  const { id } = useParams();
-  console.log(id)
-  // State for form data
+
+const UpdateForm = () => {
+  const { id } = useParams(); // Get the id parameter from the URL
   const [formData, setFormData] = useState({
-    ProjectID: "",
     MaintenanceID: "",
     TeamID: "",
     Task: "",
     Location: "",
     Date: "",
-    Status: "Pending"
+    Status: "",
   });
-
-  // State for validation errors
   const [errors, setErrors] = useState({});
   useEffect(() => {
   const fetchScheduleDetails = async () => {
@@ -47,29 +43,36 @@ const Update = () => {
     fetchScheduleDetails();
   }, [id]); 
 
-  // Function to handle form submission
+  useEffect(() => {
+    // Fetch schedule data from the server
+    const fetchSchedule = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:3000/api/v1/maintanance/schedules/get/${id}`
+        );
+        setFormData(data.schedule);
+        console.log("Schedule data:", data.schedule.ProjectID);
+      } catch (error) {
+        console.error("Error fetching schedule:", error);
+      }
+    };
+
+    fetchSchedule();
+  }, [id]); // Fetch data whenever id changes
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        await axios.put(`http://localhost:3000/api/v1/maintanance/schedules/update/${id}`, formData)
-        .then(() => {
-          alert("Schedule is Updated Successfully!");
-          window.location.href = "/maintenance-management";
-        })
-        .catch((err) => {
-          alert(err);
-        });
-        // Clear form data after successful submission
-        setFormData({
-          ProjectID: "",
-          MaintenanceID: "",
-          TeamID: "",
-          Task: "",
-          Location: "",
-          Date: "",
-          Status: "Pending"
-        });
+        // Send form data to the server for updating
+        await axios.put(
+          `http://localhost:3000/api/v1//maintanance/schedules/update/${id}`,
+          formData
+        );
+        console.log("Schedule updated successfully");
+        
+        // Redirect or perform other actions after successful submission
+        window.location.href = "/maintenance-management";
       } catch (error) {
         console.error("Error updating schedule:", error);
       }
@@ -78,35 +81,19 @@ const Update = () => {
     }
   };
 
-  // Function to validate form data
   const validateForm = () => {
     let valid = true;
     let errors = {};
 
-    // Validate each field
-    if (!formData.ProjectID.trim()) {
-      errors.ProjectID = "Project ID is required";
-      valid = false;
-    }
-    if (!formData.MaintenanceID.trim()) {
-      errors.MaintenanceID = "Maintenance ID is required";
-      valid = false;
-    }
-    if (!formData.TeamID.trim()) {
-      errors.TeamID = "Team ID is required";
-      valid = false;
-    }
-    if (!formData.Task.trim()) {
-      errors.Task = "Task is required";
-      valid = false;
-    }
-    if (!formData.Location.trim()) {
-      errors.Location = "Location is required";
-      valid = false;
-    }
-    if (!formData.Date.trim()) {
-      errors.Date = "Date is required";
-      valid = false;
+    for (const key in formData) {
+      // Check if the value is a string and not empty
+      if (typeof formData[key] === "string" && !formData[key].trim()) {
+        errors[key] = `${key} is required`;
+        valid = false;
+      }
+
+      setErrors(errors);
+      return valid;
     }
     if (!formData.Status.trim()) {
       errors.Status = "Status is required";
@@ -114,112 +101,47 @@ const Update = () => {
     }
 
 
-    // Update errors state
     setErrors(errors);
     return valid;
   };
 
-  // Function to handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h2>Update Maintenance Schedule</h2>
-        <div className="form-group">
-          <label htmlFor="ProjectID">Project ID</label>
-          <input
-            type="text"
-            id="ProjectID"
-            name="ProjectID"
-            value={formData.ProjectID}
-            onChange={handleInputChange}
-            className="form-control"
-          />
-          {errors.ProjectID && <span className="error">{errors.ProjectID}</span>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="maintenanceID">Maintenance ID</label>
-          <input
-            type="text"
-            id="MaintenanceID"
-            name="MaintenanceID"
-            value={formData.MaintenanceID}
-            onChange={handleInputChange}
-            className="form-control"
-          />
-          {errors.MaintenanceID && <span className="error">{errors.MaintenanceID}</span>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="teamID">Team ID</label>
-          <input
-            type="text"
-            id="TeamID"
-            name="TeamID"
-            value={formData.TeamID}
-            onChange={handleInputChange}
-            className="form-control"
-          />
-          {errors.TeamID && <span className="error">{errors.TeamID}</span>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="task">Task</label>
-          <input
-            type="text"
-            id="Task"
-            name="Task"
-            value={formData.Task}
-            onChange={handleInputChange}
-            className="form-control"
-          />
-          {errors.Task && <span className="error">{errors.Task}</span>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="location">Location</label>
-          <input
-            type="text"
-            id="Location"
-            name="Location"
-            value={formData.Location}
-            onChange={handleInputChange}
-            className="form-control"
-          />
-          {errors.Location && <span className="error">{errors.Location}</span>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="date">Date</label>
-          <input
-            type="text"
-            id="Date"
-            name="Date"
-            value={formData.Date}
-            onChange={handleInputChange}
-            className="form-control"
-          />
-          {errors.Date && <span className="error">{errors.Date}</span>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="status">Status</label>
-          <input
-            type="text"
-            id="Status"
-            name="Status"
-            value={formData.Status}
-            onChange={handleInputChange}
-            className="form-control"
-          />
-          {errors.Status && <span className="error">{errors.Status}</span>}
-        </div>
-        <button type="submit" className="btn btn-success">Submit</button>
+        <h2>Maintenance Update Form</h2>
+        {Object.keys(formData).map((key) => {
+          if (key !== "_id" && key !== "__v") {
+            return (
+              <div key={key} className="form-group">
+                <label htmlFor={key}>{key}</label>
+                <input
+                  type="text"
+                  id={key}
+                  name={key}
+                  value={formData[key]}
+                  onChange={handleInputChange}
+                  className="form-control"
+                />
+                {errors[key] && <span className="error">{errors[key]}</span>}
+              </div>
+            );
+          }
+          return null; // Exclude _id and __v fields
+        })}
+        <button type="submit" className="btn btn-success">
+          Submit
+        </button>
       </form>
     </div>
   );
 };
 
-export default WithLayout(Update);
+export default WithLayout(UpdateForm);

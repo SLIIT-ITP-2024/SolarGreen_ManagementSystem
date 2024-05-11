@@ -49,6 +49,7 @@ const RequestForm = () => {
           Date: "",
           Status: "Pending"
         });
+        window.location.href = '/maintenance-management'
       } catch (error) {
         console.error("Error creating schedule:", error);
       }

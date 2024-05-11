@@ -76,17 +76,17 @@ const RegisterPage = () => {
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">Email</label>
-              <input type="email" name="email" id="email" placeholder='email' value={email} onChange={handleEmailChange} />
+              <input type="email" name="email" id="email" placeholder='email' value={email} onChange={handleEmailChange}  required/>
             </div>
 
             <div className="form-group">
               <label htmlFor="username">Username</label>
-              <input type="text" name="username" id="username" placeholder='username' value={username} onChange={handleUsernameChange} />
+              <input type="text" name="username" id="username" placeholder='username' value={username} onChange={handleUsernameChange} required />
             </div>
 
             <div className="form-group">
               <label htmlFor="password">Password</label>
-              <input type="password" name="password" id="password" placeholder='password' value={password} onChange={handlePasswordChange} />
+              <input type="password" name="password" id="password" placeholder='password' value={password} onChange={handlePasswordChange} required/>
             </div>
 
             <div className="form-group">

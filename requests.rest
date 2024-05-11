@@ -1,0 +1,16 @@
+POST http://localhost:3000/api/v1/customer-employee/add-customer
+Content-Type: application/json
+
+{
+  "email": "example@example.com",
+  "name": "John Doe",
+  "gender": "male",
+  "phone": "1234567890",
+  "dob": "1990-01-01"
+}
+
+
+
+GET http://localhost:3000/api/v1/customer-employee/test
+
+

@@ -1,4 +1,7 @@
-
+.createTitle {
+    text-align: center;
+    text-decoration: underline;
+}
 .container {
     background: #fff;
     padding: 20px;
@@ -12,8 +15,11 @@ label {
     margin: 10px 5px;
 }
 
-.btn-info {
+.btn.btn-success {
     margin: 15px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 200px;
 }
 
 form {

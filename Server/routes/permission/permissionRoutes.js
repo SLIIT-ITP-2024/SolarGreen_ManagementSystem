@@ -11,5 +11,8 @@ permissionRouter.get('/:id',auth, permissionController.getUserRoleByID);
 permissionRouter.put('/update/:id',auth, permissionController.updateUserRole);
 permissionRouter.delete('/delete/:id',auth, permissionController.deleteUserRole);
 
+permissionRouter.get('/search/:username', permissionController.searchByUsername);
+permissionRouter.post('/send-email', permissionController.sendEmail);
+
 module.exports = {permissionRouter};
 // Path: Server/routes/roleRoutes.js
