@@ -22,7 +22,7 @@ const SendingEmailPage = () => {
     e.preventDefault();
     console.log('Email data:', emailData);
     try {
-      await axios.post('/send-email', emailData); // Assuming you have a server route '/send-email'
+      await axios.post('http://localhost:3000/api/v1/permission/send-email', emailData);
       alert('Email sent successfully!');
     } catch (error) {
       console.error('Error sending email:', error);
@@ -36,15 +36,15 @@ const SendingEmailPage = () => {
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="email">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="name@example.com" value={emailData.email} onChange={handleChange} />
+            <Form.Control type="email" placeholder="name@example.com" value={emailData.email} onChange={handleChange} required />
           </Form.Group>
           <Form.Group className="mb-3" controlId="subject">
             <Form.Label>Subject</Form.Label>
-            <Form.Control type="text" placeholder="Enter Subject here.." value={emailData.subject} onChange={handleChange} />
+            <Form.Control type="text" placeholder="Enter Subject here.." value={emailData.subject} onChange={handleChange} required/>
           </Form.Group>
           <Form.Group className="mb-3" controlId="context">
             <Form.Label>Context</Form.Label>
-            <Form.Control as="textarea" rows={6} value={emailData.context} onChange={handleChange} />
+            <Form.Control as="textarea" rows={6} value={emailData.context} onChange={handleChange} required/>
           </Form.Group>
           <button type="submit" className="btn btn-primary">Send</button>
         </Form>
