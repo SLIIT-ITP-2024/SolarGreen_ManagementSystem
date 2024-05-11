@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import axios from "axios";
 import"./Schedule.css"
 import Search from '../Search/Search';
 
 function Schedule() {
     const[schedules,setSchedules]=useState([]);
+    //const history = useHistory(); // Initialize useHistory hook
 
         // Get all schedules
         useEffect(() => {
@@ -36,7 +37,8 @@ function Schedule() {
               );
               // Remove the deleted student from the state
               setSchedules(schedules.filter((schedule) => schedule._id !== id));
-              window.location.href = "/maintanance-management";
+              //history.push("/maintanance-management");
+              window.location.href = "/maintenance-management";
             } catch (error) {
               console.error("Error deleting record:", error);
               alert("An error occurred while deleting the record");
@@ -49,13 +51,17 @@ function Schedule() {
     <div className="container">
         <h3><center>Maintenance Schedule</center></h3>
         <Search/>
-            <button className="filter green">Filter</button>
+           
         
         <Link to="/maintanance-management/create"className='btn btn-success'>Request Form</Link>
         <Link to="/maintanance-management/generate"className='btn btn-success'>Generate Report</Link>
+        
+
+
         <table className="table">
             <thead>
                 <tr>
+                    
                     <th>Project_ID</th>
                     <th>Maintenance_ID</th>
                     <th>Team_ID</th>
@@ -73,6 +79,7 @@ function Schedule() {
              
                         {schedules.map((schedule, index) => (
                          <tr key={schedule._id}>
+                          
                            <td>{schedule.ProjectID}</td>
                             <td>{schedule.MaintenanceID}</td>
                             <td>{schedule.TeamID}</td>

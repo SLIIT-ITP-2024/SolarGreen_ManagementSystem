@@ -10,7 +10,7 @@ const testController = (req, res) => {
 // http://localhost:3000/api/v1/maintenance/schedules/get
 const getSchedules= async (req, res) => {
   try {
-      const schedules = await Schedule.find();
+      const schedules = await Schedule.find()
       res.status(200).json(schedules);
   } catch (error) {
       res.status(500).json({message: error.message});
@@ -46,6 +46,12 @@ const addSchedule = async (req, res) => {
       const Date = req.body.Date;
       const Status = req.body.Status;
       
+      const existingSchedule = await Schedule.findOne({ MaintenanceID });
+
+      if (existingSchedule) {
+        return res.status(400).json({ message: "Maintenance ID must be unique" });
+      }
+      
 
       const newSchedule = new Schedule({
         ProjectID,
@@ -72,36 +78,32 @@ const addSchedule = async (req, res) => {
 // http://localhost:3000/api/v1/maintenance/schedules/update/:id
 const updateSchedule = async (req, res) => {
   try {
-      const {id} = req.params;
-      const ProjectID = req.body.ProjectID;
-      const MaintenanceID = req.body.MaintenanceID;
-      const TeamID = req.body.TeamID;
-      const Task = req.body.Task;
-      const Location = req.body.Location;
-      const Date = req.body.Date;
-      const Status = req.body.Status;
+    const { id } = req.params;
+    const { ProjectID, MaintenanceID, TeamID, Task, Location, Date, Status } = req.body;
       
-      const updatedSchedule = {
-        ProjectID,
-        MaintenanceID,
-        TeamID,
-        Task,
-        Location,
-        Date,
-        Status
-     
-      }
+    const updatedSchedule = {
+      ProjectID,
+      MaintenanceID,
+      TeamID,
+      Task,
+      Location,
+      Date,
+      Status
+    };
 
-      const update = await Schedule.findByIdAndUpdate(id, updatedSchedule).then(() => {
-          res.status(200).send({status: "Schedule Updated!"});
-      }).catch((err) => {
-          res.status(500).send({status: "Error with updating schedule!"});
-      })
+    const updatedScheduleDocument = await Schedule.findByIdAndUpdate(id, updatedSchedule, { new: true });
+    // The { new: true } option ensures that the updated document is returned
 
+    if (!updatedScheduleDocument) {
+      return res.status(404).json({ status: "Schedule not found" });
+    }
+
+    res.status(200).json({ status: "Schedule updated", updatedSchedule: updatedScheduleDocument });
   } catch (error) {
-      res.status(500).json({message: error.message});
+    res.status(500).json({ message: error.message });
   }
 };
+
 
 // delete project
 // http://localhost:3000/api/v1/maintenance/schedules/delete/:id
@@ -118,6 +120,48 @@ const deleteSchedule = async (req, res) => {
   } catch (error) {
       res.status(500).json({message: error.message});
   }};
+ 
+
+{/*const calculateMaintenanceCost = async (req, res) => {
+  try {
+    const { ProjectID, MaintenanceID, HoursRequired, CostPerHour } = req.query;
+
+    // Check if all required parameters are provided
+    if (!ProjectID || !MaintenanceID || !HoursRequired || !CostPerHour) {
+      return res.status(400).json({ message: "Missing required parameters" });
+    }
+
+    // Fetch project and maintenance details based on IDs
+    const projectDetails = await Schedule.findOne({ ProjectID: ProjectID });
+    const maintenanceDetails = await Schedule.findOne({ MaintenanceID: MaintenanceID });
+
+    if (!projectDetails || !maintenanceDetails) {
+      // Handle error: Unable to find project or maintenance details
+      return res.status(404).json({ message: "Project or maintenance details not found" });
+    }
+
+    const costPerHour = projectDetails.CostPerHour;
+    const hoursRequired = maintenanceDetails.HoursRequired;
+
+    if (!costPerHour || !hoursRequired) {
+      // Handle error: Missing cost per hour or hours required data
+      return res.status(400).json({ message: "Cost per hour or hours required data missing" });
+    }
+
+    // Calculate the estimated cost
+    const cost = costPerHour * hoursRequired;
+
+    // Send the calculated cost as a response
+    res.status(200).json({ cost });
+  } catch (error) {
+    // Handle unexpected errors
+    res.status(500).json({ message: error.message });
+  }
+};
+
+*/}
+
+  
   
   module.exports={
     testController, 
@@ -125,9 +169,6 @@ const deleteSchedule = async (req, res) => {
     getSchedule,
     addSchedule,
     updateSchedule,
-    deleteSchedule
-
-
-
-
-};
+    deleteSchedule,
+    //calculateMaintenanceCost
+  };

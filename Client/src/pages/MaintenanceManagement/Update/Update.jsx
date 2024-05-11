@@ -2,38 +2,73 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import WithLayout from "../../../hoc/WithLayout";
 import "./Update.css";
+import { useParams } from 'react-router-dom';
 
 const Update = () => {
+  const { id } = useParams();
+  console.log(id)
   // State for form data
   const [formData, setFormData] = useState({
-    projectID: "",
-    maintenanceID: "",
-    teamID: "",
-    task: "",
-    location: "",
-    date: "",
-    status: "Pending"
+    ProjectID: "",
+    MaintenanceID: "",
+    TeamID: "",
+    Task: "",
+    Location: "",
+    Date: "",
+    Status: "Pending"
   });
 
   // State for validation errors
   const [errors, setErrors] = useState({});
+  useEffect(() => {
+  const fetchScheduleDetails = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3000/api/v1/maintanance/schedules/get/${id}`);
+      console.log("Response:", response);
+      const scheduleData = response.data; // Assuming the response contains schedule details
+      console.log("Schedule Data:", scheduleData);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        ProjectID: scheduleData.ProjectID || "",
+        MaintenanceID: scheduleData.MaintenanceID || "",
+        TeamID: scheduleData.TeamID || "",
+        Task: scheduleData.Task || "",
+        Location: scheduleData.Location || "",
+        Date: scheduleData.Date || "",
+        Status: scheduleData.Status || "Pending" // Set form data with retrieved schedule details
+      }));
+    } catch (error) {
+      console.error("Error fetching schedule details:", error);
+    }
+  };
+
+  
+    // Fetch schedule details when the component mounts
+    fetchScheduleDetails();
+  }, [id]); 
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        await axios.put(`http://localhost:3000/api/v1/maintanance/schedules/update/${formData.projectID}`, formData);
-        console.log("Schedule updated successfully");
+        await axios.put(`http://localhost:3000/api/v1/maintanance/schedules/update/${id}`, formData)
+        .then(() => {
+          alert("Schedule is Updated Successfully!");
+          window.location.href = "/maintenance-management";
+        })
+        .catch((err) => {
+          alert(err);
+        });
         // Clear form data after successful submission
         setFormData({
-          projectID: "",
-          maintenanceID: "",
-          teamID: "",
-          task: "",
-          location: "",
-          date: "",
-          status: "Pending"
+          ProjectID: "",
+          MaintenanceID: "",
+          TeamID: "",
+          Task: "",
+          Location: "",
+          Date: "",
+          Status: "Pending"
         });
       } catch (error) {
         console.error("Error updating schedule:", error);
@@ -49,30 +84,35 @@ const Update = () => {
     let errors = {};
 
     // Validate each field
-    if (!formData.projectID.trim()) {
-      errors.projectID = "Project ID is required";
+    if (!formData.ProjectID.trim()) {
+      errors.ProjectID = "Project ID is required";
       valid = false;
     }
-    if (!formData.maintenanceID.trim()) {
-      errors.maintenanceID = "Maintenance ID is required";
+    if (!formData.MaintenanceID.trim()) {
+      errors.MaintenanceID = "Maintenance ID is required";
       valid = false;
     }
-    if (!formData.teamID.trim()) {
-      errors.teamID = "Team ID is required";
+    if (!formData.TeamID.trim()) {
+      errors.TeamID = "Team ID is required";
       valid = false;
     }
-    if (!formData.task.trim()) {
-      errors.task = "Task is required";
+    if (!formData.Task.trim()) {
+      errors.Task = "Task is required";
       valid = false;
     }
-    if (!formData.location.trim()) {
-      errors.location = "Location is required";
+    if (!formData.Location.trim()) {
+      errors.Location = "Location is required";
       valid = false;
     }
-    if (!formData.date.trim()) {
-      errors.date = "Date is required";
+    if (!formData.Date.trim()) {
+      errors.Date = "Date is required";
       valid = false;
     }
+    if (!formData.Status.trim()) {
+      errors.Status = "Status is required";
+      valid = false;
+    }
+
 
     // Update errors state
     setErrors(errors);
@@ -91,90 +131,90 @@ const Update = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h2>Maintenance Request Form</h2>
+        <h2>Update Maintenance Schedule</h2>
         <div className="form-group">
-          <label htmlFor="projectID">Project ID</label>
+          <label htmlFor="ProjectID">Project ID</label>
           <input
             type="text"
-            id="projectID"
-            name="projectID"
-            value={formData.projectID}
+            id="ProjectID"
+            name="ProjectID"
+            value={formData.ProjectID}
             onChange={handleInputChange}
             className="form-control"
           />
-          {errors.projectID && <span className="error">{errors.projectID}</span>}
+          {errors.ProjectID && <span className="error">{errors.ProjectID}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="maintenanceID">Maintenance ID</label>
           <input
             type="text"
-            id="maintenanceID"
-            name="maintenanceID"
-            value={formData.maintenanceID}
+            id="MaintenanceID"
+            name="MaintenanceID"
+            value={formData.MaintenanceID}
             onChange={handleInputChange}
             className="form-control"
           />
-          {errors.maintenanceID && <span className="error">{errors.maintenanceID}</span>}
+          {errors.MaintenanceID && <span className="error">{errors.MaintenanceID}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="teamID">Team ID</label>
           <input
             type="text"
-            id="teamID"
-            name="teamID"
-            value={formData.teamID}
+            id="TeamID"
+            name="TeamID"
+            value={formData.TeamID}
             onChange={handleInputChange}
             className="form-control"
           />
-          {errors.teamID && <span className="error">{errors.teamID}</span>}
+          {errors.TeamID && <span className="error">{errors.TeamID}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="task">Task</label>
           <input
             type="text"
-            id="task"
-            name="task"
-            value={formData.task}
+            id="Task"
+            name="Task"
+            value={formData.Task}
             onChange={handleInputChange}
             className="form-control"
           />
-          {errors.task && <span className="error">{errors.task}</span>}
+          {errors.Task && <span className="error">{errors.Task}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="location">Location</label>
           <input
             type="text"
-            id="location"
-            name="location"
-            value={formData.location}
+            id="Location"
+            name="Location"
+            value={formData.Location}
             onChange={handleInputChange}
             className="form-control"
           />
-          {errors.location && <span className="error">{errors.location}</span>}
+          {errors.Location && <span className="error">{errors.Location}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="date">Date</label>
           <input
             type="text"
-            id="date"
-            name="date"
-            value={formData.date}
+            id="Date"
+            name="Date"
+            value={formData.Date}
             onChange={handleInputChange}
             className="form-control"
           />
-          {errors.date && <span className="error">{errors.date}</span>}
+          {errors.Date && <span className="error">{errors.Date}</span>}
         </div>
         <div className="form-group">
           <label htmlFor="status">Status</label>
           <input
             type="text"
-            id="status"
-            name="status"
-            value={formData.status}
+            id="Status"
+            name="Status"
+            value={formData.Status}
             onChange={handleInputChange}
             className="form-control"
           />
-          {errors.status && <span className="error">{errors.status}</span>}
+          {errors.Status && <span className="error">{errors.Status}</span>}
         </div>
         <button type="submit" className="btn btn-success">Submit</button>
       </form>

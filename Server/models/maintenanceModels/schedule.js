@@ -9,6 +9,7 @@ const ScheduleSchema = mongoose.Schema({
   MaintenanceID: {
     type: String,
     required: [true, "Please enter MaintenanceID"],
+    unique: true
   },
 
   TeamID: {

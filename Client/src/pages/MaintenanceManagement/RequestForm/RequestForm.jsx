@@ -24,8 +24,21 @@ const RequestForm = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        await axios.post("http://localhost:3000/api/v1/maintanance/schedules/add", formData);
-        console.log("Schedule created successfully");
+        await axios.post("http://localhost:3000/api/v1/maintanance/schedules/add", formData)
+        .then(() => {
+        alert(" Schedule Added!");
+        window.location.href = "/maintenance-management";
+      })
+      .catch((err) => {
+        console.error("Error adding schedule:", err.response);
+        if (err.response && err.response.status === 400 && err.response.data.message === "Maintenance ID must be unique") {
+          // Handle duplicate MaintenanceID error
+          alert("Maintenance ID you have entered already exists, try with a new Maintenance ID.");
+        } else {
+          // Handle other errors
+          alert("Failed to add schedule. Please try again.");
+        }
+      });
         // Clear form data after successful submission
         setFormData({
           ProjectID: "",

@@ -27,6 +27,8 @@ import RequestForm from '../pages/MaintenanceManagement/RequestForm/RequestForm'
 import Update from '../pages/MaintenanceManagement/Update/Update';
 import GenerateReports from '../pages/MaintenanceManagement/Generate/GenerateReports';
 
+
+
 const AppRouters = () => {
   return (
     <Router>
@@ -96,6 +98,7 @@ const AppRouters = () => {
           path="/maintanance-management/generate"
           element={<GenerateReports/>}
         />
+
     
        
      
