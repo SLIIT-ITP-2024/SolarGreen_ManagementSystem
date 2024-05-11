@@ -42,6 +42,7 @@ import {
   UpdateProject,
   SendingEmailPage,
 } from ".././pages";
+import SolarReport from ".././pages/InstallationManagement/Report/Report";
 
 const AppRouters = () => {
   const isLogged = localStorage.getItem("token");
@@ -53,6 +54,7 @@ const AppRouters = () => {
           <>
             {/* Authenticated Routes */}
             <Route path="/" element={<Dashboard />} />
+
             <Route path="/installation-management/*" element={<InstallationManagementRoutes />} />
             <Route path="/leave-and-payroll-management" element={<LeaveAndPayrollManagementPage />} />
             <Route path="/maintenance-management/*" element={<MaintenanceManagementPageRoutes />} />
@@ -62,6 +64,7 @@ const AppRouters = () => {
             <Route path="/transport-management" element={<TransportManagementPage />} />
             <Route path="/inventory-management/*" element={<InventoryManagementPageRoutes />} />
             <Route path="/user-management/*" element={<UserManagementPageRoutes />} />
+
             <Route path="*" element={<NotFoundPage />} />
           </>
         ) : (
@@ -84,7 +87,7 @@ const InstallationManagementRoutes = () => (
     <Route path="estimations" element={<Estimations />} />
     <Route path="new-project" element={<AddProject />} />
     <Route path="update-project/:id" element={<UpdateProject />} />
-    <Route path="generate-report" element={<Report />} />
+    <Route path="generate-report" element={<SolarReport />} />
   </Routes>
 );
 
@@ -108,7 +111,7 @@ const MaintenanceManagementPageRoutes = () => (
 const PaymentManagementPageRoutes = () => (
   <Routes>
     <Route path="/" element={<PaymentDetailsPage />} />
-    <Route path="add-payment" element={<PaymentManagementPage />} /> 
+    <Route path="add-payment" element={<PaymentManagementPage />} />
     <Route path="payment-update/:_id" element={<PaymentUpdatePage />} />
   </Routes>
 );

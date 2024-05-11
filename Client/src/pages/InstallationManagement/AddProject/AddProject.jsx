@@ -183,6 +183,7 @@ function AddProject() {
 
   return (
     <div className="container">
+      <h3 className="createTitle">Add Project</h3>
       <form onSubmit={validate}>
         <div className="form-group">
           <label for="name">Customer ID</label>
