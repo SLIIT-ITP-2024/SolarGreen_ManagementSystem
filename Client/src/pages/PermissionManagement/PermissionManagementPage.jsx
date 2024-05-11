@@ -7,6 +7,8 @@ import SearchBar from '../../components/_Shared/SearchBar/SearchBar'
 import DataCard from '../../components/PermissionManagement/DataCard/DataCard'
 import AddRoleBtn from '../../components/PermissionManagement/addRoleBtn/AddRoleBtn'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+import SendingEmailBtn from '../../components/PermissionManagement/sendingEmailBtn/SendingEmailBtn'
 
 const PermissionManagementPage = () => {
     const [userData, setUserData] = useState([]);
@@ -86,6 +88,7 @@ const PermissionManagementPage = () => {
                 <div className="btn">
                     <NavigationBtn key='1' btnName="Attempts" />
                     <AddRoleBtn key='2' btnName="Add a Role" onRecordAdded={handleRecordAdded} />
+                    <SendingEmailBtn key='3' btnName="Sending Email" />
                 </div>
             </div>
             <div className="search-bar">

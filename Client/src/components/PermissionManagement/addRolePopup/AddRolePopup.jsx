@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './AddRolePopup.scss';
 import { useDarkMode } from '../../../contexts/DarkModeContext';
 import axios from 'axios';
-
+import { validateForm } from '../../../utils/permissionManagement.Utils/filedValidator';
 const AddRolePopup = ({ showModal, handleClose , onRecordAdded }) => {
   const { isDarkMode } = useDarkMode(); 
 
@@ -15,6 +15,7 @@ const AddRolePopup = ({ showModal, handleClose , onRecordAdded }) => {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('Admin');
   const [validTime, setTime] = useState('one-day');
+  const [errors, setErrors] = useState({});
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -45,29 +46,37 @@ const AddRolePopup = ({ showModal, handleClose , onRecordAdded }) => {
       validTime
     };
   
-    axios.post('http://localhost:3000/api/v1/permission/create', data, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => {
-        console.log('API response:', response.data);
-        
-        // Show toast notification
-        toast.success('Record saved successfully.', {
-          position: 'top-right'
-        });
-
-        // Close the modal after 2 seconds
-        setTimeout(() => {
-          handleClose();
-          onRecordAdded ();
-        }, 2000);
+    const formErrors = validateForm(email, username, password); // Validate the form data
+    setErrors(formErrors); // Set validation errors
+  
+    if (Object.keys(formErrors).length === 0) {
+      // If there are no validation errors, proceed with saving data
+      axios.post('http://localhost:3000/api/v1/permission/create', data, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
-      .catch(error => {
-        console.error('API error:', error);
-      });
+        .then(response => {
+          console.log('API response:', response.data);
+  
+          // Show toast notification
+          toast.success('Record saved successfully.', {
+            position: 'top-right'
+          });
+  
+          // Close the modal after 2 seconds
+          setTimeout(() => {
+            handleClose();
+            onRecordAdded();
+          }, 2000);
+        })
+        .catch(error => {
+          console.error('API error:', error);
+        });
+    }
   };
+  
+
 
   return (
     <>
@@ -91,7 +100,9 @@ const AddRolePopup = ({ showModal, handleClose , onRecordAdded }) => {
               <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password" id="password" placeholder='password' value={password} onChange={handlePasswordChange}  required/>
+               
               </div>
+              
 
               <div className="form-group">
                 <label htmlFor="role">Role</label>
@@ -111,6 +122,11 @@ const AddRolePopup = ({ showModal, handleClose , onRecordAdded }) => {
                   <option value="for year">for year</option>
                 </select>
               </div>
+
+
+              {errors.password && <span className="error">{errors.password}</span>}
+              {errors.email && <span className="error">{errors.email}</span>}
+              {errors.username && <span className="error">{errors.username}</span>}
             </form>
           </div>
         </Modal.Body>
